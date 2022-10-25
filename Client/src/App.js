@@ -1,24 +1,17 @@
-import './App.css';
-import React, { useEffect } from "react";
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
-import styled from "styled-components";
-import axios from "axios";
+import * as React from 'react';
 import { Reset } from 'styled-reset';
-
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
-
   return (
-    <>
-      <Reset/>
-      <GlobalStyles />
-      <Router>
-        <UserContext.Provider value={{user, checkAuth, editUser}}>
-          <Header />
-        </UserContext.Provider>
-      </Router>
-    </>
-
+    <div>
+      <React.Fragment>
+        <Reset />
+        <Routes>
+          <Route></Route>
+        </Routes>
+      </React.Fragment>
+    </div>
   );
 }
 
