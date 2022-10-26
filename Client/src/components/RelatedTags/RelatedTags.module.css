@@ -1,0 +1,28 @@
+.container{
+  width: 300px
+}
+.tag:hover{
+  background-color: rgb(203, 218, 228);
+} 
+.qwe{
+  font-size: 19px;
+  font-weight: 400;
+}
+.tag{
+background-color: rgb(225,236,244);
+border-radius: 3px;
+margin-right: 4px;
+padding: 4.8px 6px;
+color:rgb(57,115,157);
+font-size: 12px;
+font-weight: 400;
+cursor: pointer;
+padding: 4.8px 6px;
+}
+.x{
+  width: 8.25px;
+  height: 15px;
+  color:rgb(132,140,149)}
+.d11{
+  margin:10px 2px 6px 4px;
+}
