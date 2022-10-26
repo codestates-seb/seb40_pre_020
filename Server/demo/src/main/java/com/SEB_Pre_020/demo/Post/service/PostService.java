@@ -22,19 +22,17 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    /** 게시글(답글) 생성 */
     @Transactional
     public Post createPost(Post post) {
         int memberId = post.getMember().getId();
 
-        if (!postRepository.existsById(post.getId())) {
+        if (postRepository.existsById(post.getId())) {
             Post savePost = postRepository.save(post);
             return savePost;
         }
         return null;
     }
 
-    /** 게시글(답글) 수정 */
     @Transactional
     public Post updatePost(Post post) {
         Post findPost = findVerifiedPost(post.getId());
@@ -60,7 +58,6 @@ public class PostService {
         return postList;
     }
 
-    /** 게시글 삭제 */
     @Transactional
     public void deletePost(int postId) {
         Post findPost = findVerifiedPost(postId);
@@ -68,7 +65,6 @@ public class PostService {
         postRepository.delete(findPost);
     }
 
-    /** id로 게시글(답글) get */
     @Transactional(readOnly = true)
     public Post findVerifiedPost(int postId) {
         Optional<Post> optionalPost = postRepository.findById(postId);
