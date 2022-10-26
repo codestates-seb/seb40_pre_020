@@ -1,12 +1,13 @@
 import Tag from '../Addtag/Addtag';
 import Editor from '../Editor/Editor';
-import styles from './AskQuestion.module.css';
-function AskQuestion() {
+import styles from './UpdateQuestion.module.css';
+
+function UpdateQuestion() {
   return (
     <section className={styles.container}>
       <div className={styles.content}>
         <div className={styles.contentHeader}>
-          <h1>Ask a public question</h1>
+          <h1>Update question</h1>
         </div>
         <div className={styles.editorWrap}>
           <div className={styles.editorHeader}>
@@ -31,10 +32,10 @@ function AskQuestion() {
         </div>
         <Tag></Tag>
         <button className={styles.postBtn} type="button">
-          Review your question
+          Update your question
         </button>
       </div>
     </section>
   );
 }
-export default AskQuestion;
+export default UpdateQuestion;

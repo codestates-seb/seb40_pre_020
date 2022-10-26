@@ -1,89 +1,68 @@
-import React, { useEffect, useRef } from 'react';
-import styles from './Pagination.module.css';
+import styled from 'styled-components';
 
-// eslint-disable-next-line react/prop-types
-function Pagination({ total, currentPage, setCurrentPage }) {
-  const btnContainerRef = useRef(null);
-  const CreatePage = () => {
-    const page = [];
-    const head = (
-      <button key={1} type="button" value={1}>
-        {1}
-      </button>
-    );
-    const tail = (
-      <button key={total} type="button" value={total}>
-        {total}
-      </button>
-    );
-    const ellipsisHead = <span key="ellipsis-head">...</span>;
-    const ellipsisTail = <span key="ellipsis-tail">...</span>;
-
-    if (total <= 8) {
-      for (let i = 0; i < total; i += 1) {
-        page.push(
-          <button key={i + 1} type="button" value={i + 1}>{`${i + 1}`}</button>
-        );
-      }
-      return page;
-    }
-
-    if (total >= 9 && currentPage <= 4) {
-      for (let i = 0; i < 5; i += 1) {
-        page.push(
-          <button key={i + 1} type="button" value={i + 1}>{`${i + 1}`}</button>
-        );
-      }
-      page.push(ellipsisTail, tail);
-      return page;
-    }
-
-    if (total >= 9 && currentPage > total - 4) {
-      page.push(head, ellipsisHead);
-      for (let i = 4; i >= 0; i -= 1) {
-        page.push(
-          <button key={total - i} type="button" value={total - i}>{`${
-            total - i
-          }`}</button>
-        );
-      }
-      return page;
-    }
-
-    page.push(head, ellipsisHead);
-    for (let i = currentPage - 2; i <= currentPage + 2; i += 1) {
-      page.push(<button key={i} type="button" value={i}>{`${i}`}</button>);
-    }
-    page.push(ellipsisTail, tail);
-    return page;
-  };
-
-  const handleOnClick = (e) => {
-    if (e.target.type !== 'button') return;
-    const current = Number(e.target.value.trim());
-    setCurrentPage(current);
-  };
-
-  useEffect(() => {
-    const nodeList = btnContainerRef.current.childNodes;
-    nodeList.forEach((node) => {
-      if (node.value === currentPage.toString()) {
-        node.classList.add(`${styles.select}`);
-      }
-    });
-  }, [currentPage]);
+function Pagination({ total, limit, page, setPage }) {
+  const numPages = Math.ceil(total / limit);
 
   return (
-    <div
-      className={styles.container}
-      role="button"
-      onClick={handleOnClick}
-      aria-hidden="true"
-      ref={btnContainerRef}
-    >
-      <CreatePage />
-    </div>
+    <>
+      <Nav>
+        {/* <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
+          &lt;
+        </Button> */}
+        {Array(numPages)
+          .fill()
+          .map((_, i) => (
+            <Button
+              key={i + 1}
+              onClick={() => setPage(i + 1)}
+              aria-current={page === i + 1 ? 'page' : null}
+            >
+              {i + 1}
+            </Button>
+          ))}
+        {/* <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>
+          &gt;
+        </Button> */}
+      </Nav>
+    </>
   );
 }
 
-export default React.memo(Pagination);
+const Nav = styled.div`
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 4px;
+  margin: 16px;
+`;
+
+const Button = styled.button`
+  padding: 4px 8px;
+  font-size: 13px;
+  font-weight: inherit;
+  outline: none;
+  border: 1px solid hsl(210, 8%, 85%);
+  background-color: transparent;
+  border-radius: 3px;
+
+  &:hover {
+    background-color: hsl(210, 8%, 85%);
+    cursor: pointer;
+    /* transform: translateY(-2px); */
+  }
+
+  /* &[disabled] {
+    background: grey;
+    cursor: revert;
+    transform: revert;
+  } */
+
+  &[aria-current] {
+    border-color: transparent !important;
+    background-color: hsl(27, 90%, 55%) !important;
+    color: #ffffff;
+    cursor: default;
+  }
+`;
+
+export default Pagination;
