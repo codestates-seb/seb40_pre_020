@@ -25,7 +25,7 @@ public class Member extends Auditable {
     private String name; //사용자 이름
 
     @Column(name="MemberEmail", nullable = false, unique = true)
-    private Long email; //로그인 아이디
+    private String email; //로그인 아이디
 
     @Column(name="MemberPassword", nullable = false)
     private String password;
