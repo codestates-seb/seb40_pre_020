@@ -5,6 +5,7 @@ import Footer from './components/footer';
 import Header from './components/header';
 import Home from './components/home';
 import AskQuestion from './components/AskQuestion/AskQuestion';
+import UpdateQuestion from './components/UpdateQuestion/UpdateQuestion';
 function App() {
   return (
     <div>
@@ -15,13 +16,14 @@ function App() {
             path="/"
             element={
               <>
-                <Header />
+                {/* <Header /> */}
                 <Home />
-                <Footer />
+                {/* <Footer /> */}
               </>
             }
           />
           <Route path="/questions/ask" element={<AskQuestion />} />
+          <Route path="/questions/update" element={<UpdateQuestion />} />
           <Route
             path="/tags"
             element={
