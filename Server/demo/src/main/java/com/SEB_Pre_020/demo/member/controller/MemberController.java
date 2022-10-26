@@ -3,20 +3,18 @@ package com.SEB_Pre_020.demo.member.controller;
 import com.SEB_Pre_020.demo.member.entity.Member;
 import com.SEB_Pre_020.demo.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
-@RequestMapping("수정")
+@RequestMapping(value="v1/members", produces = {MediaType.APPLICATION_JSON_VALUE})
+//JSON 형식의 데이터를 응답 데이터로 전송합니다
 public class MemberController {
-
     private final MemberRepository memberRepository;
 
     @GetMapping("수정")
