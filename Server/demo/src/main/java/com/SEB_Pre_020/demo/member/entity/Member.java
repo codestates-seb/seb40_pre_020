@@ -19,7 +19,7 @@ public class Member extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="MemberId", updatable = false, nullable = false, unique = true)
-    private int id;
+    private Integer id;
 
     @Column(name="MemberNickname", nullable = false, unique = true)
     private String name; //사용자 이름
