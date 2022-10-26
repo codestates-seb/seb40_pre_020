@@ -1,0 +1,9 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  jpa:
+    hibernate:
+      use-new-id-generator-mappings: true #JPA ??? ?? ?? ?? ?? ?? ?? ??
+
