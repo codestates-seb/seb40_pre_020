@@ -28,4 +28,11 @@ public class Member extends Auditable {
 
     @Column(name="MemberPassword", nullable = false)
     private String password;
+
+
+    public Member(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 }
