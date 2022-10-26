@@ -16,7 +16,7 @@ import javax.validation.Valid;
 public class MemberController {
     private final MemberRepository memberRepository;
 
-    @GetMapping("{")
+    @GetMapping("")
     public String addForm(@ModelAttribute("member") Member member){
         return "수정";
     }
