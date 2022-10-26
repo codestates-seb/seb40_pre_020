@@ -12,12 +12,11 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value="v1/members", produces = {MediaType.APPLICATION_JSON_VALUE})
-//JSON 형식의 데이터를 응답 데이터로 전송합니다
+@RequestMapping(value="v1/members")
 public class MemberController {
     private final MemberRepository memberRepository;
 
-    @GetMapping("수정")
+    @GetMapping("{")
     public String addForm(@ModelAttribute("member") Member member){
         return "수정";
     }
