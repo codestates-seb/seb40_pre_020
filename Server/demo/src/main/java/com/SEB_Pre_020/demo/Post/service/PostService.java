@@ -19,7 +19,8 @@ public class PostService {
 
     @Transactional
     public Post createPost(Post post) {
-//        get memberid
+        int memberId = post.getMember().getId();
+
         if (postRepository.existsById(post.getId())) {
             Post savePost = postRepository.save(post);
             return savePost;
@@ -30,12 +31,16 @@ public class PostService {
     @Transactional
     public Post updatePost(Post post) {
         Post findPost = findVerifiedPost(post.getId());
+
+        // 제목, 내용 뷰만 수정 가능
         findPost.setPostTitle(post.getPostTitle());
         findPost.setPostContent(post.getPostContent());
         findPost.setPostView(post.getPostView());
+
         return postRepository.save(findPost);
     }
 
+    // 특정 게시글(답글) 하나만 get
     @Transactional(readOnly = true)
     public Post findPost(int postId) {
         return findVerifiedPost(postId);

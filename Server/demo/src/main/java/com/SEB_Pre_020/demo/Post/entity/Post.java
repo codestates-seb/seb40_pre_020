@@ -1,6 +1,7 @@
 package com.SEB_Pre_020.demo.Post.entity;
 
 import com.SEB_Pre_020.demo.audit.Auditable;
+import com.SEB_Pre_020.demo.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,9 +27,9 @@ public class Post extends Auditable {
     @Column(name = "PostContent", nullable = false, updatable = true, unique = false)
     private String postContent;
 
-//    @ManyToOne
-//    @JoinColumn(name = "MemberId")
-//    private Member member;
+    @ManyToOne
+    @JoinColumn(name = "MemberId")
+    private Member member;
 
     @Column(name = "PostView", nullable = false, updatable = true, unique = false)
     private int postView;
