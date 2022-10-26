@@ -3,7 +3,7 @@ import { Reset } from 'styled-reset';
 import { Routes, Route } from 'react-router-dom';
 import Footer from './components/footer';
 import Header from './components/header';
-import Questions from './components/Questions/Questions';
+import Home from './components/home';
 import AskQuestion from './components/AskQuestion/AskQuestion';
 function App() {
   return (
@@ -16,12 +16,39 @@ function App() {
             element={
               <>
                 <Header />
+                <Home />
                 <Footer />
-                <Questions />
               </>
             }
           />
           <Route path="/questions/ask" element={<AskQuestion />} />
+          <Route
+            path="/tags"
+            element={
+              <>
+                <Header />
+                <Footer />
+              </>
+            }
+          ></Route>
+          <Route
+            path="/users"
+            element={
+              <>
+                <Header />
+                <Footer />
+              </>
+            }
+          ></Route>
+          <Route
+            path="/companies"
+            element={
+              <>
+                <Header />
+                <Footer />
+              </>
+            }
+          ></Route>
         </Routes>
       </React.Fragment>
     </div>
