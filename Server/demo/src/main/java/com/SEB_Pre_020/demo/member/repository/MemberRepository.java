@@ -1,39 +1,11 @@
 package com.SEB_Pre_020.demo.member.repository;
 
 import com.SEB_Pre_020.demo.member.entity.Member;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.*;
+import java.util.Optional;
 
-@Slf4j
-@Repository
-public class MemberRepository {
-    private static Map<Long, Member> store = new HashMap<>();
-    private static long sequence = 0L;
-
-    public Member save(Member member){
-        member.setId(++sequence);
-        log.info("save: member={}", member);
-        store.put(member.getId(), member);
-        return member;
-    }
-
-    public Member findById(Long id){
-        return store.get(id);
-    }
-
-    public Optional<Member> findByLoginId(String loginId){
-        return findAll().stream()
-                .filter(m -> m.getName().equals(loginId))
-                .findFirst();
-    }
-
-    public List<Member> findAll(){
-        return new ArrayList<>(store.values());
-    }
-
-    public void clearStore(){
-        store.clear();
-    }
+public interface MemberRepository extends JpaRepository<Member,Long> {
+    Optional<Member> findByEmail(String email);
+    boolean existsByEmail(String email);
 }
