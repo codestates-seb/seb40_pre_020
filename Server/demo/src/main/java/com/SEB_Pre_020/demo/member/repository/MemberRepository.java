@@ -1,5 +1,6 @@
-package com.SEB_Pre_020.demo.member;
+package com.SEB_Pre_020.demo.member.repository;
 
+import com.SEB_Pre_020.demo.member.entity.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 

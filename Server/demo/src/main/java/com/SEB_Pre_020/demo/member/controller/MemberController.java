@@ -1,7 +1,7 @@
-package com.SEB_Pre_020.demo.controller;
+package com.SEB_Pre_020.demo.member.controller;
 
-import com.SEB_Pre_020.demo.member.Member;
-import com.SEB_Pre_020.demo.member.MemberRepository;
+import com.SEB_Pre_020.demo.member.entity.Member;
+import com.SEB_Pre_020.demo.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
