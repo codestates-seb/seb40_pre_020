@@ -1,0 +1,11 @@
+
+.ck-editor__editable:not(.ck-editor__nested-editable) {
+  max-height: 192.664px;
+  min-height: 178.664px;
+  /* max-width: 799.195px;
+  min-width: 401.195px; */
+}
+/* .ck ck-toolbar ck-toolbar_grouping{
+  max-width: 799.195px;
+  min-width: 401.195px;
+} */
