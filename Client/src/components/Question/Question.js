@@ -1,9 +1,9 @@
 import styles from './Question.module.css';
 import { useNavigate } from 'react-router-dom';
 
+// eslint-disable-next-line react/prop-types
 function Question({ userData }) {
   const navigate = useNavigate();
-  console.log(userData.tags);
   const handleOnClick = () => navigate(`/question/${userData.userId}`);
   return (
     <div className={styles.container1}>
