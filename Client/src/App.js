@@ -15,11 +15,11 @@ function App() {
             element={
               <>
                 <Header />
-                <Footer />
               </>
             }
           ></Route>
         </Routes>
+        <Footer />
       </React.Fragment>
     </div>
   );
