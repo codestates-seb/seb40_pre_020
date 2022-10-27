@@ -15,7 +15,7 @@ public class Member extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본키 설정을 위한 애너테이션.
     // IDENTITY 전략(=기본키 설정을 데이터베이스에 위임)사용
-    private int MemberId;
+    private int id;
 
     @Column(name="MemberNickname", nullable = false, unique = true)
     private String name; //사용자 이름
