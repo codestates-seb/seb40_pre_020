@@ -1,5 +1,5 @@
 import Tag from '../Addtag/Addtag';
-import Editor from '../editor/Editor';
+import Editor from '../Editor/Editor';
 import styles from './AskQuestion.module.css';
 function AskQuestion() {
   return (
