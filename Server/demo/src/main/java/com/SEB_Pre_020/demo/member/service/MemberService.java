@@ -10,11 +10,11 @@ import java.util.Optional;
 public class MemberService {
     private final MemberRepository memberRepository;
 
-    public MemberService(MemberRepository memberRepository){
+    public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
 
-    public Member createMember(Member member) {
+    public Member joinMember(Member member) {
         verifyExistsEmail(member.getEmail());
         return memberRepository.save(member);
     } // 회원등록 메서드
@@ -25,3 +25,16 @@ public class MemberService {
             throw new BusinessLogicException(ExceptionCode.USER_EXISTS);
     }
 }
+
+/** jwt 토큰 적용 뒤에 수정할 코드
+//    public Member getLoginMember() {
+//        return findMember(getUserByToken());
+//    }
+
+//    public User getUserByToken(){
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        PrincipalDetails principalDetails = (PrincipalDetails)principal;
+//
+//        return principalDetails.getUser();
+//    }
+} **/
