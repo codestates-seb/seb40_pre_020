@@ -6,6 +6,7 @@ import Header from './components/header';
 import Home from './components/home';
 import AskQuestion from './components/AskQuestion/AskQuestion';
 import UpdateQuestion from './components/UpdateQuestion/UpdateQuestion';
+import Userprofile from './components/Userprofile/Userprofile';
 function App() {
   return (
     <div>
@@ -24,6 +25,16 @@ function App() {
           />
           <Route path="/questions/ask" element={<AskQuestion />} />
           <Route path="/questions/update" element={<UpdateQuestion />} />
+          <Route
+            path="/Userprofile"
+            element={
+              <>
+                <Header />
+                <Userprofile />
+                <Footer />
+              </>
+            }
+          />
           <Route
             path="/tags"
             element={

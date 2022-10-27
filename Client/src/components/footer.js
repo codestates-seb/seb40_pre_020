@@ -18,7 +18,6 @@ const Columnlink = styled(Link)`
 const Footermain = styled.footer`
   display: flex;
   flex-flow: row wrap;
-  position: absolute;
   width: 100%;
   bottom: 0;
   background-color: #232629;

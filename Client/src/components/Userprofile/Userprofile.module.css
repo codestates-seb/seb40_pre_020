@@ -1,0 +1,92 @@
+.container{
+  width: 980px;
+  padding-top: 100px;
+}
+.Userprofile{
+  display:  flex;
+align-items: center;
+}
+.Userprofile img{
+width: 128px;
+border-radius: 3px;
+}
+.username{
+  display: inline-block;
+  font-size: 34px;
+  margin: 4px 4px 12px;
+}
+.userinfo{
+  color: rgb(106, 115, 124);
+  padding: 10px;
+}
+.navbar{
+margin-top: 16px;}
+.on{
+  background-color: orange!important;
+  ;
+}
+.navbar button{
+  text-align: center;
+  height: 29px;
+  margin:2px ;
+  padding: 6px 12px;
+  background-color: white;
+  border-radius: 20px;
+}
+.stats{
+  margin-top: 16px;
+  margin-left:20px ;
+}
+.stats h2{
+  font-size: 21px;
+}
+.statsinfo{
+  display: flex;
+  margin-top: 20px;
+  padding: 15px 10px 0px 10px;
+  border:  1px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  max-width: 593px;
+
+   }
+.stat{
+  width: 143px;
+  height: 39px;
+  display: flex;
+  flex-direction: column;
+  color:rgb(106, 115, 124)
+}
+.Userdata {
+  margin-top: 16px;
+  margin-left:20px ;
+}
+.Userdata h2{
+  font-size: 21px;
+}
+.post{
+  width: 684px;
+  height: 300px;/*포스트창 임의크기*/
+  background-color: rgb(226, 226, 226);
+  border-radius: 5px;
+}
+.about{
+  width: 684px;
+  height: 100px;
+  background-color: rgb(226, 226, 226);
+  border-radius: 5px;
+}
+
+
+
+@media (min-width: 980px) {
+  .statsinfo{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 211px;
+    /* height: 120px; */
+  }
+  .sss{
+    display: flex;
+
+  }
+}

@@ -61,7 +61,7 @@
 
 .content div {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   gap: 0 4px;
 }
@@ -76,6 +76,7 @@
 .user {
   text-align: end;
   width: 700px;
+  margin-top: 3px;
 }
 .user img {
   height: 16px;

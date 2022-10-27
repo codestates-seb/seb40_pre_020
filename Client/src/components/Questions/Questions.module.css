@@ -5,11 +5,12 @@
   border-top-width: 0;
   border-bottom-width: 0;
   border-right-width: 0;
-
 }
+
 
 .titleWrap {
   padding: 24px 24px 0px 24px;
+  margin-top: 90px;
 }
 
 .mainber {
