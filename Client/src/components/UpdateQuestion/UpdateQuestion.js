@@ -1,5 +1,5 @@
 import Tag from '../Addtag/Addtag';
-import Editor from '../Editor/Editor';
+import Editor from '../editor/Editor';
 import styles from './UpdateQuestion.module.css';
 
 function UpdateQuestion() {
