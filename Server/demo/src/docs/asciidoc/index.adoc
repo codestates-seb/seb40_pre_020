@@ -1,0 +1,28 @@
+= 스택오버플로우 클론 코딩
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:source-highlighter: prettify
+
+Kim Ji Hwan <kjh42447@gmail.com>
+
+v1.0.0, 2022.10.27
+
+***
+== PostController
+=== 게시글 등록
+.curl-request
+include::{snippets}/post-post/curl-request.adoc[]
+
+.http-request
+include::{snippets}/post-post/http-request.adoc[]
+
+.request-fields
+include::{snippets}/post-post/request-fields.adoc[]
+
+.http-response
+include::{snippets}/post-post/http-response.adoc[]
+
+.response-fields
+include::{snippets}/post-post/response-fields.adoc[]
