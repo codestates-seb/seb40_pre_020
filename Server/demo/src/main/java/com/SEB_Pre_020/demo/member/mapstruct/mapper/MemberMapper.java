@@ -21,7 +21,8 @@ public interface MemberMapper {
       MemberResponseDto memberResponseDto = new MemberResponseDto();
 
       memberResponseDto.setEmail(member.getEmail());
-      memberResponseDto.setName(member.getName()); // 프로필에 표시되는 회원정보
+      memberResponseDto.setName(member.getName());
+      memberResponseDto.setPassword(member.getPassword());
 
       return memberResponseDto;
     }
