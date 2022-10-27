@@ -1,44 +1,42 @@
 package com.SEB_Pre_020.demo.post;
 
-import com.SEB_Pre_020.demo.Post.controller.PostController;
+import com.SEB_Pre_020.demo.Post.controller.AnswerController;
 import com.SEB_Pre_020.demo.Post.dto.PostDto;
 import com.SEB_Pre_020.demo.Post.entity.Post;
 import com.SEB_Pre_020.demo.Post.mapper.PostMapper;
+import com.SEB_Pre_020.demo.Post.service.AnswerService;
 import com.SEB_Pre_020.demo.Post.service.PostService;
-import com.SEB_Pre_020.demo.member.controller.MemberController;
 import com.SEB_Pre_020.demo.util.ApiDocumentUtils;
-import org.junit.jupiter.api.Test;
 import com.google.gson.Gson;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(PostController.class)
+@WebMvcTest(AnswerController.class)
 @MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs
-public class PostApiTests {
+public class AnswerApiTests {
     @Autowired
     private MockMvc mockMvc;
 
@@ -47,15 +45,17 @@ public class PostApiTests {
 
     @MockBean
     private PostService postService;
+    @MockBean
+    private AnswerService answerService;
 
     @MockBean
     private PostMapper postMapper;
 
     @Test
-    public void postPostTest() throws Exception {
+    public void answerPostTest() throws Exception {
         // given
-        PostDto.Post postDto = new PostDto.Post(0, "Post1", "Content1", 1, 0);
-        PostDto.Response responseDto = new PostDto.Response(1, 0, "Post1", "Content1", 1, 0);
+        PostDto.Post postDto = new PostDto.Post(1, "Answer1", "Content1", 2, 0);
+        PostDto.Response responseDto = new PostDto.Response(2, 1, "Answer1", "Content1", 2, 0);
         String content = gson.toJson(postDto);
 
         given(postMapper.postPostToPost(Mockito.any(PostDto.Post.class))).willReturn(new Post());
@@ -64,7 +64,7 @@ public class PostApiTests {
 
         //when
         ResultActions actions = mockMvc.perform(
-                post("/posts")
+                post("/answers")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content)
@@ -77,7 +77,7 @@ public class PostApiTests {
                 .andExpect(jsonPath("$.data.memberId").value(postDto.getMemberId()))
                 .andExpect(jsonPath("$.data.postContent").value(postDto.getPostContent()))
                 .andDo(document(
-                        "post-post",
+                        "answer-post",
                         ApiDocumentUtils.getRequestPreProcessor(),
                         ApiDocumentUtils.getResponsePreProcessor(),
 //                        pathParameters(
@@ -107,11 +107,11 @@ public class PostApiTests {
     }
 
     @Test
-    public void postPatchTest() throws Exception {
+    public void answerPatchTest() throws Exception {
         // given
-        int id = 1;
-        PostDto.Patch patchDto = new PostDto.Patch(1, 0, "Post1", "Content1", 1, 0);
-        PostDto.Response responseDto = new PostDto.Response(1, 0, "Post1", "Content1", 1, 0);
+        int id = 2;
+        PostDto.Patch patchDto = new PostDto.Patch(2, 1, "Answer1", "Content1", 2, 0);
+        PostDto.Response responseDto = new PostDto.Response(2, 1, "Answer1", "Content1", 2, 0);
         String content = gson.toJson(patchDto);
 
         given(postMapper.postPatchToPost(Mockito.any(PostDto.Patch.class))).willReturn(new Post());
@@ -120,7 +120,7 @@ public class PostApiTests {
 
         //when
         ResultActions actions = mockMvc.perform(
-                RestDocumentationRequestBuilders.patch("/posts/{PostId}", id)
+                RestDocumentationRequestBuilders.patch("/answers/{PostId}", id)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content)
@@ -133,7 +133,7 @@ public class PostApiTests {
                 .andExpect(jsonPath("$.data.memberId").value(patchDto.getMemberId()))
                 .andExpect(jsonPath("$.data.postContent").value(patchDto.getPostContent()))
                 .andDo(document(
-                        "post-patch",
+                        "answer-patch",
                         ApiDocumentUtils.getRequestPreProcessor(),
                         ApiDocumentUtils.getResponsePreProcessor(),
                         pathParameters(
@@ -148,53 +148,6 @@ public class PostApiTests {
                                         fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("작성자 Id").ignored(),
                                         fieldWithPath("postView").type(JsonFieldType.NUMBER).description("조회수").optional()
                                 )
-                        ),
-                        responseFields(
-                                List.of(
-                                        fieldWithPath("data").type(JsonFieldType.OBJECT).description("결과 데이터"),
-                                        fieldWithPath("data.id").type(JsonFieldType.NUMBER).description("게시글 Id"),
-                                        fieldWithPath("data.parentId").type(JsonFieldType.NUMBER).description("부모 Id"),
-                                        fieldWithPath("data.postTitle").type(JsonFieldType.STRING).description("제목"),
-                                        fieldWithPath("data.postContent").type(JsonFieldType.STRING).description("내용"),
-                                        fieldWithPath("data.memberId").type(JsonFieldType.NUMBER).description("작성자 Id"),
-                                        fieldWithPath("data.postView").type(JsonFieldType.NUMBER).description("조회수")
-                                )
-                        )
-                ));
-    }
-
-    @Test
-    public void postGetTest() throws Exception {
-        // given
-        int id = 1;
-//        PostDto.Patch patchDto = new PostDto.Patch(1, 0, "Post1", "Content1", 1, 0);
-        PostDto.Response responseDto = new PostDto.Response(1, 0, "Post1", "Content1", 1, 0);
-//        String content = gson.toJson(patchDto);
-
-//        given(postMapper.postPatchToPost(Mockito.any(PostDto.Patch.class))).willReturn(new Post());
-        given(postService.findPost(Mockito.anyInt())).willReturn(new Post());
-        given(postMapper.postToPostResponse(Mockito.any(Post.class))).willReturn(responseDto);
-
-        //when
-        ResultActions actions = mockMvc.perform(
-                RestDocumentationRequestBuilders.get("/posts/{PostId}", id)
-                        .accept(MediaType.APPLICATION_JSON)
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(content)
-        );
-
-        //then
-        actions
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.postTitle").value(responseDto.getPostTitle()))
-                .andExpect(jsonPath("$.data.memberId").value(responseDto.getMemberId()))
-                .andExpect(jsonPath("$.data.postContent").value(responseDto.getPostContent()))
-                .andDo(document(
-                        "post-get",
-                        ApiDocumentUtils.getRequestPreProcessor(),
-                        ApiDocumentUtils.getResponsePreProcessor(),
-                        pathParameters(
-                                parameterWithName("PostId").description("게시글 Id")
                         ),
                         responseFields(
                                 List.of(

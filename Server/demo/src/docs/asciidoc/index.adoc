@@ -5,9 +5,10 @@
 :toc-title: Table of Contents
 :source-highlighter: prettify
 
+// 다른 분들도 문서화 하시면 수정해주세요
 Kim Ji Hwan <kjh42447@gmail.com>
 
-v1.0.0, 2022.10.27
+v1.0.1, 2022.10.27
 
 ***
 == PostController
@@ -42,3 +43,16 @@ include::{snippets}/post-patch/http-response.adoc[]
 
 .response-fields
 include::{snippets}/post-patch/response-fields.adoc[]
+
+=== 단일 게시글 가져오기
+.curl-request
+include::{snippets}/post-get/curl-request.adoc[]
+
+.http-request
+include::{snippets}/post-get/http-request.adoc[]
+
+.http-response
+include::{snippets}/post-get/http-response.adoc[]
+
+.response-fields
+include::{snippets}/post-get/response-fields.adoc[]
