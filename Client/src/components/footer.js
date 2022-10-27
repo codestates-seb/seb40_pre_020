@@ -61,6 +61,7 @@ const Footercopy = styled.div`
 
 const H5 = styled.h5`
   margin-bottom: 10px;
+  font-weight: 700;
 `;
 
 const Footer = () => {
