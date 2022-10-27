@@ -27,7 +27,7 @@ public class Post extends Auditable {
     @Column(name = "PostContent", nullable = false, updatable = true, unique = false)
     private String postContent;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "MemberId")
     private Member member;
 
