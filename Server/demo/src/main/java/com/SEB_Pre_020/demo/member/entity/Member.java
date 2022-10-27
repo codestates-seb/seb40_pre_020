@@ -30,7 +30,6 @@ public class Member extends Auditable {
     //방문수(VisitCount) 추가해야 함
 
 
-
     public Member(String name, String email, String password) {
         this.name = name;
         this.email = email;
