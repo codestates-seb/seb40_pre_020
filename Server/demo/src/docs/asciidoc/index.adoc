@@ -26,3 +26,19 @@ include::{snippets}/post-post/http-response.adoc[]
 
 .response-fields
 include::{snippets}/post-post/response-fields.adoc[]
+
+=== 게시글 수정
+.curl-request
+include::{snippets}/post-patch/curl-request.adoc[]
+
+.http-request
+include::{snippets}/post-patch/http-request.adoc[]
+
+.request-fields
+include::{snippets}/post-patch/request-fields.adoc[]
+
+.http-response
+include::{snippets}/post-patch/http-response.adoc[]
+
+.response-fields
+include::{snippets}/post-patch/response-fields.adoc[]
