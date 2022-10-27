@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberPostDto {
-    @NotBlank
+    @NotBlank(message = "이메일을 입력해주세요.")
     @Email
     private String email;
 
