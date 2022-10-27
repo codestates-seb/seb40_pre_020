@@ -5,7 +5,6 @@ import Home from './components/Pages/home';
 import Tags from './components/Pages/tags';
 import AskQuestion from './components/AskQuestion/AskQuestion';
 import UpdateQuestion from './components/UpdateQuestion/UpdateQuestion';
-
 function App() {
   return (
     <div>
