@@ -8,7 +8,7 @@ import org.mapstruct.Mapper; // MapSturuct 매퍼 인터페이스로 정의하�
 
 @Mapper(componentModel = "Spring") // Spring Bean으로 등록하는 애트리뷰트
 public interface MemberMapper {
-    default Member memberDtoToMember(MemberPostDto memberPostDto){
+    default Member memberPostDtoToMember(MemberPostDto memberPostDto){
       Member member = new Member();
 
       member.setEmail(memberPostDto.getEmail());
