@@ -20,7 +20,7 @@ public class MemberService {
     } // 회원등록 메서드
 
     private void verifyExistsEmail(String email) {
-        Optional<Member> member = MemberRepository.findByEmail(email);
+        Optional<Member> member = memberRepository.findByEmail(email);
         if (member.isPresent())
             throw new BusinessLogicException(ExceptionCode.USER_EXISTS);
     }
