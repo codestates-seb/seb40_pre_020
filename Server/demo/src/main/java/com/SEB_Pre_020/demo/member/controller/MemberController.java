@@ -32,7 +32,7 @@ public class MemberController {
 
     @PostMapping("/signup") // 회원가입
     public ResponseEntity postMember(@Valid @RequestBody MemberPostDto memberPostDto){
-       Member member = memberMapper.memberDtoToMember(memberPostDto);
+       Member member = memberMapper.memberPostDtoToMember(memberPostDto); // 여기서 nullException이!
        Member joinedMember = memberService.joinMember(member);
        return new ResponseEntity<>(
                new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(joinedMember)),
