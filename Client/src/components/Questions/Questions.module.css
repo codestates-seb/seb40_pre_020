@@ -45,7 +45,7 @@ button {
   border-color: hsl(205, 41%, 63%);
   box-shadow: inset 0 1px 0 0 hsl(0deg, 0%, 100% / 70%);
 }
-.mainber button:hover{
+.mainber button:hover {
   background-color: rgb(1, 120, 231);
 }
 .subber {
@@ -70,12 +70,9 @@ button {
   border-color: hsl(205, 41%, 63%);
   box-shadow: inset 0 1px 0 0 hsl(0deg, 0%, 100% / 70%);
 }
-.subber button:hover{
+.subber button:hover {
   background-color: hsl(205, 76%, 84%);
 }
-
-
-
 
 /* @media (max-width:980px) {
   .small-tomato {
