@@ -10,5 +10,5 @@ import lombok.Setter;
 public class MemberResponseDto {
     private String name;
     private String email;
-    private String password;
+//    private String password;
 }
