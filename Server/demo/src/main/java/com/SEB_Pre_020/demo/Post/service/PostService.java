@@ -53,19 +53,6 @@ public class PostService {
         return findVerifiedPost(postId);
     }
 
-    /** 게시글의 모든 답변 get */
-    @Transactional
-    public Page<Post> findPostPosts(int postId, int page, int size) {
-        List<Post> postList = postRepository.findByParentId(postId);
-
-        Pageable pageable = PageRequest.of(page, size);
-        PagedListHolder pagedListHolder = new PagedListHolder(postList);
-        pagedListHolder.setPageSize(size);
-        pagedListHolder.setPage(page);
-
-        return new PageImpl<>(pagedListHolder.getPageList(), pageable, postList.size());
-    }
-
     // 멤버 get 현재 미구현
     @Transactional
     public List<Post> findMemberPosts(int postId, int page, int size) {
