@@ -38,15 +38,4 @@ public class MemberController {
                new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(joinedMember)),
                HttpStatus.CREATED);
     }
-/** jwt 토큰 적용 뒤 완성해야 할 코드
-//    @GetMapping("/member") // 로그인한 회원 정보 토큰 클라이언트에게 전달
-//    public ResponseEntity getMember(){
-//        Member member = memberService.getLoginMember();
-//
-//        return new ResponseEntity<>(
-//                new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(member)),
-//                HttpStatus.OK);
-//    }
-//    @PutMapping("/profile/memberid/{MemberId}") // 마이페이지 프로필 수정
- **/
 }
