@@ -1,0 +1,83 @@
+.content {
+  max-width: 727px;
+  border: 1px solid hsl(210, 8%, 85%);
+  border-left-width: 1px;
+  border-top-width: 0;
+  border-bottom-width: 0;
+  border-right-width: 0;
+
+}
+
+.titleWrap {
+  padding: 24px 24px 0px 24px;
+}
+
+.mainber {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.mainber h1 {
+  font-size: 27px;
+  color: #232629;
+}
+.mainber {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+}
+button {
+  padding: 8px 10, 4px;
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid transparent;
+  font-family: inherit;
+  text-align: center;
+}
+.mainber button {
+  width: 98px;
+  height: 38px;
+  font-family: inherit;
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(206deg 100% 52%);
+  border-color: hsl(205, 41%, 63%);
+  box-shadow: inset 0 1px 0 0 hsl(0deg, 0%, 100% / 70%);
+}
+.mainber button:hover{
+  background-color: rgb(1, 120, 231);
+}
+.subber {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 48px;
+}
+
+.subber span {
+  font-size: 17px;
+  color: #232629;
+  font-family: inherit;
+  font-weight: 400px;
+}
+
+.subber button {
+  width: 68px;
+  height: 35px;
+  color: hsl(205, 47%, 42%);
+  background-color: hsl(205, 46%, 92%);
+  border-color: hsl(205, 41%, 63%);
+  box-shadow: inset 0 1px 0 0 hsl(0deg, 0%, 100% / 70%);
+}
+.subber button:hover{
+  background-color: hsl(205, 76%, 84%);
+}
+
+
+
+
+/* @media (max-width:980px) {
+  .small-tomato {
+    background-color: tomato;
+  }
+} */
