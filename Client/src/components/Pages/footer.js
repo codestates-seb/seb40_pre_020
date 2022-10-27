@@ -17,8 +17,6 @@ const Columnlink = styled(Link)`
 
 const Footermain = styled.footer`
   display: flex;
-  flex-flow: row wrap;
-  position: absolute;
   width: 100%;
   bottom: 0;
   background-color: #232629;
@@ -28,7 +26,6 @@ const Footermain = styled.footer`
 const Footernav = styled.nav`
   display: flex;
   flex: 2 1 auto;
-  flex-wrap: wrap;
 `;
 
 const Footercolumn = styled.div`
@@ -64,7 +61,7 @@ const H5 = styled.h5`
   font-weight: 700;
 `;
 
-const Footer = () => {
+function Footer() {
   return (
     <Footermain>
       <Logo to="/">
@@ -144,6 +141,6 @@ const Footer = () => {
       </Footercopy>
     </Footermain>
   );
-};
+}
 
 export default Footer;

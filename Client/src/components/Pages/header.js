@@ -1,8 +1,10 @@
 // eslint-disable-next-line import/default
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { faStackOverflow } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 
 const Navmain = styled.div`
   display: flex;
@@ -94,6 +96,20 @@ const Singupbutton = styled.button`
 `;
 
 function Header() {
+  const [keyword, Setkeyword] = useState('');
+
+  const valueChange = (e) => {
+    Setkeyword(e.target.value);
+    console.log(keyword);
+  };
+  const Submit = async (e) => {
+    e.preventDefault();
+
+    const res = await axios.get('/questions', { params: keyword });
+    console.log(res);
+    Setkeyword('');
+  };
+
   return (
     <div>
       <Navmain>
@@ -116,7 +132,11 @@ function Header() {
             <Logo to={'/'}>For Teams</Logo>
           </Li>
         </Ul>
-        <Input type="text" placeholder="Search" />
+        <form onChange={valueChange} onSubmit={Submit}>
+          <label htmlFor="search">
+            <Input type="text" placeholder="Search" />
+          </label>
+        </form>
         <Button>
           <Loginbutton>Log in</Loginbutton>
           <Singupbutton>Sign up</Singupbutton>
