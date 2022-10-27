@@ -25,16 +25,3 @@ public class MemberService {
             throw new BusinessLogicException(ExceptionCode.USER_EXISTS);
     }
 }
-
-/** jwt 토큰 적용 뒤에 수정할 코드
-//    public Member getLoginMember() {
-//        return findMember(getUserByToken());
-//    }
-
-//    public User getUserByToken(){
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        PrincipalDetails principalDetails = (PrincipalDetails)principal;
-//
-//        return principalDetails.getUser();
-//    }
-} **/
