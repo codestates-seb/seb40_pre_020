@@ -63,4 +63,16 @@ public class PostController {
         );
     }
 
+    /** 게시글 목록 get */
+    @GetMapping
+    public ResponseEntity getPosts(@Positive @RequestParam int page,
+                                   @Positive @RequestParam int size) {
+        Page<Post> postPage = postService.findPostPosts(0, page-1, size);
+        List<Post> posts = postPage.getContent();
+
+        return new ResponseEntity<>(
+                new PageResponseDto<>(mapper.postsToPostResponses(posts), postPage), HttpStatus.OK
+        );
+    }
+
 }
