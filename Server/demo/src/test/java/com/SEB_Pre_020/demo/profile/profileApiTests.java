@@ -143,4 +143,89 @@ public class profileApiTests {
                         )
                 ));
     }
+
+    @Test
+    public void getMemberAnswersTest() throws Exception {
+        // given
+        int memberId = 2;
+        int page = 1;
+        int size = 20;
+
+        MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
+        queryParams.add("page", Integer.toString(page));
+        queryParams.add("size", Integer.toString(size));
+
+        Member member1 = new Member();
+        Member member2 = new Member();
+        Member member3 = new Member();
+
+        member1.setId(2);
+        member2.setId(2);
+        member3.setId(3);
+
+        Post post1 = new Post(2, 1, "Post1", "Content2", member1, 6, 1, 1, 2);
+        Post post2 = new Post(3, 3, "Post2", "Content3", member2, 5, 3, 1, 2);
+        Post post3 = new Post(4, 1, "Post3", "Content4", member3, 4, 2, 1, 2);
+
+        PostDto.Response responseDto1 = new PostDto.Response(2, 1, "Post1", "Content2", 2, 6, 1, 1, 2);
+        PostDto.Response responseDto2 = new PostDto.Response(3, 3, "Post2", "Content3", 2, 5, 3, 1, 2);
+        PostDto.Response responseDto3 = new PostDto.Response(4, 1, "Post3", "Content4", 3, 4, 2, 1, 2);
+
+
+        Pageable pageable = PageRequest.of(page-1, size, Sort.by("postVoteCount").descending());
+        Page<Post> posts = new PageImpl<>(List.of(post1, post2, post3), pageable, 3);
+        List<PostDto.Response> responses = List.of(responseDto1, responseDto2);
+
+
+        given(postService.findMemberAnswers(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).willReturn(posts);
+        given(postMapper.postsToPostResponses(Mockito.anyList()))
+                .willReturn(responses);
+
+        // when
+        ResultActions actions = mockMvc.perform(
+                RestDocumentationRequestBuilders.get("/profiles/{MemberId}/answers", memberId)
+                        .params(queryParams)
+                        .accept(MediaType.APPLICATION_JSON)
+        );
+
+        // then
+        actions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data[0].postTitle").value(responses.get(0).getPostTitle()))
+                .andExpect(jsonPath("$.data[0].memberId").value(responses.get(0).getMemberId()))
+                .andExpect(jsonPath("$.data[0].postContent").value(responses.get(0).getPostContent()))
+                .andDo(document(
+                        "profile-getAnswers",
+                        ApiDocumentUtils.getRequestPreProcessor(),
+                        ApiDocumentUtils.getResponsePreProcessor(),
+                        pathParameters(
+                                parameterWithName("MemberId").description("작성자 Id")
+                        ),
+                        requestParameters(
+                                List.of(
+                                        parameterWithName("page").description("페이지 번호"),
+                                        parameterWithName("size").description("페이지 사이즈")
+                                )
+                        ),
+                        responseFields(
+                                Arrays.asList(
+                                        fieldWithPath("data").type(JsonFieldType.ARRAY).description("결과 데이터"),
+                                        fieldWithPath("data[].id").type(JsonFieldType.NUMBER).description("게시글 Id"),
+                                        fieldWithPath("data[].parentId").type(JsonFieldType.NUMBER).description("부모 Id"),
+                                        fieldWithPath("data[].postTitle").type(JsonFieldType.STRING).description("제목"),
+                                        fieldWithPath("data[].postContent").type(JsonFieldType.STRING).description("내용"),
+                                        fieldWithPath("data[].memberId").type(JsonFieldType.NUMBER).description("작성자 Id"),
+                                        fieldWithPath("data[].postView").type(JsonFieldType.NUMBER).description("조회수"),
+                                        fieldWithPath("data[].postVoteCount").type(JsonFieldType.NUMBER).description("추천수"),
+                                        fieldWithPath("data[].postAnswerCount").type(JsonFieldType.NUMBER).description("답글수"),
+                                        fieldWithPath("data[].postCommentCount").type(JsonFieldType.NUMBER).description("댓글수"),
+                                        fieldWithPath("pageInfo").type(JsonFieldType.OBJECT).description("페이지 정보"),
+                                        fieldWithPath("pageInfo.page").type(JsonFieldType.NUMBER).description("페이지 번호"),
+                                        fieldWithPath("pageInfo.size").type(JsonFieldType.NUMBER).description("페이지 사이즈"),
+                                        fieldWithPath("pageInfo.totalElements").type(JsonFieldType.NUMBER).description("전체 건 수"),
+                                        fieldWithPath("pageInfo.totalPages").type(JsonFieldType.NUMBER).description("전체 페이지 수")
+                                )
+                        )
+                ));
+    }
 }

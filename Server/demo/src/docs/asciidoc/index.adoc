@@ -129,3 +129,16 @@ include::{snippets}/profile-getPosts/http-response.adoc[]
 
 .response-fields
 include::{snippets}/profile-getPosts/response-fields.adoc[]
+
+=== 답글 조회
+.curl-request
+include::{snippets}/profile-getAnswers/curl-request.adoc[]
+
+.http-request
+include::{snippets}/profile-getAnswers/http-request.adoc[]
+
+.http-response
+include::{snippets}/profile-getAnswers/http-response.adoc[]
+
+.response-fields
+include::{snippets}/profile-getAnswers/response-fields.adoc[]
