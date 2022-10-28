@@ -33,6 +33,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2' /*일단 로컬테스트까진 h2로 DB 사용하도록 설정하겠습니다*/
+	implementation "com.h2database:h2"
 	implementation 'com.google.code.gson:gson:2.10'
 
 	annotationProcessor 'org.projectlombok:lombok'
@@ -42,12 +43,10 @@ dependencies {
 	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 
-	implementation "com.h2database:h2"
-
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
-	runtimeOnly	'io.jsonwebtoken:jjwt-jackson:0.11.5' // Spring Security - jwt 인증 위한 라이브러리들
+//	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+//	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+//	runtimeOnly	'io.jsonwebtoken:jjwt-jackson:0.11.5' // Spring Security - jwt 인증 위한 라이브러리들
 
 }
 
