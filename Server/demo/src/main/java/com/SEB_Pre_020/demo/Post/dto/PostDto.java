@@ -26,6 +26,10 @@ public class PostDto {
         private int memberId;
 
         private int postView;
+
+        private int postVoteCount;
+
+        private int postCommentCount;
     }
 
     @Getter
@@ -47,6 +51,10 @@ public class PostDto {
         private int memberId;
 
         private int postView;
+
+        private int postVoteCount;
+
+        private int postCommentCount;
     }
 
     @Getter
@@ -68,5 +76,9 @@ public class PostDto {
         private int memberId;
 
         private int postView;
+
+        private int postVoteCount;
+
+        private int postCommentCount;
     }
 }

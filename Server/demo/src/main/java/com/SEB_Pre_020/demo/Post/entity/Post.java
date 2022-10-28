@@ -33,4 +33,10 @@ public class Post extends Auditable {
 
     @Column(name = "PostView", nullable = false, updatable = true, unique = false)
     private int postView;
+
+    @Column(name = "PostVoteCount", nullable = false, updatable = true, unique = false)
+    private int postVoteCount;
+
+    @Column(name = "PostCommentCount", nullable = false, updatable = true, unique = false)
+    private int postCommentCount;
 }
