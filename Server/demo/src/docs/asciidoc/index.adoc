@@ -8,7 +8,7 @@
 // 다른 분들도 문서화 하시면 수정해주세요
 Kim Ji Hwan <kjh42447@gmail.com>
 
-v1.0.1, 2022.10.27
+v1.0.1, 2022.10.28
 
 ***
 == PostController
@@ -56,3 +56,49 @@ include::{snippets}/post-get/http-response.adoc[]
 
 .response-fields
 include::{snippets}/post-get/response-fields.adoc[]
+
+== AnswerController
+=== 답변 등록
+.curl-request
+include::{snippets}/answer-post/curl-request.adoc[]
+
+.http-request
+include::{snippets}/answer-post/http-request.adoc[]
+
+.request-fields
+include::{snippets}/answer-post/request-fields.adoc[]
+
+.http-response
+include::{snippets}/answer-post/http-response.adoc[]
+
+.response-fields
+include::{snippets}/answer-post/response-fields.adoc[]
+
+=== 게시글 수정
+.curl-request
+include::{snippets}/answer-patch/curl-request.adoc[]
+
+.http-request
+include::{snippets}/answer-patch/http-request.adoc[]
+
+.request-fields
+include::{snippets}/answer-patch/request-fields.adoc[]
+
+.http-response
+include::{snippets}/answer-patch/http-response.adoc[]
+
+.response-fields
+include::{snippets}/answer-patch/response-fields.adoc[]
+
+=== 한 게시글의 모든 답글 가져오기
+.curl-request
+include::{snippets}/answer-get/curl-request.adoc[]
+
+.http-request
+include::{snippets}/answer-get/http-request.adoc[]
+
+.http-response
+include::{snippets}/answer-get/http-response.adoc[]
+
+.response-fields
+include::{snippets}/answer-get/response-fields.adoc[]
