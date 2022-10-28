@@ -171,7 +171,7 @@ public class PostApiTests {
                 ));
     }
 
-    @Test
+//    @Test
     public void postGetTest() throws Exception {
         // given
         int id = 1;
