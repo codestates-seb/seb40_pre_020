@@ -3,6 +3,7 @@ import { Reset } from 'styled-reset';
 import { Routes, Route } from 'react-router-dom';
 import Home from './components/Pages/home';
 import Tags from './components/Pages/tags';
+import Users from './components/Pages/Users';
 import AskQuestion from './components/AskQuestion/AskQuestion';
 import UpdateQuestion from './components/UpdateQuestion/UpdateQuestion';
 function App() {
@@ -13,24 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/tags" element={<Tags />}></Route>
-          {/* <Route
-            path="/users"
-            element={
-              <>
-                <Header />
-                <Footer />
-              </>
-            }
-          ></Route>
-          <Route
-            path="/companies"
-            element={
-              <>
-                <Header />
-                <Footer />
-              </>
-            }
-          ></Route> */}
+          <Route path="/users" element={<Users />}></Route>
           <Route path="/questions/ask" element={<AskQuestion />} />
           <Route path="/questions/update" element={<UpdateQuestion />} />
         </Routes>
