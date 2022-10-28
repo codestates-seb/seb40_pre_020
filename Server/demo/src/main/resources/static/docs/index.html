@@ -1489,14 +1489,22 @@ Content-Length: 246
 <div class="listingblock">
 <div class="title">curl-request</div>
 <div class="content">
+<<<<<<< HEAD
+<pre class="prettyprint highlight"><code data-lang="bash">$ curl 'http://localhost:8080/answers/1?page=1&amp;size=20' -i -X GET \
+=======
 <pre class="prettyprint highlight"><code data-lang="bash">$ curl 'http://localhost:8080/posts?page=1&amp;size=20' -i -X GET \
+>>>>>>> parent of 806ebae (edit Post(add field postVoteCount, postCommentCount))
     -H 'Accept: application/json'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">http-request</div>
 <div class="content">
+<<<<<<< HEAD
+<pre class="prettyprint highlight nowrap"><code data-lang="http">GET /answers/1?page=1&amp;size=20 HTTP/1.1
+=======
 <pre class="prettyprint highlight nowrap"><code data-lang="http">GET /posts?page=1&amp;size=20 HTTP/1.1
+>>>>>>> parent of 806ebae (edit Post(add field postVoteCount, postCommentCount))
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -1506,38 +1514,69 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="prettyprint highlight nowrap"><code data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
+<<<<<<< HEAD
+Content-Length: 819
+=======
 Content-Length: 813
+>>>>>>> parent of 806ebae (edit Post(add field postVoteCount, postCommentCount))
 
 {
   "data" : [ {
     "id" : 2,
+<<<<<<< HEAD
+    "parentId" : 1,
+    "postTitle" : "Answer1",
+=======
     "parentId" : 0,
     "postTitle" : "Post1",
+>>>>>>> parent of 806ebae (edit Post(add field postVoteCount, postCommentCount))
     "postContent" : "Content2",
     "memberId" : 2,
     "postView" : 6,
     "postVoteCount" : 1,
+<<<<<<< HEAD
+    "postAnswerCount" : 0,
+    "postCommentCount" : 2
+  }, {
+    "id" : 3,
+    "parentId" : 1,
+    "postTitle" : "Answer2",
+=======
     "postAnswerCount" : 1,
     "postCommentCount" : 2
   }, {
     "id" : 3,
     "parentId" : 0,
     "postTitle" : "Post2",
+>>>>>>> parent of 806ebae (edit Post(add field postVoteCount, postCommentCount))
     "postContent" : "Content3",
     "memberId" : 2,
     "postView" : 5,
     "postVoteCount" : 3,
+<<<<<<< HEAD
+    "postAnswerCount" : 0,
+    "postCommentCount" : 2
+  }, {
+    "id" : 4,
+    "parentId" : 1,
+    "postTitle" : "Answer3",
+=======
     "postAnswerCount" : 1,
     "postCommentCount" : 2
   }, {
     "id" : 4,
     "parentId" : 0,
     "postTitle" : "Post3",
+>>>>>>> parent of 806ebae (edit Post(add field postVoteCount, postCommentCount))
     "postContent" : "Content4",
     "memberId" : 3,
     "postView" : 4,
     "postVoteCount" : 2,
+<<<<<<< HEAD
+    "postAnswerCount" : 0,
+=======
     "postAnswerCount" : 1,
+>>>>>>> parent of 806ebae (edit Post(add field postVoteCount, postCommentCount))
     "postCommentCount" : 2
   } ],
   "pageInfo" : {
@@ -1648,7 +1687,11 @@ Content-Length: 813
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
+<<<<<<< HEAD
+Last updated 2022-10-28 14:52:52 +0900
+=======
 Last updated 2022-10-28 14:49:38 +0900
+>>>>>>> parent of 806ebae (edit Post(add field postVoteCount, postCommentCount))
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">

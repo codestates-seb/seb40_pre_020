@@ -16,6 +16,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
@@ -195,6 +196,7 @@ public class AnswerApiTests {
         member2.setId(2);
         member3.setId(3);
 
+
         Post post1 = new Post(2, 1, "Answer1", "Content2", member1, 6, 1, 0, 2);
         Post post2 = new Post(3, 1, "Answer2", "Content3", member2, 5, 3, 0, 2);
         Post post3 = new Post(4, 1, "Answer3", "Content4", member3, 4, 2, 0, 2);
@@ -209,6 +211,7 @@ public class AnswerApiTests {
         List<PostDto.Response> responses = List.of(responseDto1, responseDto2, responseDto3);
 
 //        given(postMapper.postPatchToPost(Mockito.any(PostDto.Patch.class))).willReturn(new Post());
+
         given(postService.findPostPosts(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).willReturn(posts);
         given(postMapper.postsToPostResponses(Mockito.anyList()))
                 .willReturn(responses);

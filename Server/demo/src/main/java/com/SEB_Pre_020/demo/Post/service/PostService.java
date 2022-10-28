@@ -36,10 +36,12 @@ public class PostService {
     public Post updatePost(Post post) {
         Post findPost = findVerifiedPost(post.getId());
 
-        // 제목, 내용 뷰만 수정 가능
+        // 제목, 내용, 조회수, 추천수, 댓글수만 수정 가능
         findPost.setPostTitle(post.getPostTitle());
         findPost.setPostContent(post.getPostContent());
         findPost.setPostView(post.getPostView());
+        findPost.setPostVoteCount(post.getPostVoteCount());
+        findPost.setPostCommentCount(post.getPostCommentCount());
 
         return postRepository.save(findPost);
     }
