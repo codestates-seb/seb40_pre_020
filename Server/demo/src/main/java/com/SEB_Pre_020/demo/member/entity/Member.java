@@ -1,10 +1,15 @@
 package com.SEB_Pre_020.demo.member.entity;
 
 import com.SEB_Pre_020.demo.audit.Auditable;
+import com.SEB_Pre_020.demo.member.repository.MemberRepository;
+import com.SEB_Pre_020.demo.member.service.MemberService;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.*;
+import javax.transaction.Transactional;
 
 @NoArgsConstructor
 @Getter
