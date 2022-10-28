@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 @RestController
-@RequestMapping("/Votes")
+@RequestMapping("/votes")
 @Validated
 @Slf4j
 public class VoteController {

@@ -29,8 +29,6 @@ public interface VoteMapper {
     default VoteDto.Response voteToVoteResponse(Vote vote) {
         VoteDto.Response response = new VoteDto.Response();
 
-        if (response == null)   return response;
-
         response.setId(vote.getId());
         response.setPostId(vote.getPost().getId());
         response.setMemberId(vote.getMember().getId());
