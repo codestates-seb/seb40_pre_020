@@ -13,6 +13,7 @@ const Navmain = styled.div`
   width: 100%;
   margin: 0 auto;
   background-color: #f8f9f9;
+  border-top: 3px solid #f48225;
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.5);
   position: fixed;
   z-index: 999;
@@ -61,10 +62,10 @@ const Input = styled.input`
   border-radius: 5px;
   display: block;
   width: 100%;
-  max-width: 500px;
+  min-width: 450px;
   box-sizing: border-box;
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 25px;
   margin-bottom: 20px;
   outline-style: none;
 `;
