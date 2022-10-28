@@ -57,6 +57,7 @@ public interface PostMapper {
         response.setPostVoteCount(post.getPostVoteCount());
         response.setPostAnswerCount(post.getPostAnswerCount());
         response.setPostCommentCount(post.getPostCommentCount());
+
         response.setMemberId(post.getMember().getId());
 
         return response;

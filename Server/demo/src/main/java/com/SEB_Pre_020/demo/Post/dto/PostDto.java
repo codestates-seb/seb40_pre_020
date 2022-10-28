@@ -29,6 +29,8 @@ public class PostDto {
 
         private int postVoteCount;
 
+        private int postAnswerCount;
+
         private int postCommentCount;
     }
 
@@ -54,6 +56,8 @@ public class PostDto {
 
         private int postVoteCount;
 
+        private int postAnswerCount;
+
         private int postCommentCount;
     }
 
@@ -78,6 +82,8 @@ public class PostDto {
         private int postView;
 
         private int postVoteCount;
+
+        private int postAnswerCount;
 
         private int postCommentCount;
     }
