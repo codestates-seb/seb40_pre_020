@@ -21,6 +21,7 @@ public interface PostMapper {
         post.setPostContent(requestBody.getPostContent());
         post.setPostView(0);
         post.setPostVoteCount(0);
+        post.setPostAnswerCount(0);
         post.setPostCommentCount(0);
         post.setMember(member);
 
@@ -38,6 +39,7 @@ public interface PostMapper {
         post.setPostContent(requestBody.getPostContent());
         post.setPostView(requestBody.getPostView());
         post.setPostVoteCount(requestBody.getPostVoteCount());
+        post.setPostAnswerCount(requestBody.getPostAnswerCount());
         post.setPostCommentCount(requestBody.getPostCommentCount());
         post.setMember(member);
 
@@ -47,15 +49,14 @@ public interface PostMapper {
     default PostDto.Response postToPostResponse(Post post) {
         PostDto.Response response = new PostDto.Response();
 
-        if (response == null)   return response;
-
         response.setId(post.getId());
         response.setParentId(post.getParentId());
         response.setPostTitle(post.getPostTitle());
         response.setPostContent(post.getPostContent());
-        response.setPostView(response.getPostView());
-        post.setPostVoteCount(response.getPostVoteCount());
-        post.setPostCommentCount(response.getPostCommentCount());
+        response.setPostView(post.getPostView());
+        response.setPostVoteCount(post.getPostVoteCount());
+        response.setPostAnswerCount(post.getPostAnswerCount());
+        response.setPostCommentCount(post.getPostCommentCount());
         response.setMemberId(post.getMember().getId());
 
         return response;
