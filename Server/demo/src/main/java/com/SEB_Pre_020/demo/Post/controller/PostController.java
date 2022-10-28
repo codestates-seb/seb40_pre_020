@@ -61,11 +61,11 @@ public class PostController {
 
         // 조회수 1 증가
         post.setPostView(post.getPostView()+1);
-//        Post savedPost = postService.updatePost(post);
-
+        Post savedPost = postService.updatePost(post);
+        
         return new ResponseEntity<>(
-//                new SingleResponseDto<>(mapper.postToPostResponse(savedPost)), HttpStatus.OK
-                    new SingleResponseDto<>(mapper.postToPostResponse(post)), HttpStatus.OK
+                new SingleResponseDto<>(mapper.postToPostResponse(savedPost)), HttpStatus.OK
+//                    new SingleResponseDto<>(mapper.postToPostResponse(post)), HttpStatus.OK
         );
     }
 
