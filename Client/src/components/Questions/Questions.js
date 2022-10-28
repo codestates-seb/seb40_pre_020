@@ -38,7 +38,7 @@ function Questions() {
       status: '-ㅇㅇㅇㅇㅇㅇㅇ',
       views: 5,
       content: ` know this has been asked before, and I have read a lot of posts about it, but I can't seem to find anything to help. I have about 15 controllersamong many other'`,
-      userId: 123123,
+      userId: 333123,
       createdAt: '2022 - 10 - 18',
       votes: 5,
       replies: 5,
@@ -456,7 +456,7 @@ function Questions() {
           </button>
         </div>
         <div className={styles.subber}>
-          <span>286 questions</span>
+          <span>{defaultData.length} questions</span>
           <button type="button">Filter</button>
         </div>
       </div>
@@ -467,7 +467,7 @@ function Questions() {
       </div>
       {/* <RelatedTags /> */}
       <Pagination
-        total={defaultData.length}
+        total={defaultData.length} //게시물 갯수
         limit={limit}
         page={page}
         setPage={setPage}

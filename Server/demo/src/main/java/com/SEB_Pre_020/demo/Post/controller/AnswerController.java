@@ -3,7 +3,6 @@ package com.SEB_Pre_020.demo.Post.controller;
 import com.SEB_Pre_020.demo.Post.dto.PostDto;
 import com.SEB_Pre_020.demo.Post.entity.Post;
 import com.SEB_Pre_020.demo.Post.mapper.PostMapper;
-import com.SEB_Pre_020.demo.Post.service.AnswerService;
 import com.SEB_Pre_020.demo.Post.service.PostService;
 import com.SEB_Pre_020.demo.dto.PageResponseDto;
 import com.SEB_Pre_020.demo.dto.SingleResponseDto;
@@ -24,13 +23,10 @@ import java.util.List;
 @Slf4j
 public class AnswerController {
     private final PostService postService;
-
-    private final AnswerService answerService;
     private final PostMapper mapper;
 
-    public AnswerController(PostService postService, AnswerService answerService, PostMapper mapper) {
+    public AnswerController(PostService postService, PostMapper mapper) {
         this.postService = postService;
-        this.answerService = answerService;
         this.mapper = mapper;
     }
 
@@ -62,7 +58,7 @@ public class AnswerController {
     public ResponseEntity getAnswers(@Positive @RequestParam int page,
                                   @Positive @RequestParam int size,
                                   @PathVariable("PostId") @Positive int postId) {
-        Page<Post> postPage = answerService.findPostAnswers(postId, page-1, size);
+        Page<Post> postPage = postService.findPostPosts(postId, page-1, size);
         List<Post> posts = postPage.getContent();
 
         return new ResponseEntity<>(

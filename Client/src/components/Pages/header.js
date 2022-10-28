@@ -1,8 +1,10 @@
 // eslint-disable-next-line import/default
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { faStackOverflow } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 
 const Navmain = styled.div`
   display: flex;
@@ -11,6 +13,7 @@ const Navmain = styled.div`
   width: 100%;
   margin: 0 auto;
   background-color: #f8f9f9;
+  border-top: 3px solid #f48225;
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.5);
   position: fixed;
   z-index: 999;
@@ -59,10 +62,10 @@ const Input = styled.input`
   border-radius: 5px;
   display: block;
   width: 100%;
-  max-width: 500px;
+  min-width: 450px;
   box-sizing: border-box;
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 25px;
   margin-bottom: 20px;
   outline-style: none;
 `;
@@ -94,6 +97,20 @@ const Singupbutton = styled.button`
 `;
 
 function Header() {
+  const [keyword, Setkeyword] = useState('');
+
+  const valueChange = (e) => {
+    Setkeyword(e.target.value);
+    console.log(keyword);
+  };
+  const Submit = async (e) => {
+    e.preventDefault();
+
+    const res = await axios.get('/questions', { params: keyword });
+    console.log(res);
+    Setkeyword('');
+  };
+
   return (
     <div>
       <Navmain>
@@ -116,7 +133,11 @@ function Header() {
             <Logo to={'/'}>For Teams</Logo>
           </Li>
         </Ul>
-        <Input type="text" placeholder="Search" />
+        <form onChange={valueChange} onSubmit={Submit}>
+          <label htmlFor="search">
+            <Input type="text" placeholder="Search" />
+          </label>
+        </form>
         <Button>
           <Loginbutton>Log in</Loginbutton>
           <Singupbutton>Sign up</Singupbutton>
