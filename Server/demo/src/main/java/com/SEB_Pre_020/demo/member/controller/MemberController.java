@@ -37,4 +37,6 @@ public class MemberController {
                new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(joinedMember)),
                HttpStatus.CREATED);
     }
+
+
 }
