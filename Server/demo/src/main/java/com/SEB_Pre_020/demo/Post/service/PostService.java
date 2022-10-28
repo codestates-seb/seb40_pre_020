@@ -65,11 +65,30 @@ public class PostService {
         return new PageImpl<>(pagedListHolder.getPageList(), pageable, postList.size());
     }
 
-    // 멤버 get 현재 미구현
+    /** memberId로 게시글 목록 가져오기 */
     @Transactional
-    public List<Post> findMemberPosts(int postId, int page, int size) {
-        List<Post> postList = postRepository.findByParentId(postId);
-        return postList;
+    public Page<Post> findMemberPosts(int memberId, int page, int size) {
+        List<Post> postList = postRepository.findByMember_IdAndParentId(memberId, 0);
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+        PagedListHolder pagedListHolder = new PagedListHolder(postList);
+        pagedListHolder.setPageSize(size);
+        pagedListHolder.setPage(page);
+
+        return new PageImpl<>(pagedListHolder.getPageList(), pageable, postList.size());
+    }
+
+    /** memberId로 답글 목록 가져오기 */
+    @Transactional
+    public Page<Post> findMemberAnswers(int memberId, int page, int size) {
+        List<Post> postList = postRepository.findByMember_IdAndParentIdNot(memberId, 0);
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+        PagedListHolder pagedListHolder = new PagedListHolder(postList);
+        pagedListHolder.setPageSize(size);
+        pagedListHolder.setPage(page);
+
+        return new PageImpl<>(pagedListHolder.getPageList(), pageable, postList.size());
     }
 
     /** 게시글 삭제 */
