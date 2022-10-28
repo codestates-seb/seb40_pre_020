@@ -2,12 +2,14 @@ package com.SEB_Pre_020.demo.Post.entity;
 
 import com.SEB_Pre_020.demo.audit.Auditable;
 import com.SEB_Pre_020.demo.member.entity.Member;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
