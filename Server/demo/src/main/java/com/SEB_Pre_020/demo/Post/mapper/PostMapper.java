@@ -20,6 +20,9 @@ public interface PostMapper {
         post.setPostTitle(requestBody.getPostTitle());
         post.setPostContent(requestBody.getPostContent());
         post.setPostView(0);
+        post.setPostVoteCount(0);
+        post.setPostAnswerCount(0);
+        post.setPostCommentCount(0);
         post.setMember(member);
 
         return post;
@@ -35,6 +38,9 @@ public interface PostMapper {
         post.setPostTitle(requestBody.getPostTitle());
         post.setPostContent(requestBody.getPostContent());
         post.setPostView(requestBody.getPostView());
+        post.setPostVoteCount(requestBody.getPostVoteCount());
+        post.setPostAnswerCount(requestBody.getPostAnswerCount());
+        post.setPostCommentCount(requestBody.getPostCommentCount());
         post.setMember(member);
 
         return post;
@@ -50,6 +56,9 @@ public interface PostMapper {
         response.setPostTitle(post.getPostTitle());
         response.setPostContent(post.getPostContent());
         response.setPostView(response.getPostView());
+        post.setPostVoteCount(response.getPostVoteCount());
+        post.setPostAnswerCount(response.getPostAnswerCount());
+        post.setPostCommentCount(response.getPostCommentCount());
         response.setMemberId(post.getMember().getId());
 
         return response;
