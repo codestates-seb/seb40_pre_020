@@ -4,9 +4,11 @@ import com.SEB_Pre_020.demo.exception.ExceptionCode;
 import com.SEB_Pre_020.demo.member.entity.Member;
 import com.SEB_Pre_020.demo.member.repository.MemberRepository;
 import com.SEB_Pre_020.demo.exception.BusinessLogicException;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class MemberService {
     private final MemberRepository memberRepository;
 
