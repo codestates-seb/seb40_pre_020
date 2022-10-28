@@ -24,7 +24,7 @@ dependencies {
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 	asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 
-//	implementation 'mysql:mysql-connector-java'
+	implementation 'mysql:mysql-connector-java'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -32,7 +32,7 @@ dependencies {
 	implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'com.h2database:h2' /*일단 로컬테스트까진 h2로 DB 사용하도록 설정하겠습니다*/
+//	runtimeOnly 'com.h2database:h2'
 	implementation 'com.google.code.gson:gson:2.10'
 
 	annotationProcessor 'org.projectlombok:lombok'
@@ -41,12 +41,10 @@ dependencies {
 
 	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
-
-	implementation "com.h2database:h2"
 }
 
 ext {
-	snippetsDir =  file('build/generated-snippets')
+	snippetsDir =  file('build/generated/sources/generated-snippets')
 }
 
 tasks.named('test') {
