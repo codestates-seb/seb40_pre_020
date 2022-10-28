@@ -57,6 +57,19 @@ include::{snippets}/post-get/http-response.adoc[]
 .response-fields
 include::{snippets}/post-get/response-fields.adoc[]
 
+=== 게시글 목록 가져오기
+.curl-request
+include::{snippets}/posts-get/curl-request.adoc[]
+
+.http-request
+include::{snippets}/posts-get/http-request.adoc[]
+
+.http-response
+include::{snippets}/posts-get/http-response.adoc[]
+
+.response-fields
+include::{snippets}/posts-get/response-fields.adoc[]
+
 == AnswerController
 === 답변 등록
 .curl-request

@@ -179,16 +179,20 @@ public class PostApiTests {
                 ));
     }
 
-//    @Test
+    @Test
     public void postGetTest() throws Exception {
         // given
         int id = 1;
+        Member member = new Member();
+        member.setId(1);
 //        PostDto.Patch patchDto = new PostDto.Patch(1, 0, "Post1", "Content1", 1, 0);
+        Post post = new Post(1, 0, "Post1", "Content1", member, 0, 1, 1, 1);
         PostDto.Response responseDto = new PostDto.Response(1, 0, "Post1", "Content1", 1, 0, 1, 1, 1);
 //        String content = gson.toJson(patchDto);
 
 //        given(postMapper.postPatchToPost(Mockito.any(PostDto.Patch.class))).willReturn(new Post());
-        given(postService.findPost(Mockito.anyInt())).willReturn(new Post());
+        given(postService.findPost(Mockito.anyInt())).willReturn(post);
+        given(postService.updatePost(Mockito.any(Post.class))).willReturn(post);
         given(postMapper.postToPostResponse(Mockito.any(Post.class))).willReturn(responseDto);
 
         //when
