@@ -5,10 +5,6 @@ import com.SEB_Pre_020.demo.Post.dto.PostDto;
 import com.SEB_Pre_020.demo.Post.entity.Post;
 import com.SEB_Pre_020.demo.Post.mapper.PostMapper;
 import com.SEB_Pre_020.demo.Post.service.PostService;
-<<<<<<< HEAD
-import com.SEB_Pre_020.demo.dto.PageResponseDto;
-=======
->>>>>>> parent of 806ebae (edit Post(add field postVoteCount, postCommentCount))
 import com.SEB_Pre_020.demo.member.entity.Member;
 import com.SEB_Pre_020.demo.util.ApiDocumentUtils;
 import com.google.gson.Gson;
@@ -200,15 +196,7 @@ public class AnswerApiTests {
         member2.setId(2);
         member3.setId(3);
 
-<<<<<<< HEAD
-        Post post1 = new Post(2, 1, "Answer1", "Content2", member1, 6, 1, 2);
-        Post post2 = new Post(3, 1, "Answer2", "Content3", member2, 5, 3, 2);
-        Post post3 = new Post(4, 1, "Answer3", "Content4", member3, 4, 2, 2);
-//        PostDto.Patch patchDto = new PostDto.Patch(1, 0, "Post1", "Content1", 1, 0);
-        PostDto.Response responseDto1 = new PostDto.Response(2, 1, "Answer1", "Content2", 2, 6, 1, 2);
-        PostDto.Response responseDto2 = new PostDto.Response(3, 1, "Answer2", "Content3", 2, 5, 3, 2);
-        PostDto.Response responseDto3 = new PostDto.Response(4, 1, "Answer3", "Content4", 3, 4, 2, 2);
-=======
+
         Post post1 = new Post(2, 1, "Answer1", "Content2", member1, 6, 1, 0, 2);
         Post post2 = new Post(3, 1, "Answer2", "Content3", member2, 5, 3, 0, 2);
         Post post3 = new Post(4, 1, "Answer3", "Content4", member3, 4, 2, 0, 2);
@@ -216,7 +204,6 @@ public class AnswerApiTests {
         PostDto.Response responseDto1 = new PostDto.Response(2, 1, "Answer1", "Content2", 2, 6, 1, 0, 2);
         PostDto.Response responseDto2 = new PostDto.Response(3, 1, "Answer2", "Content3", 2, 5, 3, 0, 2);
         PostDto.Response responseDto3 = new PostDto.Response(4, 1, "Answer3", "Content4", 3, 4, 2, 0, 2);
->>>>>>> parent of 806ebae (edit Post(add field postVoteCount, postCommentCount))
 //        String content = gson.toJson(patchDto);
 
         Pageable pageable = PageRequest.of(page-1, size, Sort.by("postVoteCount").descending());
@@ -224,11 +211,8 @@ public class AnswerApiTests {
         List<PostDto.Response> responses = List.of(responseDto1, responseDto2, responseDto3);
 
 //        given(postMapper.postPatchToPost(Mockito.any(PostDto.Patch.class))).willReturn(new Post());
-<<<<<<< HEAD
-        given(answerService.findPostAnswers(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).willReturn(posts);
-=======
+
         given(postService.findPostPosts(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).willReturn(posts);
->>>>>>> parent of 806ebae (edit Post(add field postVoteCount, postCommentCount))
         given(postMapper.postsToPostResponses(Mockito.anyList()))
                 .willReturn(responses);
 
@@ -270,10 +254,7 @@ public class AnswerApiTests {
                                         fieldWithPath("data[].memberId").type(JsonFieldType.NUMBER).description("작성자 Id"),
                                         fieldWithPath("data[].postView").type(JsonFieldType.NUMBER).description("조회수"),
                                         fieldWithPath("data[].postVoteCount").type(JsonFieldType.NUMBER).description("추천수"),
-<<<<<<< HEAD
-=======
                                        fieldWithPath("data[].postAnswerCount").type(JsonFieldType.NUMBER).description("답글수"),
->>>>>>> parent of 806ebae (edit Post(add field postVoteCount, postCommentCount))
                                         fieldWithPath("data[].postCommentCount").type(JsonFieldType.NUMBER).description("댓글수"),
                                         fieldWithPath("pageInfo").type(JsonFieldType.OBJECT).description("페이지 정보"),
                                         fieldWithPath("pageInfo.page").type(JsonFieldType.NUMBER).description("페이지 번호"),
