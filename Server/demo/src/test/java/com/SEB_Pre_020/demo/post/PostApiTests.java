@@ -54,8 +54,8 @@ public class PostApiTests {
     @Test
     public void postPostTest() throws Exception {
         // given
-        PostDto.Post postDto = new PostDto.Post(0, "Post1", "Content1", 1, 0);
-        PostDto.Response responseDto = new PostDto.Response(1, 0, "Post1", "Content1", 1, 0);
+        PostDto.Post postDto = new PostDto.Post(0, "Post1", "Content1", 1, 0, 0, 0);
+        PostDto.Response responseDto = new PostDto.Response(1, 0, "Post1", "Content1", 1, 0, 0, 0);
         String content = gson.toJson(postDto);
 
         given(postMapper.postPostToPost(Mockito.any(PostDto.Post.class))).willReturn(new Post());
@@ -89,7 +89,9 @@ public class PostApiTests {
                                         fieldWithPath("postTitle").type(JsonFieldType.STRING).description("제목"),
                                         fieldWithPath("postContent").type(JsonFieldType.STRING).description("내용"),
                                         fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("작성자 Id"),
-                                        fieldWithPath("postView").type(JsonFieldType.NUMBER).description("조회수")
+                                        fieldWithPath("postView").type(JsonFieldType.NUMBER).description("조회수"),
+                                        fieldWithPath("postVoteCount").type(JsonFieldType.NUMBER).description("추천수"),
+                                        fieldWithPath("postCommentCount").type(JsonFieldType.NUMBER).description("댓글수")
                                 )
                         ),
                         responseFields(
@@ -100,7 +102,9 @@ public class PostApiTests {
                                         fieldWithPath("data.postTitle").type(JsonFieldType.STRING).description("제목"),
                                         fieldWithPath("data.postContent").type(JsonFieldType.STRING).description("내용"),
                                         fieldWithPath("data.memberId").type(JsonFieldType.NUMBER).description("작성자 Id"),
-                                        fieldWithPath("data.postView").type(JsonFieldType.NUMBER).description("조회수")
+                                        fieldWithPath("data.postView").type(JsonFieldType.NUMBER).description("조회수"),
+                                        fieldWithPath("data.postVoteCount").type(JsonFieldType.NUMBER).description("추천수"),
+                                        fieldWithPath("data.postCommentCount").type(JsonFieldType.NUMBER).description("댓글수")
                                 )
                         )
                 ));
@@ -110,8 +114,8 @@ public class PostApiTests {
     public void postPatchTest() throws Exception {
         // given
         int id = 1;
-        PostDto.Patch patchDto = new PostDto.Patch(1, 0, "Post1", "Content1", 1, 0);
-        PostDto.Response responseDto = new PostDto.Response(1, 0, "Post1", "Content1", 1, 0);
+        PostDto.Patch patchDto = new PostDto.Patch(1, 0, "Post1", "Content1", 1, 0, 0, 0);
+        PostDto.Response responseDto = new PostDto.Response(1, 0, "Post1", "Content1", 1, 0, 0, 0);
         String content = gson.toJson(patchDto);
 
         given(postMapper.postPatchToPost(Mockito.any(PostDto.Patch.class))).willReturn(new Post());
@@ -146,7 +150,9 @@ public class PostApiTests {
                                         fieldWithPath("postTitle").type(JsonFieldType.STRING).description("제목").optional(),
                                         fieldWithPath("postContent").type(JsonFieldType.STRING).description("내용").optional(),
                                         fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("작성자 Id").ignored(),
-                                        fieldWithPath("postView").type(JsonFieldType.NUMBER).description("조회수").optional()
+                                        fieldWithPath("postView").type(JsonFieldType.NUMBER).description("조회수").optional(),
+                                        fieldWithPath("postVoteCount").type(JsonFieldType.NUMBER).description("추천수").optional(),
+                                        fieldWithPath("postCommentCount").type(JsonFieldType.NUMBER).description("댓글수").optional()
                                 )
                         ),
                         responseFields(
@@ -157,7 +163,9 @@ public class PostApiTests {
                                         fieldWithPath("data.postTitle").type(JsonFieldType.STRING).description("제목"),
                                         fieldWithPath("data.postContent").type(JsonFieldType.STRING).description("내용"),
                                         fieldWithPath("data.memberId").type(JsonFieldType.NUMBER).description("작성자 Id"),
-                                        fieldWithPath("data.postView").type(JsonFieldType.NUMBER).description("조회수")
+                                        fieldWithPath("data.postView").type(JsonFieldType.NUMBER).description("조회수"),
+                                        fieldWithPath("data.postVoteCount").type(JsonFieldType.NUMBER).description("추천수"),
+                                        fieldWithPath("data.postCommentCount").type(JsonFieldType.NUMBER).description("댓글수")
                                 )
                         )
                 ));
@@ -168,7 +176,7 @@ public class PostApiTests {
         // given
         int id = 1;
 //        PostDto.Patch patchDto = new PostDto.Patch(1, 0, "Post1", "Content1", 1, 0);
-        PostDto.Response responseDto = new PostDto.Response(1, 0, "Post1", "Content1", 1, 0);
+        PostDto.Response responseDto = new PostDto.Response(1, 0, "Post1", "Content1", 1, 0, 1, 1);
 //        String content = gson.toJson(patchDto);
 
 //        given(postMapper.postPatchToPost(Mockito.any(PostDto.Patch.class))).willReturn(new Post());
@@ -204,7 +212,9 @@ public class PostApiTests {
                                         fieldWithPath("data.postTitle").type(JsonFieldType.STRING).description("제목"),
                                         fieldWithPath("data.postContent").type(JsonFieldType.STRING).description("내용"),
                                         fieldWithPath("data.memberId").type(JsonFieldType.NUMBER).description("작성자 Id"),
-                                        fieldWithPath("data.postView").type(JsonFieldType.NUMBER).description("조회수")
+                                        fieldWithPath("data.postView").type(JsonFieldType.NUMBER).description("조회수"),
+                                        fieldWithPath("data.postVoteCount").type(JsonFieldType.NUMBER).description("추천수"),
+                                        fieldWithPath("data.postCommentCount").type(JsonFieldType.NUMBER).description("댓글수")
                                 )
                         )
                 ));
