@@ -8,7 +8,7 @@
 // 다른 분들도 문서화 하시면 수정해주세요
 Kim Ji Hwan <kjh42447@gmail.com>
 
-v1.0.3, 2022.10.28
+v1.0.1, 2022.10.28
 
 ***
 == PostController
