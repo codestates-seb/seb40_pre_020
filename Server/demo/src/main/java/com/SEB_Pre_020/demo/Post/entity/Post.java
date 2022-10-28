@@ -2,14 +2,12 @@ package com.SEB_Pre_020.demo.Post.entity;
 
 import com.SEB_Pre_020.demo.audit.Auditable;
 import com.SEB_Pre_020.demo.member.entity.Member;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -29,7 +27,7 @@ public class Post extends Auditable {
     @Column(name = "PostContent", nullable = false, updatable = true, unique = false)
     private String postContent;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "MemberId")
     private Member member;
 
@@ -38,9 +36,6 @@ public class Post extends Auditable {
 
     @Column(name = "PostVoteCount", nullable = false, updatable = true, unique = false)
     private int postVoteCount;
-
-    @Column(name = "PostAnswerCount", nullable = false, updatable = true, unique = false)
-    private int postAnswerCount;
 
     @Column(name = "PostCommentCount", nullable = false, updatable = true, unique = false)
     private int postCommentCount;
