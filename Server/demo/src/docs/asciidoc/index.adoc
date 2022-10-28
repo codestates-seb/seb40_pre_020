@@ -115,3 +115,17 @@ include::{snippets}/answer-get/http-response.adoc[]
 
 .response-fields
 include::{snippets}/answer-get/response-fields.adoc[]
+
+== ProfileController
+=== 게시글 조회
+.curl-request
+include::{snippets}/profile-getPosts/curl-request.adoc[]
+
+.http-request
+include::{snippets}/profile-getPosts/http-request.adoc[]
+
+.http-response
+include::{snippets}/profile-getPosts/http-response.adoc[]
+
+.response-fields
+include::{snippets}/profile-getPosts/response-fields.adoc[]
