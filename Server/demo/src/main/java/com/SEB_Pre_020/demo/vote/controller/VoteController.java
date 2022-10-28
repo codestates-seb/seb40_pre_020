@@ -38,11 +38,6 @@ public class VoteController {
 
         Vote createdVote = voteService.createVote(vote);
 
-        // 추천수 수정
-        Post post = postService.findPost(createdVote.getPost().getId());
-        post.setPostVoteCount(post.getPostVoteCount() + createdVote.getVoteType());
-        postService.updatePost(post);
-
         return new ResponseEntity<>(
                 new SingleResponseDto<>(voteMapper.voteToVoteResponse(createdVote))
                , HttpStatus.CREATED);
