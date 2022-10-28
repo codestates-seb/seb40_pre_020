@@ -19,11 +19,11 @@ public class Vote extends Auditable {
     @Column(name="VoteId")
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "Vote_PostId")
     private Post post;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "Vote_MemberId")
     private Member member;
 
