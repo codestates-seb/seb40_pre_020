@@ -6,6 +6,8 @@ import com.SEB_Pre_020.demo.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -19,12 +21,14 @@ public class Vote extends Auditable {
     @Column(name="voteId", nullable = false, unique = true)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "votePostId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "voteMemberId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 
     @Column(name = "voteType", nullable = false, updatable = true, unique = false)
