@@ -1,17 +1,13 @@
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://database-1.caprut5wigfx.ap-northeast-2.rds.amazonaws.com/seb_40_pre_020
-    username: "admin" #나중에 시크릿 키로 처리
-    password: "pre20pre20" #나중에 시크릿 키로 처리
+  h2:
+    console:
+      enabled: true
+      path: /h2
+    datasource:
+      url: jdbc:h2:mem:test
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create #운영환경에 배포시 반드시 none으로 바꿀 것!!!!
     show-sql: true
     use-new-id-generator-mappings: true
-
-#aws:
-#  paramstore:
-#    enabled: true
-#    prefix: /
 
