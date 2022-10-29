@@ -1,6 +1,7 @@
 package com.SEB_Pre_020.demo.vote.service;
 
 import com.SEB_Pre_020.demo.Post.entity.Post;
+import com.SEB_Pre_020.demo.Post.service.PostService;
 import com.SEB_Pre_020.demo.vote.entity.Vote;
 import com.SEB_Pre_020.demo.vote.repository.VoteRepository;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,11 @@ import java.util.Optional;
 @Service
 public class VoteService {
     private final VoteRepository voteRepository;
+    private final PostService postService;
 
-    public VoteService(VoteRepository voteRepository) {
+    public VoteService(VoteRepository voteRepository, PostService postService) {
         this.voteRepository = voteRepository;
+        this.postService = postService;
     }
 
     /** 추천(비추천) 생성 */
@@ -22,11 +25,16 @@ public class VoteService {
         int memberId = vote.getMember().getId();
         int postId = vote.getPost().getId();
 
-        if (!voteRepository.existsById(vote.getId())) {
+        if (!voteRepository.existsById(vote.getId())
+        && !voteRepository.existsByMember_IdAndPost_Id(memberId, postId)) {
+            // 추천수 수정
+            Post post = postService.findPost(vote.getPost().getId());
+            post.setPostVoteCount(post.getPostVoteCount() + vote.getVoteType());
+            postService.updatePost(post);
             Vote saveVote = voteRepository.save(vote);
             return saveVote;
         }
-        return  null;
+        return  findVerifiedVote(memberId, postId);
     }
 
     /** 추천(비추천) 삭제 */
