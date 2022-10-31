@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name="member")
+//@Table(name="member")
 public class Member extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본키 설정을 위한 애너테이션.
