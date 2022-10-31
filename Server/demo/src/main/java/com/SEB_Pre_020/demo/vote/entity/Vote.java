@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class Vote extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="VoteId")
+    @Column(name="VoteId", nullable = false, unique = true)
     private int id;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
