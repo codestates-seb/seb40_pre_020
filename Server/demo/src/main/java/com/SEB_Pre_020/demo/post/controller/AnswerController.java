@@ -65,4 +65,10 @@ public class AnswerController {
                 new PageResponseDto<>(mapper.postsToPostResponses(posts), postPage), HttpStatus.OK
         );
     }
+
+    @DeleteMapping("/{PostId}")
+    public ResponseEntity deletePost(@PathVariable("PostId") @Positive int postId) {
+        postService.deletePost(postId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
 }
