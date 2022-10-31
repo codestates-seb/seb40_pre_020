@@ -1,7 +1,7 @@
-package com.SEB_Pre_020.demo.Post.service;
+package com.SEB_Pre_020.demo.post.service;
 
-import com.SEB_Pre_020.demo.Post.entity.Post;
-import com.SEB_Pre_020.demo.Post.repository.PostRepository;
+import com.SEB_Pre_020.demo.post.entity.Post;
+import com.SEB_Pre_020.demo.post.repository.PostRepository;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;

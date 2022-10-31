@@ -1,4 +1,4 @@
-package com.SEB_Pre_020.demo.Post.dto;
+package com.SEB_Pre_020.demo.post.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,9 +1,9 @@
 package com.SEB_Pre_020.demo.profile;
 
-import com.SEB_Pre_020.demo.Post.dto.PostDto;
-import com.SEB_Pre_020.demo.Post.entity.Post;
-import com.SEB_Pre_020.demo.Post.mapper.PostMapper;
-import com.SEB_Pre_020.demo.Post.service.PostService;
+import com.SEB_Pre_020.demo.post.dto.PostDto;
+import com.SEB_Pre_020.demo.post.entity.Post;
+import com.SEB_Pre_020.demo.post.mapper.PostMapper;
+import com.SEB_Pre_020.demo.post.service.PostService;
 import com.SEB_Pre_020.demo.member.controller.ProfileController;
 import com.SEB_Pre_020.demo.member.entity.Member;
 import com.SEB_Pre_020.demo.member.mapstruct.mapper.MemberMapper;

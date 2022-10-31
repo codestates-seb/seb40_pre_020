@@ -1,4 +1,4 @@
-package com.SEB_Pre_020.demo.Post.entity;
+package com.SEB_Pre_020.demo.post.entity;
 
 import com.SEB_Pre_020.demo.audit.Auditable;
 import com.SEB_Pre_020.demo.member.entity.Member;

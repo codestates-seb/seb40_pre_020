@@ -1,8 +1,8 @@
 package com.SEB_Pre_020.demo.member.controller;
 
-import com.SEB_Pre_020.demo.Post.entity.Post;
-import com.SEB_Pre_020.demo.Post.mapper.PostMapper;
-import com.SEB_Pre_020.demo.Post.service.PostService;
+import com.SEB_Pre_020.demo.post.entity.Post;
+import com.SEB_Pre_020.demo.post.mapper.PostMapper;
+import com.SEB_Pre_020.demo.post.service.PostService;
 import com.SEB_Pre_020.demo.dto.PageResponseDto;
 import com.SEB_Pre_020.demo.member.mapstruct.mapper.MemberMapper;
 import com.SEB_Pre_020.demo.member.service.MemberService;
