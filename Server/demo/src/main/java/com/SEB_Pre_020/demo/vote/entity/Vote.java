@@ -1,6 +1,6 @@
 package com.SEB_Pre_020.demo.vote.entity;
 
-import com.SEB_Pre_020.demo.Post.entity.Post;
+import com.SEB_Pre_020.demo.post.entity.Post;
 import com.SEB_Pre_020.demo.audit.Auditable;
 import com.SEB_Pre_020.demo.member.entity.Member;
 import lombok.Getter;

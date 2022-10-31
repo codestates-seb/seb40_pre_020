@@ -1,6 +1,6 @@
 package com.SEB_Pre_020.demo.vote.mapper;
 
-import com.SEB_Pre_020.demo.Post.entity.Post;
+import com.SEB_Pre_020.demo.post.entity.Post;
 import com.SEB_Pre_020.demo.member.entity.Member;
 import com.SEB_Pre_020.demo.vote.dto.VoteDto;
 import com.SEB_Pre_020.demo.vote.entity.Vote;
