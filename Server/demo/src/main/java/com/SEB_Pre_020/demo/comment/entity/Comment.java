@@ -21,7 +21,7 @@ import javax.swing.text.StringContent;
 public class Comment extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="PostId")
+    @Column(name="CommentId")
     private int id;
 
     @ManyToOne

@@ -42,7 +42,7 @@ public interface CommentMapper {
         return comment;
     }
 
-    default CommentDto.Response commentToCommentDto(Comment comment) {
+    default CommentDto.Response commentToCommentResponse(Comment comment) {
         CommentDto.Response response = new CommentDto.Response();
 
         response.setId(comment.getId());
