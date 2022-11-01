@@ -6,7 +6,9 @@ import { Routes, Route } from 'react-router-dom';
 import Questions from './components/Questions/Questions';
 import AskQuestion from './components/AskQuestion/AskQuestion';
 import UpdateQuestion from './components/UpdateQuestion/UpdateQuestion';
-import Login from './components/Login/Login';
+//import Login from './components/Login/Login';
+import SignUp from './SignUp/SignUp';
+//import Comment from './components/Comment/Comment';
 
 function App() {
   return (
@@ -20,7 +22,9 @@ function App() {
               <>
                 {/* <Header /> */}
                 {/* <Footer /> */}
-                <Login />
+                {/*<Login /> */}
+                {<SignUp />}
+                {/*<Comment />*/}
               </>
             }
           />
@@ -34,6 +38,7 @@ function App() {
               </>
             }
           />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/questions/ask" element={<AskQuestion />} />
           <Route path="/questions/update" element={<UpdateQuestion />} />
         </Routes>
