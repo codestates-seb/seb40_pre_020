@@ -4,10 +4,13 @@ spring:
       enabled: true
       path: /h2
     datasource:
-      url: jdbc:h2:mem:test
+      url: jdbc:h2:mem:test #로컬DB- RDS와 연결시 수정 필요
   jpa:
     hibernate:
       ddl-auto: create #운영환경에 배포시 반드시 none으로 바꿀 것!!!!
     show-sql: true
     use-new-id-generator-mappings: true
+config:
+  domain: 'http://seb40pre020.s3-website.ap-northeast-2.amazonaws.com'
+
 
