@@ -1,7 +1,7 @@
 package com.SEB_Pre_020.demo.vote.controller;
 
-import com.SEB_Pre_020.demo.Post.entity.Post;
-import com.SEB_Pre_020.demo.Post.service.PostService;
+import com.SEB_Pre_020.demo.post.entity.Post;
+import com.SEB_Pre_020.demo.post.service.PostService;
 import com.SEB_Pre_020.demo.dto.SingleResponseDto;
 import com.SEB_Pre_020.demo.vote.dto.VoteDto;
 import com.SEB_Pre_020.demo.vote.entity.Vote;

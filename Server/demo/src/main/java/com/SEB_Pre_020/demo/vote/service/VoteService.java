@@ -1,7 +1,7 @@
 package com.SEB_Pre_020.demo.vote.service;
 
-import com.SEB_Pre_020.demo.Post.entity.Post;
-import com.SEB_Pre_020.demo.Post.service.PostService;
+import com.SEB_Pre_020.demo.post.entity.Post;
+import com.SEB_Pre_020.demo.post.service.PostService;
 import com.SEB_Pre_020.demo.vote.entity.Vote;
 import com.SEB_Pre_020.demo.vote.repository.VoteRepository;
 import org.springframework.stereotype.Service;
@@ -25,8 +25,20 @@ public class VoteService {
         int memberId = vote.getMember().getId();
         int postId = vote.getPost().getId();
 
-        if (!voteRepository.existsById(vote.getId())
-        && !voteRepository.existsByMember_IdAndPost_Id(memberId, postId)) {
+        if(voteRepository.existsByMember_IdAndPost_Id(memberId, postId)) {
+            Vote findVote = findVerifiedVote(memberId, postId);
+            // 이미 추천했으면 무시
+            if (findVote.getVoteType() == vote.getVoteType())   return vote;
+            // 반대된 추천을 했다면 추천수 수정 & 이전 추천 삭제
+            Post post = postService.findPost(vote.getPost().getId());
+            post.setPostVoteCount(post.getPostVoteCount() + vote.getVoteType());
+            postService.updatePost(post);
+
+            deleteVote(memberId, postId);
+            return vote;
+        }
+
+        else if (!voteRepository.existsById(vote.getId())) {
             // 추천수 수정
             Post post = postService.findPost(vote.getPost().getId());
             post.setPostVoteCount(post.getPostVoteCount() + vote.getVoteType());

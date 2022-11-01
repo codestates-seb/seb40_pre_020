@@ -1,10 +1,10 @@
 package com.SEB_Pre_020.demo.post;
 
-import com.SEB_Pre_020.demo.Post.controller.AnswerController;
-import com.SEB_Pre_020.demo.Post.dto.PostDto;
-import com.SEB_Pre_020.demo.Post.entity.Post;
-import com.SEB_Pre_020.demo.Post.mapper.PostMapper;
-import com.SEB_Pre_020.demo.Post.service.PostService;
+import com.SEB_Pre_020.demo.post.controller.AnswerController;
+import com.SEB_Pre_020.demo.post.dto.PostDto;
+import com.SEB_Pre_020.demo.post.entity.Post;
+import com.SEB_Pre_020.demo.post.mapper.PostMapper;
+import com.SEB_Pre_020.demo.post.service.PostService;
 import com.SEB_Pre_020.demo.member.entity.Member;
 import com.SEB_Pre_020.demo.util.ApiDocumentUtils;
 import com.google.gson.Gson;
@@ -16,7 +16,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
@@ -29,6 +28,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
@@ -264,5 +264,31 @@ public class AnswerApiTests {
                                 )
                         )
                 ));
+    }
+
+    @Test
+    void deleteAnswerTest() throws Exception {
+        // given
+        int id = 1;
+
+        doNothing().when(postService).deletePost(Mockito.anyInt());
+
+        // when
+        ResultActions actions = mockMvc.perform(
+                RestDocumentationRequestBuilders
+                        .delete("/answers/{PostId}", id));
+
+        // then
+        actions.andExpect(status().isNoContent())
+                .andDo(
+                        document(
+                                "answer-delete",
+                                ApiDocumentUtils.getRequestPreProcessor(),
+                                ApiDocumentUtils.getResponsePreProcessor(),
+                                pathParameters(
+                                        Arrays.asList(parameterWithName("PostId").description("게시글 Id"))
+                                )
+                        )
+                );
     }
 }

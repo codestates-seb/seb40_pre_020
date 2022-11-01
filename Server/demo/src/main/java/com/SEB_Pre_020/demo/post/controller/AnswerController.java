@@ -1,9 +1,9 @@
-package com.SEB_Pre_020.demo.Post.controller;
+package com.SEB_Pre_020.demo.post.controller;
 
-import com.SEB_Pre_020.demo.Post.dto.PostDto;
-import com.SEB_Pre_020.demo.Post.entity.Post;
-import com.SEB_Pre_020.demo.Post.mapper.PostMapper;
-import com.SEB_Pre_020.demo.Post.service.PostService;
+import com.SEB_Pre_020.demo.post.dto.PostDto;
+import com.SEB_Pre_020.demo.post.entity.Post;
+import com.SEB_Pre_020.demo.post.mapper.PostMapper;
+import com.SEB_Pre_020.demo.post.service.PostService;
 import com.SEB_Pre_020.demo.dto.PageResponseDto;
 import com.SEB_Pre_020.demo.dto.SingleResponseDto;
 import lombok.extern.slf4j.Slf4j;
@@ -64,5 +64,11 @@ public class AnswerController {
         return new ResponseEntity<>(
                 new PageResponseDto<>(mapper.postsToPostResponses(posts), postPage), HttpStatus.OK
         );
+    }
+
+    @DeleteMapping("/{PostId}")
+    public ResponseEntity deletePost(@PathVariable("PostId") @Positive int postId) {
+        postService.deletePost(postId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

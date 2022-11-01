@@ -1,7 +1,7 @@
-package com.SEB_Pre_020.demo.Post.service;
+package com.SEB_Pre_020.demo.post.service;
 
-import com.SEB_Pre_020.demo.Post.entity.Post;
-import com.SEB_Pre_020.demo.Post.repository.PostRepository;
+import com.SEB_Pre_020.demo.post.entity.Post;
+import com.SEB_Pre_020.demo.post.repository.PostRepository;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -91,10 +91,18 @@ public class PostService {
         return new PageImpl<>(pagedListHolder.getPageList(), pageable, postList.size());
     }
 
-    /** 게시글 삭제 */
+    /** 게시글(하위 답글 포함) 삭제 */
     @Transactional
     public void deletePost(int postId) {
         Post findPost = findVerifiedPost(postId);
+
+        // 게시글이면 하위 답글도 삭제
+        if(findPost.getParentId() == 0) {
+            List<Post> postList = postRepository.findByParentId(postId);
+            for (Post post : postList) {
+                postRepository.delete(post);
+            }
+        }
 
         postRepository.delete(findPost);
     }
