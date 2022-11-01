@@ -21,7 +21,7 @@ import javax.swing.text.StringContent;
 public class Comment extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="CommentId")
+    @Column(name="commentId")
     private int id;
 
     @ManyToOne
@@ -30,10 +30,10 @@ public class Comment extends Auditable {
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "PostId")
+    @JoinColumn(name = "postId")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
-    @Column(name = "CommentContent", nullable = false, updatable = true, unique = false)
+    @Column(name = "commentContent", nullable = false, updatable = true, unique = false)
     private String commentContent;
 }
