@@ -215,3 +215,71 @@ include::{snippets}/vote-post/http-response.adoc[]
 
 .response-fields
 include::{snippets}/vote-post/response-fields.adoc[]
+
+== CommentController
+=== 댓글 등록
+.curl-request
+include::{snippets}/comment-post/curl-request.adoc[]
+
+.http-request
+include::{snippets}/comment-post/http-request.adoc[]
+
+.request-fields
+include::{snippets}/comment-post/request-fields.adoc[]
+
+.http-response
+include::{snippets}/comment-post/http-response.adoc[]
+
+.response-fields
+include::{snippets}/comment-post/response-fields.adoc[]
+
+=== 댓글 수정
+.curl-request
+include::{snippets}/comment-patch/curl-request.adoc[]
+
+.http-request
+include::{snippets}/comment-patch/http-request.adoc[]
+
+.request-fields
+include::{snippets}/comment-patch/request-fields.adoc[]
+
+path-parameters
+include::{snippets}/comment-patch/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/comment-patch/http-response.adoc[]
+
+.response-fields
+include::{snippets}/comment-patch/response-fields.adoc[]
+
+=== 한 게시글(답글)의 모든 댓글 가져오기
+.curl-request
+include::{snippets}/comments-get/curl-request.adoc[]
+
+.http-request
+include::{snippets}/comments-get/http-request.adoc[]
+
+path-parameters
+include::{snippets}/comments-get/path-parameters.adoc[]
+
+request-parameters
+include::{snippets}/comments-get/request-parameters.adoc[]
+
+.http-response
+include::{snippets}/comments-get/http-response.adoc[]
+
+.response-fields
+include::{snippets}/comments-get/response-fields.adoc[]
+
+=== 댓글 삭제
+.curl-request
+include::{snippets}/comment-delete/curl-request.adoc[]
+
+.http-request
+include::{snippets}/comment-delete/http-request.adoc[]
+
+path-parameters
+include::{snippets}/comment-delete/path-parameters.adoc[]
+
+.http-response
+include::{snippets}/comment-delete/http-response.adoc[]
