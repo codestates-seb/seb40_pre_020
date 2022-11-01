@@ -1,7 +1,7 @@
-package com.SEB_Pre_020.demo.Post.mapper;
+package com.SEB_Pre_020.demo.post.mapper;
 
-import com.SEB_Pre_020.demo.Post.dto.PostDto;
-import com.SEB_Pre_020.demo.Post.entity.Post;
+import com.SEB_Pre_020.demo.post.dto.PostDto;
+import com.SEB_Pre_020.demo.post.entity.Post;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;

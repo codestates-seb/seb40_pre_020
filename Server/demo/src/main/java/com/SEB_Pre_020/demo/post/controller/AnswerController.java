@@ -1,9 +1,9 @@
-package com.SEB_Pre_020.demo.Post.controller;
+package com.SEB_Pre_020.demo.post.controller;
 
-import com.SEB_Pre_020.demo.Post.dto.PostDto;
-import com.SEB_Pre_020.demo.Post.entity.Post;
-import com.SEB_Pre_020.demo.Post.mapper.PostMapper;
-import com.SEB_Pre_020.demo.Post.service.PostService;
+import com.SEB_Pre_020.demo.post.dto.PostDto;
+import com.SEB_Pre_020.demo.post.entity.Post;
+import com.SEB_Pre_020.demo.post.mapper.PostMapper;
+import com.SEB_Pre_020.demo.post.service.PostService;
 import com.SEB_Pre_020.demo.dto.PageResponseDto;
 import com.SEB_Pre_020.demo.dto.SingleResponseDto;
 import lombok.extern.slf4j.Slf4j;
@@ -18,20 +18,20 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
-@RequestMapping("/posts")
+@RequestMapping("/answers")
 @Validated
 @Slf4j
-public class PostController {
+public class AnswerController {
     private final PostService postService;
     private final PostMapper mapper;
 
-    public PostController(PostService postService, PostMapper mapper) {
+    public AnswerController(PostService postService, PostMapper mapper) {
         this.postService = postService;
         this.mapper = mapper;
     }
 
     @PostMapping
-    public ResponseEntity postPost(@Valid @RequestBody PostDto.Post requestBody) {
+    public ResponseEntity postAnswer(@Valid @RequestBody PostDto.Post requestBody) {
         Post post = mapper.postPostToPost(requestBody);
 
         Post createdPost = postService.createPost(post);
@@ -42,7 +42,7 @@ public class PostController {
     }
 
     @PatchMapping("/{PostId}")
-    public ResponseEntity patchPost(
+    public ResponseEntity patchAnswer(
             @PathVariable("PostId") @Positive int postId,
             @Valid @RequestBody PostDto.Patch requestBody) {
         requestBody.setId(postId);
@@ -53,26 +53,16 @@ public class PostController {
                 HttpStatus.OK);
     }
 
-    /** 단일 게시글(답글) get */
+    /** 특정 게시글의 모든 답글 get */
     @GetMapping("/{PostId}")
-    public ResponseEntity getPost(@PathVariable("PostId") @Positive int postId) {
-        Post post = postService.findPost(postId);
-
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.postToPostResponse(post)), HttpStatus.OK
-        );
-    }
-
-    /** 게시글 목록 get */
-    @GetMapping
-    public ResponseEntity getPosts(@Positive @RequestParam int page,
-                                   @Positive @RequestParam int size) {
-        Page<Post> postPage = postService.findPostPosts(0, page-1, size);
+    public ResponseEntity getAnswers(@Positive @RequestParam int page,
+                                  @Positive @RequestParam int size,
+                                  @PathVariable("PostId") @Positive int postId) {
+        Page<Post> postPage = postService.findPostPosts(postId, page-1, size);
         List<Post> posts = postPage.getContent();
 
         return new ResponseEntity<>(
                 new PageResponseDto<>(mapper.postsToPostResponses(posts), postPage), HttpStatus.OK
         );
     }
-
 }

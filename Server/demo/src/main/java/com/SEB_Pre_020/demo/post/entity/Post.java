@@ -1,4 +1,4 @@
-package com.SEB_Pre_020.demo.Post.entity;
+package com.SEB_Pre_020.demo.post.entity;
 
 import com.SEB_Pre_020.demo.audit.Auditable;
 import com.SEB_Pre_020.demo.member.entity.Member;
@@ -17,31 +17,31 @@ import javax.persistence.*;
 public class Post extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="PostId")
+    @Column(name="postId")
     private int id;
 
-    @Column(name = "ParentId", nullable = false, updatable = true, unique = false)
+    @Column(name = "parentId", nullable = false, updatable = true, unique = false)
     private int parentId;
 
-    @Column(name = "PostTitle", nullable = false, updatable = true, unique = false)
+    @Column(name = "postTitle", nullable = false, updatable = true, unique = false)
     private String postTitle;
 
-    @Column(name = "PostContent", nullable = false, updatable = true, unique = false)
+    @Column(name = "postContent", nullable = false, updatable = true, unique = false)
     private String postContent;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "MemberId")
+    @JoinColumn(name = "memberId")
     private Member member;
 
-    @Column(name = "PostView", nullable = false, updatable = true, unique = false)
+    @Column(name = "postView", nullable = false, updatable = true, unique = false)
     private int postView;
 
-    @Column(name = "PostVoteCount", nullable = false, updatable = true, unique = false)
+    @Column(name = "postVoteCount", nullable = false, updatable = true, unique = false)
     private int postVoteCount;
 
-    @Column(name = "PostAnswerCount", nullable = false, updatable = true, unique = false)
+    @Column(name = "postAnswerCount", nullable = false, updatable = true, unique = false)
     private int postAnswerCount;
 
-    @Column(name = "PostCommentCount", nullable = false, updatable = true, unique = false)
+    @Column(name = "postCommentCount", nullable = false, updatable = true, unique = false)
     private int postCommentCount;
 }
