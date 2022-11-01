@@ -34,6 +34,9 @@ public class Member extends Auditable {
 
     //방문수(VisitCount) 추가해야 함
 
+    @Column(nullable = true)
+    private String role; // Member
+
 
     public Member(String name, String email, String password) {
         this.name = name;

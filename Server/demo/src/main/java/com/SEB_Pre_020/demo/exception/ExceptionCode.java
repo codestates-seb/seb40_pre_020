@@ -3,8 +3,8 @@ package com.SEB_Pre_020.demo.exception;
 import lombok.Getter;
 
 public enum ExceptionCode {
-    USER_NOT_FOUND(404, "User not found"),
-    USER_EXISTS(409, "User exists"),
+    USER_NOT_FOUND(404, "해당 정보로 등록된 회원이 존재하지 않습니다"),
+    USER_EXISTS(409, "등록된 회원입니다"),
     QUESTION_NOT_FOUND(404, "Question not found"),
     QUESTION_EXISTS(409, "Question exists"),
     ANSWER_NOT_FOUND(404, "Answer not found"),
