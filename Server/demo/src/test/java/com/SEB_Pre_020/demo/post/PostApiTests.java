@@ -28,6 +28,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doNothing;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
@@ -310,5 +311,31 @@ public class PostApiTests {
                                 )
                         )
                 ));
+    }
+
+    @Test
+    void deletePostTest() throws Exception {
+        // given
+        int id = 1;
+
+        doNothing().when(postService).deletePost(Mockito.anyInt());
+
+        // when
+        ResultActions actions = mockMvc.perform(
+                RestDocumentationRequestBuilders
+                        .delete("/posts/{PostId}", id));
+
+        // then
+        actions.andExpect(status().isNoContent())
+                .andDo(
+                        document(
+                                "post-delete",
+                                ApiDocumentUtils.getRequestPreProcessor(),
+                                ApiDocumentUtils.getResponsePreProcessor(),
+                                pathParameters(
+                                        Arrays.asList(parameterWithName("PostId").description("게시글 Id"))
+                                )
+                        )
+                );
     }
 }

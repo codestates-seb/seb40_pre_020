@@ -25,7 +25,7 @@ public class Comment extends Auditable {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "MemberId")
+    @JoinColumn(name = "commentMemberId")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 

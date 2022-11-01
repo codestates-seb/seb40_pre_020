@@ -9,7 +9,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
+@Entity(name="member")
 //@Table(name="member")
 public class Member extends Auditable {
     @Id
