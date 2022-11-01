@@ -5,10 +5,14 @@ import com.SEB_Pre_020.demo.exception.ExceptionCode;
 import com.SEB_Pre_020.demo.member.entity.Member;
 import com.SEB_Pre_020.demo.member.repository.MemberRepository;
 import com.SEB_Pre_020.demo.exception.BusinessLogicException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,8 +28,9 @@ public class MemberService {
 
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
+        List<GrantedAuthority> authorities = createAuthorities(Member.MemberRole.ROLE_USER.name());
         String encryptedPassword = passwordEncoder.encode(member.getPassword());
-        member.setPassword(encryptedPassword);
+        UserDetails userDetails = new User(member.getEmail(), encryptedPassword, authorities);
 
         Member savedMember = memberRepository.save(member);
 
