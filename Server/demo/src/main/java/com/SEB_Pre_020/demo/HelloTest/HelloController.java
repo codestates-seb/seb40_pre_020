@@ -8,8 +8,8 @@ import java.util.List;
 
 @RestController
 public class HelloController {
-    @GetMapping("/api/hello-react-spring")
+    @GetMapping("/api/hello")
     public List<String> Hello(){
-        return Arrays.asList("리액트 스프링", "연결 성공");
+        return Arrays.asList("서버", "연결 성공");
     }
 }
