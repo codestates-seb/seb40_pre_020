@@ -16,17 +16,17 @@ import javax.persistence.*;
 public class Vote extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="VoteId", nullable = false, unique = true)
+    @Column(name="voteId", nullable = false, unique = true)
     private int id;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "Vote_PostId")
+    @JoinColumn(name = "votePostId")
     private Post post;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "Vote_MemberId")
+    @JoinColumn(name = "voteMemberId")
     private Member member;
 
-    @Column(name = "VoteType", nullable = false, updatable = true, unique = false)
+    @Column(name = "voteType", nullable = false, updatable = true, unique = false)
     private int voteType;
 }
