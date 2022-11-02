@@ -43,7 +43,7 @@ public class MemberController {
         Member member =  memberService.getLoginMember();
 
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.userToUserResponseDto(user)),
+                new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(member)),
                 HttpStatus.OK);
     }
 

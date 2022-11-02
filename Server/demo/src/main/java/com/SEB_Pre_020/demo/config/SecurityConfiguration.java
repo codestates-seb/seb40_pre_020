@@ -23,7 +23,7 @@ public class SecurityConfiguration {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .authorizeHttpRequests(authorize -> authorize
-                        .antMatchers("/profile/memberid/**").hasRole("MEMBER")
+                        .antMatchers("/profiles/**").hasRole("MEMBER")
                         // MEMBER 권한 가진 사용자만 마이페이지 이하 리소스 접근가능
                         .antMatchers("/**").permitAll()
                 );
