@@ -1,29 +1,39 @@
 package com.SEB_Pre_020.demo.member.service;
 
 import com.SEB_Pre_020.demo.config.auth.PrincipalDetails;
+import com.SEB_Pre_020.demo.config.auth.utils.CustomAuthorityUtils;
+import com.SEB_Pre_020.demo.event.MemberRegistrationApplicationEvent;
 import com.SEB_Pre_020.demo.exception.ExceptionCode;
 import com.SEB_Pre_020.demo.member.entity.Member;
 import com.SEB_Pre_020.demo.member.repository.MemberRepository;
 import com.SEB_Pre_020.demo.exception.BusinessLogicException;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-
+@Transactional
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final ApplicationEventPublisher publisher;
     private final PasswordEncoder passwordEncoder;
+    private final CustomAuthorityUtils authorityUtils;
 
     public MemberService(MemberRepository memberRepository,
-                         PasswordEncoder passwordEncoder) {
+                         ApplicationEventPublisher publisher,
+                         PasswordEncoder passwordEncoder,
+                         CustomAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
+        this.publisher = publisher;
         this.passwordEncoder = passwordEncoder;
+        this.authorityUtils = authorityUtils;
     }
 
     private Member findMember(Member member) { return findVerifiedMember(member.getEmail());}
@@ -34,9 +44,12 @@ public class MemberService {
         verifyExistsEmail(member.getEmail());
 
         member.setPassword(passwordEncoder.encode(member.getPassword()));
-        member.setRole("ROLE_MEMBER");  //SimpleGrantedAuthority 를 사용해 Role 베이스 형태의 권한을 지정할 때
-        // ‘Roll_’ + 권한명 형태로 지정해 주어야
+
+        List<String> roles = authorityUtils.createRoles(member.getEmail());
+        member.setRoles(roles); // DB에 MEMBER ROLE 저장
+
         Member savedMember = memberRepository.save(member);
+
         return savedMember;
     }
 
@@ -55,6 +68,10 @@ public class MemberService {
             throw new BusinessLogicException(ExceptionCode.USER_EXISTS);
     }
 
+    @Transactional(readOnly = true)
+    public Member findMember(String memberEmail) { return findVerifiedMember(memberEmail); }
+
+    @Transactional
     public Member findVerifiedMember(String email){
         Optional<Member> optionalMember = memberRepository.findByEmail(email);
 
@@ -63,10 +80,10 @@ public class MemberService {
         return findMember;
     }
 
-    public Member getUserByToken(){
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        PrincipalDetails principalDetails = (PrincipalDetails)principal;
-
-        return principalDetails.getMember();
-    }
+//    public Member getUserByToken(){
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        PrincipalDetails principalDetails = (PrincipalDetails)principal;
+//
+//        return principalDetails.getMember();
+//    }
 }

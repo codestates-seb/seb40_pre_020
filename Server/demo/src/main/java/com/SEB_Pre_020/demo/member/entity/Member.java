@@ -10,6 +10,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -32,8 +34,8 @@ public class Member extends Auditable {
     @Column(name="memberPassword", nullable = false)
     private String password;
 
-    @Column(nullable = true)
-    private String role; // Member
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
 
     public Member(String name, String email, String password) {
         this.name = name;

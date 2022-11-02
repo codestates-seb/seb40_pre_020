@@ -1,6 +1,7 @@
 package com.SEB_Pre_020.demo.member.controller;
 
 import com.SEB_Pre_020.demo.dto.SingleResponseDto;
+import com.SEB_Pre_020.demo.member.dto.MemberLoginDto;
 import com.SEB_Pre_020.demo.member.dto.MemberPostDto;
 import com.SEB_Pre_020.demo.member.entity.Member;
 import com.SEB_Pre_020.demo.member.mapstruct.mapper.MemberMapper;
