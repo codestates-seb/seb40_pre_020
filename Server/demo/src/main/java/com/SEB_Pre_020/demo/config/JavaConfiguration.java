@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class JavaConfiguration {
     @Bean
-    public MemberService dbMemberService(MemberRepository memberRepository,
+    public MemberService memberService(MemberRepository memberRepository,
                                          PasswordEncoder passwordEncoder) {
         return new MemberService(memberRepository, passwordEncoder);
     }

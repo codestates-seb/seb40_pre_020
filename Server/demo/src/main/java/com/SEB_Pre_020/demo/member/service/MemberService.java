@@ -6,14 +6,17 @@ import com.SEB_Pre_020.demo.member.entity.Member;
 import com.SEB_Pre_020.demo.member.repository.MemberRepository;
 import com.SEB_Pre_020.demo.exception.BusinessLogicException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+
 
 @Service
 public class MemberService {
@@ -26,17 +29,28 @@ public class MemberService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    private Member findMember(Member member) { return findVerifiedMember(member.getEmail());}
+
+    public Member getLoginMember() { return findMember(getUserByToken());}
+
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
-        List<GrantedAuthority> authorities = createAuthorities(Member.MemberRole.ROLE_USER.name());
         String encryptedPassword = passwordEncoder.encode(member.getPassword());
         UserDetails userDetails = new User(member.getEmail(), encryptedPassword, authorities);
 
         Member savedMember = memberRepository.save(member);
 
-        System.out.println("회원정보가 DB에 등록되었습니다");
         return savedMember;
-    } // 회원등록 메서드
+    }
+
+    private List<GrantedAuthority> createAuthorities(String... roles) {
+        // (3-1) Java의 Stream API를 이용해 생성자 파라미터로 해당 User의 Role을 전달하면서
+        // SimpleGrantedAuthority 객체를 생성한 후, List<SimpleGrantedAuthority> 형태로 리턴
+        return Arrays.stream(roles)
+                .map(role -> new SimpleGrantedAuthority(role))
+                .collect(Collectors.toList());
+    } //SimpleGrantedAuthority 를 사용해 Role 베이스 형태의 권한을 지정할 때
+    // ‘Roll_’ + 권한명 형태로 지정해 주어야
 
     private void verifyExistsEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
