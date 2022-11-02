@@ -107,7 +107,9 @@ function Header() {
   const Submit = async (e) => {
     e.preventDefault();
 
-    const res = await axios.get('/questions', { params: keyword });
+    const res = await axios.get('/profiles/1/posts?page=1&size=20', {
+      params: keyword,
+    });
     console.log(res);
     Setkeyword('');
   };

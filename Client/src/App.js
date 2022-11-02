@@ -8,6 +8,7 @@ import AskQuestion from './components/AskQuestion/AskQuestion';
 import UpdateQuestion from './components/UpdateQuestion/UpdateQuestion';
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
+import Posts from './Pages/posts';
 function App() {
   return (
     <div>
@@ -19,6 +20,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/login" element={<Login />} />
           <Route path="/singup" element={<SignUp />} />
+          <Route path="/posts/:id" element={<Posts />} />
           <Route path="/questions/ask" element={<AskQuestion />} />
           <Route path="/questions/update" element={<UpdateQuestion />} />
         </Routes>

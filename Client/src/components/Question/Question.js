@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line react/prop-types
 function Question({ userData }) {
   const navigate = useNavigate();
-  const handleOnClick = () => navigate(`/question/${userData.userId}`);
+  const handleOnClick = () => navigate(`/posts/${userData.Id}`);
   return (
     <div className={styles.container1}>
       <div className={styles.container} aria-hidden="true">
