@@ -35,7 +35,6 @@ public class Member extends Auditable {
     @Column(nullable = true)
     private String role; // Member
 
-
     public Member(String name, String email, String password) {
         this.name = name;
         this.email = email;

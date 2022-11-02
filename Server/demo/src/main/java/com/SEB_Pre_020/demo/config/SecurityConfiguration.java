@@ -2,6 +2,7 @@ package com.SEB_Pre_020.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +26,17 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize -> authorize
                         .antMatchers("/profiles/**").hasRole("MEMBER")
                         // MEMBER 권한 가진 사용자만 마이페이지 이하 리소스 접근가능
-                        .antMatchers("/**").permitAll()
+                        .antMatchers(HttpMethod.POST,"/posts/**").hasRole("MEMBER")
+                        .antMatchers(HttpMethod.PATCH,"/posts/**").hasRole("MEMBER")
+                        .antMatchers(HttpMethod.DELETE,"/posts/**").hasRole("MEMBER")
+                        .antMatchers(HttpMethod.POST,"/answers/**").hasRole("MEMBER")
+                        .antMatchers(HttpMethod.PATCH,"/answers/**").hasRole("MEMBER")
+                        .antMatchers(HttpMethod.DELETE,"/answers/**").hasRole("MEMBER")
+                        .antMatchers(HttpMethod.POST,"/votes/**").hasRole("MEMBER")
+                        .antMatchers(HttpMethod.POST,"/comments/**").hasRole("MEMBER")
+                        .antMatchers(HttpMethod.PATCH,"/comments/**").hasRole("MEMBER")
+                        .antMatchers(HttpMethod.DELETE,"/comments/**").hasRole("MEMBER")
+                        .anyRequest().permitAll()
                 );
         return http.build();
     }
