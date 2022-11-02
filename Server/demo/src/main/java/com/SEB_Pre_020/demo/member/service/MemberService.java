@@ -1,8 +1,6 @@
 package com.SEB_Pre_020.demo.member.service;
 
-import com.SEB_Pre_020.demo.config.auth.PrincipalDetails;
 import com.SEB_Pre_020.demo.config.auth.utils.CustomAuthorityUtils;
-import com.SEB_Pre_020.demo.event.MemberRegistrationApplicationEvent;
 import com.SEB_Pre_020.demo.exception.ExceptionCode;
 import com.SEB_Pre_020.demo.member.entity.Member;
 import com.SEB_Pre_020.demo.member.repository.MemberRepository;
@@ -22,7 +20,6 @@ import java.util.stream.Collectors;
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
-    private final ApplicationEventPublisher publisher;
     private final PasswordEncoder passwordEncoder;
     private final CustomAuthorityUtils authorityUtils;
 
@@ -31,14 +28,11 @@ public class MemberService {
                          PasswordEncoder passwordEncoder,
                          CustomAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
-        this.publisher = publisher;
         this.passwordEncoder = passwordEncoder;
         this.authorityUtils = authorityUtils;
     }
 
     private Member findMember(Member member) { return findVerifiedMember(member.getEmail());}
-
-    public Member getLoginMember() { return findMember(getUserByToken());}
 
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
