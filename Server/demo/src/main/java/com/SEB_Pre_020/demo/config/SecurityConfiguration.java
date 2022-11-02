@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -20,7 +22,12 @@ public class SecurityConfiguration {
         http
                 .headers().frameOptions().sameOrigin() //동일 출처로부터 들어오는 request만 페이지 렌더링을 허용
                 .and()
-                .csrf().disable()
+                .csrf().requireCsrfProtectionMatcher(new AntPathRequestMatcher("!/h2/**"))
+                .and()
+                .headers().addHeaderWriter
+                        (new StaticHeadersWriter("X-Content-Security-Policy", "script-src 'self'"))
+                .frameOptions().disable()
+                .and()
                 .formLogin().disable()
                 .httpBasic().disable()
                 .authorizeHttpRequests(authorize -> authorize
