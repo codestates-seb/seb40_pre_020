@@ -35,12 +35,12 @@ public class MemberService {
 
     public Member createMember(Member member) {
         verifyExistsEmail(member.getEmail());
-        String encryptedPassword = passwordEncoder.encode(member.getPassword());
-        UserDetails userDetails = new User(member.getEmail(), encryptedPassword, authorities);
 
-        Member savedMember = memberRepository.save(member);
+        member.setPassword(passwordEncoder.encode(member.getPassword()));
+        member.setRole("ROLE_MEMBER");  //SimpleGrantedAuthority 를 사용해 Role 베이스 형태의 권한을 지정할 때
+        // ‘Roll_’ + 권한명 형태로 지정해 주어야
 
-        return savedMember;
+        return memberRepository.save(member);
     }
 
     private List<GrantedAuthority> createAuthorities(String... roles) {
