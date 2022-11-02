@@ -19,7 +19,7 @@ import java.util.Map;
 public class JwtTokenizer {
 
     private String secretKey = "iv1idjidIlgi1hii1dijhciIj1!ih|giI";
-    // 코드에서 환경변수로 빼내 숨기는 방법 적용해야 함
+    /** 코드에서 환경변수로 빼내 숨기는 방법 적용해야 함 **/
 
     @PostConstruct
     protected void init() {
