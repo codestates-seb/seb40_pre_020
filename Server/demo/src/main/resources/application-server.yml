@@ -17,3 +17,6 @@ spring:
     properties:
       hibernate:
         format_sql: true  # (3) SQL pretty print
+#jwt:
+#  secret-key: ${JWT_SKY}
+#  access-token-expiration-seconds: 7200
