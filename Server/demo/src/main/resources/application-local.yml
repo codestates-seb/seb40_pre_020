@@ -12,7 +12,7 @@ spring:
       ddl-auto: create
     show-sql: true
     use-new-id-generator-mappings: true
-jwt:
-  secret-key: ${JWT_SKY}
-  access-token-expiration-seconds: 7200
-  refresh-token-expiration-seconds: 18000
+#jwt:
+#  secret-key: ${JWT_SKY}
+#  access-token-expiration-seconds: 7200
+#  refresh-token-expiration-seconds: 18000
