@@ -5,6 +5,7 @@ import Home from './components/Pages/home';
 import Tags from './components/Pages/tags';
 import AskQuestion from './components/AskQuestion/AskQuestion';
 import UpdateQuestion from './components/UpdateQuestion/UpdateQuestion';
+import Mypage from './components/Pages/mypage';
 function App() {
   return (
     <div>
@@ -32,6 +33,7 @@ function App() {
             }
           ></Route> */}
           <Route path="/questions/ask" element={<AskQuestion />} />
+          <Route path="/mypage" element={<Mypage />} />
           <Route path="/questions/update" element={<UpdateQuestion />} />
         </Routes>
       </React.Fragment>

@@ -75,7 +75,7 @@ const TagBox = styled.div`
   border: 1px solid rgba(118, 118, 118);
   border-radius: 3px;
   &:focus-within {
-    border-color: blue;
+    border-color: #0982f0;
   }
 `;
 

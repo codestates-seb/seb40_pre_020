@@ -20,9 +20,9 @@ function Question({ userData }) {
             role="button"
             aria-hidden="true"
           >
-            {userData.title}
+            {userData.postTitle}
           </div>
-          <p>{userData.content}</p>
+          <p>{userData.postContent}</p>
         </div>
       </div>
       {userData.tags && (
