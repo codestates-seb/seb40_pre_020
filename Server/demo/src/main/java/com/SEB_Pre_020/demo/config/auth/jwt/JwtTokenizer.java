@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.Getter;
 import lombok.Value;
 
 import javax.annotation.PostConstruct;
@@ -17,9 +18,17 @@ import java.util.Date;
 import java.util.Map;
 
 public class JwtTokenizer {
+    @Getter
+    @Value("${jwt.secret-key}")
+    private String secretKey;
 
-    private String secretKey = "iv1idjidIlgi1hii1dijhciIj1!ih|giI";
-    /** 코드에서 환경변수로 빼내 숨기는 방법 적용해야 함 **/
+    @Getter
+    @Value("${jwt.access-token-expiration-seconds}")
+    private int accessTokenExpiriationSeconds;
+
+    @Getter
+    @Value("${jwt.refresh-token-expiration-seconds}")
+    private int refreshTokenExpirationSeconds;
 
     @PostConstruct
     protected void init() {
@@ -67,6 +76,16 @@ public class JwtTokenizer {
         return key;
     } // JWT 서명에 사용하는 SecretKey 생성 메서드
 
+    public Jws<Claims> getClaims(String jws, String base64EncodedSecretKey) {
+        Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
+
+        Jws<Claims> claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(jws);
+        return claims;
+    } // 검증 후 Claims 반환하는 메서드
+
     public void verifySignature(String jws, String base64EncodedSecretKey) {
         Key key = getKeyFromBase64EncodedKey(base64EncodedSecretKey);
 
@@ -74,16 +93,13 @@ public class JwtTokenizer {
                 .setSigningKey(key)     // (1)
                 .build()
                 .parseClaimsJws(jws);   // (2)
-    }
+    } // 단순 검증용 메서드
 
-    // 토큰의 유효성 + 만료일자 확인
-    public boolean validateToken(String jwtToken) {
-        try {
-            Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
-            return !claims.getBody().getExpiration().before(new Date());
-        } catch (Exception e) {
-            return false;
-        }
-    }
+    public Date getTokenExpiration(int expirationSeconds) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.SECOND, expirationSeconds);
+        Date expiration = calendar.getTime();
 
+        return expiration;
+    }
 }
