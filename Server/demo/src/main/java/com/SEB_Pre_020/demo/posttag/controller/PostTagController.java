@@ -32,8 +32,8 @@ public class PostTagController {
     }
 
     @PostMapping
-    public ResponseEntity postPostTags(@Valid @RequestBody List<PostTagDto.Post> requestBody) {
-        List<PostTag> postTags = postTagMapper.postTagPostsToPostTags(requestBody);
+    public ResponseEntity postPostTags(@Valid @RequestBody PostTagDto.Post requestBody) {
+        List<PostTag> postTags = postTagMapper.postTagPostToPostTag(requestBody);
 
         List<PostTag> createdPostTags = postTagService.createPostTags(postTags);
 

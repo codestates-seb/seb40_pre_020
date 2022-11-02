@@ -1,23 +1,29 @@
 package com.SEB_Pre_020.demo.posttag.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
+import java.util.List;
 
 public class PostTagDto {
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class Post {
+    public static class PostEntity {
         @Positive
         private int postId;
 
-        @Positive
-        private int tagId;
+        @NotBlank
+        private String tagName;
+    }
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Post {
+        List<PostEntity> postEntities;
     }
 
     @Getter
@@ -30,8 +36,8 @@ public class PostTagDto {
         @Positive
         private int postId;
 
-        @Positive
-        private int tagId;
+        @NotBlank
+        private String tagName;
     }
 
     @Getter
@@ -42,9 +48,9 @@ public class PostTagDto {
         private int id;
 
         @Positive
-        private int tagId;
-
-        @Positive
         private int postId;
+
+        @NotBlank
+        private String tagName;
     }
 }

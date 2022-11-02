@@ -7,25 +7,34 @@ import com.SEB_Pre_020.demo.tag.entity.Tag;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PostTagMapper {
-    default PostTag postTagPostToPostTag(PostTagDto.Post requestBody) {
-        PostTag postTag = new PostTag();
-        Post post = new Post();
-        Tag tag = new Tag();
+    default List<PostTag> postTagPostToPostTag(PostTagDto.Post requestBody) {
 
-        post.setId(requestBody.getPostId());
-        tag.setId(requestBody.getTagId());
+        List<PostTag> list = new ArrayList<PostTag>( requestBody.getPostEntities().size() );
+        for ( PostTagDto.PostEntity postEntity : requestBody.getPostEntities() ) {
+            PostTag postTag = new PostTag();
+            Post post = new Post();
+            Tag tag = new Tag();
 
-        postTag.setPost(post);
-        postTag.setTag(tag);
+            post.setId(postEntity.getPostId());
+            tag.setTagName(postEntity.getTagName());
 
-        return postTag;
+            postTag.setPost(post);
+            postTag.setTag(tag);
+
+            System.out.println(postTag.getPost().getId());
+            System.out.println(postTag.getTag().getTagName());
+
+            list.add(postTag);
+        }
+
+        return list;
+
     }
-
-    List<PostTag> postTagPostsToPostTags(List<PostTagDto.Post> requestBody);
 
     default PostTag postTagPatchToPostTag(PostTagDto.Patch requestBody) {
         PostTag postTag = new PostTag();
@@ -33,7 +42,7 @@ public interface PostTagMapper {
         Tag tag = new Tag();
 
         post.setId(requestBody.getPostId());
-        tag.setId(requestBody.getTagId());
+        tag.setTagName(requestBody.getTagName());
 
         postTag.setId(requestBody.getId());
         postTag.setPost(post);
@@ -47,7 +56,7 @@ public interface PostTagMapper {
 
         response.setId(postTag.getId());
         response.setPostId(postTag.getPost().getId());
-        response.setTagId(postTag.getTag().getId());
+        response.setTagName(postTag.getTag().getTagName());
 
         return response;
     }
