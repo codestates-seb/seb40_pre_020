@@ -36,10 +36,12 @@ public class PostService {
     public Post updatePost(Post post) {
         Post findPost = findVerifiedPost(post.getId());
 
-        // 제목, 내용 뷰만 수정 가능
+        // 제목, 내용, 조회수, 추천수, 댓글수만 수정 가능
         findPost.setPostTitle(post.getPostTitle());
         findPost.setPostContent(post.getPostContent());
         findPost.setPostView(post.getPostView());
+        findPost.setPostVoteCount(post.getPostVoteCount());
+        findPost.setPostCommentCount(post.getPostCommentCount());
 
         return postRepository.save(findPost);
     }
@@ -63,17 +65,44 @@ public class PostService {
         return new PageImpl<>(pagedListHolder.getPageList(), pageable, postList.size());
     }
 
-    // 멤버 get 현재 미구현
+    /** memberId로 게시글 목록 가져오기 */
     @Transactional
-    public List<Post> findMemberPosts(int postId, int page, int size) {
-        List<Post> postList = postRepository.findByParentId(postId);
-        return postList;
+    public Page<Post> findMemberPosts(int memberId, int page, int size) {
+        List<Post> postList = postRepository.findByMember_IdAndParentId(memberId, 0);
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+        PagedListHolder pagedListHolder = new PagedListHolder(postList);
+        pagedListHolder.setPageSize(size);
+        pagedListHolder.setPage(page);
+
+        return new PageImpl<>(pagedListHolder.getPageList(), pageable, postList.size());
     }
 
-    /** 게시글 삭제 */
+    /** memberId로 답글 목록 가져오기 */
+    @Transactional
+    public Page<Post> findMemberAnswers(int memberId, int page, int size) {
+        List<Post> postList = postRepository.findByMember_IdAndParentIdNot(memberId, 0);
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+        PagedListHolder pagedListHolder = new PagedListHolder(postList);
+        pagedListHolder.setPageSize(size);
+        pagedListHolder.setPage(page);
+
+        return new PageImpl<>(pagedListHolder.getPageList(), pageable, postList.size());
+    }
+
+    /** 게시글(하위 답글 포함) 삭제 */
     @Transactional
     public void deletePost(int postId) {
         Post findPost = findVerifiedPost(postId);
+
+        // 게시글이면 하위 답글도 삭제
+        if(findPost.getParentId() == 0) {
+            List<Post> postList = postRepository.findByParentId(postId);
+            for (Post post : postList) {
+                postRepository.delete(post);
+            }
+        }
 
         postRepository.delete(findPost);
     }
