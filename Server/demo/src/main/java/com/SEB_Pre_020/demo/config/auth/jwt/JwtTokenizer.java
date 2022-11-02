@@ -19,16 +19,16 @@ import java.util.Map;
 
 public class JwtTokenizer {
     @Getter
-    @Value("${jwt.secret-key}")
-    private String secretKey;
+//    @Value("${jwt.secret-key}")
+    private String secretKey = "iv1idjidIlgi1hii1dijhciIj1!ih|giI";
 
     @Getter
-    @Value("${jwt.access-token-expiration-seconds}")
-    private int accessTokenExpiriationSeconds;
+//    @Value("${jwt.access-token-expiration-seconds}")
+    private int accessTokenExpiriationSeconds = 7200;
 
     @Getter
-    @Value("${jwt.refresh-token-expiration-seconds}")
-    private int refreshTokenExpirationSeconds;
+//    @Value("${jwt.refresh-token-expiration-seconds}")
+    private int refreshTokenExpirationSeconds = 18000;
 
     @PostConstruct
     protected void init() {

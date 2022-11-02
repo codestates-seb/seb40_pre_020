@@ -40,13 +40,13 @@ public class MemberController {
                HttpStatus.CREATED);
     }
 
-    @GetMapping("/member") // 해당 토큰을 받은 유저 정보를 클라이언트에게 전달
-    public ResponseEntity getMember(){
-        Member member =  memberService.getLoginMember();
-
-        return new ResponseEntity<>(
-                new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(member)),
-                HttpStatus.OK);
-    }
+//    @GetMapping("/member") // 해당 토큰을 받은 유저 정보를 클라이언트에게 전달
+//    public ResponseEntity getMember(){
+//        Member member =  memberService.getLoginMember();
+//
+//        return new ResponseEntity<>(
+//                new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(member)),
+//                HttpStatus.OK);
+//    }
 
 }
