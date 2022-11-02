@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import User from '../Users/User.js';
+import Tag from '../components/Tags/tag';
 import { useState, useEffect } from 'react';
-import Leftmenu from '../Leftside/Leftside.js';
+import Leftmenu from '../components/Leftside/Leftside';
 import Header from './header.js';
 import Footer from './footer.js';
 
@@ -32,6 +32,9 @@ const Maintags = styled.div`
   border-top-width: 0;
   border-bottom-width: 0;
   border-right-width: 0;
+  p {
+    margin-left: 70px;
+  }
 `;
 
 const Gridtags = styled.div`
@@ -41,23 +44,22 @@ const Gridtags = styled.div`
   margin-top: 10px;
 `;
 
-function Users() {
+function Tags() {
   const [loading, setLoading] = useState(true);
-  const [users, setUsers] = useState([]);
+  const [tags, setTags] = useState([]);
 
-  const getUsers = async () => {
+  const getTags = async () => {
     const json = await (
       await fetch(
-        'https://api.stackexchange.com/2.3/users?order=desc&sort=reputation&site=stackoverflow'
+        'https://api.stackexchange.com/2.3/tags?order=desc&sort=popular&site=stackoverflow'
       )
     ).json();
-    setUsers(json.items);
-    console.log(json);
+    setTags(json.items);
     setLoading(false);
   };
 
   useEffect(() => {
-    getUsers();
+    getTags();
   }, []);
 
   return (
@@ -66,21 +68,22 @@ function Users() {
       <Homemain>
         <Leftmenu />
         <Maintags>
-          <H1>Users</H1>
-          <Input placeholder="Filter by user"></Input>
+          <H1>Tags</H1>
+          <p>
+            A tag is a keyword or label that categorizes your question with
+            other, similar questions.
+            <br />
+            Using the right tags makes it easier for others to find and answer
+            your question.
+          </p>
+          <Input placeholder="Filter by tag name"></Input>
           <div>
             {loading ? (
               <h1>loading...</h1>
             ) : (
               <Gridtags>
-                {users.map((Users) => (
-                  <User
-                    key={Users.user_id}
-                    id={Users.user_id}
-                    name={Users.display_name}
-                    location={Users.location}
-                    userimg={Users.profile_image}
-                  />
+                {tags.map((tags) => (
+                  <Tag key={tags.name} id={tags.name} count={tags.count} />
                 ))}
               </Gridtags>
             )}
@@ -92,4 +95,4 @@ function Users() {
   );
 }
 
-export default Users;
+export default Tags;

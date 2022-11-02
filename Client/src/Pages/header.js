@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/default
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { faStackOverflow } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -97,6 +97,7 @@ const Singupbutton = styled.button`
 `;
 
 function Header() {
+  const navigate = useNavigate();
   const [keyword, Setkeyword] = useState('');
 
   const valueChange = (e) => {
@@ -139,8 +140,10 @@ function Header() {
           </label>
         </form>
         <Button>
-          <Loginbutton>Log in</Loginbutton>
-          <Singupbutton>Sign up</Singupbutton>
+          <Loginbutton onClick={() => navigate('/login')}>Log in</Loginbutton>
+          <Singupbutton onClick={() => navigate('/singup')}>
+            Sign up
+          </Singupbutton>
         </Button>
       </Navmain>
     </div>
