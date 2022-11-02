@@ -5,12 +5,19 @@ spring:
     username: "localtest"
     password: "pre20test"
   jpa:
-    hibernate:
-      ddl-auto: create
-    show-sql: true
-    use-new-id-generator-mappings: true
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
+    hibernate:
+      ddl-auto: none
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
 #jwt:
 #  secret-key: ${JWT_SKY}
 #  access-token-expiration-seconds: 7200
