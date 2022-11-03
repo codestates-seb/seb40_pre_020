@@ -24,6 +24,6 @@ public class Tag extends Auditable {
     @Column(name = "tagName", nullable = false, updatable = true, unique = true)
     private String tagName;
 
-    @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
-    private List<PostTag> postTags;
+//    @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
+//    private List<PostTag> postTags;
 }

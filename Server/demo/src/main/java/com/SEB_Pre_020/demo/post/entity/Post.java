@@ -50,6 +50,6 @@ public class Post extends Auditable {
     @Column(name = "postCommentCount", nullable = false, updatable = true, unique = false)
     private int postCommentCount;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<PostTag> postTags;
+//    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+//    private List<PostTag> postTags;
 }
