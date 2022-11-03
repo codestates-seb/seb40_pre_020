@@ -25,11 +25,11 @@ public class PostTag extends Auditable {
 
     @ManyToOne
     @JoinColumn(name = "postTagPostId")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
     @ManyToOne
     @JoinColumn(name = "postTagTagId")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     private Tag tag;
 }

@@ -26,9 +26,6 @@ public interface PostTagMapper {
             postTag.setPost(post);
             postTag.setTag(tag);
 
-            System.out.println(postTag.getPost().getId());
-            System.out.println(postTag.getTag().getTagName());
-
             list.add(postTag);
         }
 
