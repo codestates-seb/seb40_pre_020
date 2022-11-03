@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Questions() {
-  const [limit] = useState(4); //한 페이지 최대 개시물 수
-  const [page, setPage] = useState(1);
+  const [limit] = useState(10); //한 페이지 최대 개시물 수
+  const [page, setPage] = useState(4);
   const [total, setTotal] = useState(1);
   const [postsData, setPostsData] = useState([]);
   const navigate = useNavigate();
