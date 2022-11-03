@@ -1,6 +1,8 @@
 package com.SEB_Pre_020.demo.vote.service;
 
+import com.SEB_Pre_020.demo.member.repository.MemberRepository;
 import com.SEB_Pre_020.demo.post.entity.Post;
+import com.SEB_Pre_020.demo.post.repository.PostRepository;
 import com.SEB_Pre_020.demo.post.service.PostService;
 import com.SEB_Pre_020.demo.vote.entity.Vote;
 import com.SEB_Pre_020.demo.vote.repository.VoteRepository;
@@ -13,10 +15,14 @@ import java.util.Optional;
 @Service
 public class VoteService {
     private final VoteRepository voteRepository;
+    private final MemberRepository memberRepository;
+    private final PostRepository postRepository;
     private final PostService postService;
 
-    public VoteService(VoteRepository voteRepository, PostService postService) {
+    public VoteService(VoteRepository voteRepository, MemberRepository memberRepository, PostRepository postRepository, PostService postService) {
         this.voteRepository = voteRepository;
+        this.memberRepository = memberRepository;
+        this.postRepository = postRepository;
         this.postService = postService;
     }
 
@@ -43,6 +49,10 @@ public class VoteService {
             Post post = postService.findPost(vote.getPost().getId());
             post.setPostVoteCount(post.getPostVoteCount() + vote.getVoteType());
             postService.updatePost(post);
+
+            vote.setMember(memberRepository.findById(memberId).get());
+            vote.setPost(postRepository.findById(postId).get());
+
             Vote saveVote = voteRepository.save(vote);
             return saveVote;
         }

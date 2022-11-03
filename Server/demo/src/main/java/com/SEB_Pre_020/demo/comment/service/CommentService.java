@@ -2,7 +2,9 @@ package com.SEB_Pre_020.demo.comment.service;
 
 import com.SEB_Pre_020.demo.comment.entity.Comment;
 import com.SEB_Pre_020.demo.comment.repository.CommentRepository;
+import com.SEB_Pre_020.demo.member.repository.MemberRepository;
 import com.SEB_Pre_020.demo.post.entity.Post;
+import com.SEB_Pre_020.demo.post.repository.PostRepository;
 import com.SEB_Pre_020.demo.post.service.PostService;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.*;
@@ -16,10 +18,14 @@ import java.util.Optional;
 @Service
 public class CommentService {
     private final CommentRepository commentRepository;
+    private final MemberRepository memberRepository;
+    private final PostRepository postRepository;
     private final PostService postService;
 
-    public CommentService(CommentRepository commentRepository, PostService postService) {
+    public CommentService(CommentRepository commentRepository, MemberRepository memberRepository, PostRepository postRepository, PostService postService) {
         this.commentRepository = commentRepository;
+        this.memberRepository = memberRepository;
+        this.postRepository = postRepository;
         this.postService = postService;
     }
 
@@ -30,6 +36,8 @@ public class CommentService {
         int postId = comment.getPost().getId();
 
         if (!commentRepository.existsById(comment.getId())) {
+            comment.setMember(memberRepository.findById(memberId).get());
+            comment.setPost(postRepository.findById(postId).get());
             Comment savedComment = commentRepository.save(comment);
 
             // 게시글(답글)의 commentCount 증가
