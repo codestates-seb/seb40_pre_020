@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line react/prop-types
 function Question({ userData }) {
   const navigate = useNavigate();
-  const handleOnClick = () => navigate(`/posts/${userData.Id}`);
+  const handleOnClick = () => navigate(`/posts/${userData.id}`);
   return (
     <div className={styles.container1}>
       <div className={styles.container} aria-hidden="true">
@@ -20,9 +20,9 @@ function Question({ userData }) {
             role="button"
             aria-hidden="true"
           >
-            {userData.title}
+            {userData.postTitle}
           </div>
-          <p>{userData.content}</p>
+          <p>{userData.postContent}</p>
         </div>
       </div>
       {userData.tags && (
