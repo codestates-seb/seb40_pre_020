@@ -1,17 +1,14 @@
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './Editor.css';
-function Editor({ setContent }) {
+import React from 'react';
+
+const Editor = ({ setContent, postContent }) => {
   return (
     <div className="App">
-      {/* <h2>Using CKEditor 5 build in React</h2> */}
       <CKEditor
         editor={ClassicEditor}
-        data=""
-        onReady={(editor) => {
-          // You can store the "editor" and use when it is needed.
-          console.log('Editor is ready to use!', editor);
-        }}
+        data={postContent}
         onChange={(event, editor) => {
           const data = editor.getData();
           setContent(data.replace(/<[^>]*>?/g, ''));
@@ -25,6 +22,6 @@ function Editor({ setContent }) {
       />
     </div>
   );
-}
+};
 
-export default Editor;
+export default React.memo(Editor);

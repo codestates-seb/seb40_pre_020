@@ -1,8 +1,18 @@
 import Tag from '../Addtag/Addtag';
 import Editor from '../Editor/editor';
 import styles from './UpdateQuestion.module.css';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function UpdateQuestion() {
+  const [userdata, setuserData] = useState([]);
+  const { id } = useParams();
+  useEffect(() => {
+    axios.get(`/posts/${id}`).then((res) => {
+      setuserData(res.data.data);
+    });
+  }, []);
   return (
     <section className={styles.container}>
       <div className={styles.content}>
@@ -16,6 +26,7 @@ function UpdateQuestion() {
               Be specific and imagine you`re asking a question to another person
             </p>
             <input
+              value={userdata.postTitle}
               type="text"
               placeholder="e.g is there an R function someone would need to answer your question"
             />
@@ -27,7 +38,7 @@ function UpdateQuestion() {
               Include all the information someone would need to answer you
               question
             </p>
-            <Editor />
+            <Editor postContent={userdata.postContent} />
           </div>
         </div>
         <Tag></Tag>

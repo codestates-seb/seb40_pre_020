@@ -6,9 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Questions() {
-  const [limit] = useState(4); //한 페이지 최대 개시물 수
+  const [limit] = useState(10); //한 페이지 최대 개시물 수
   const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(1);
+  const [total, setTotal] = useState([]);
+  const [totalEl, setTotalEl] = useState([]);
   const [postsData, setPostsData] = useState([]);
   const navigate = useNavigate();
   const handleOnClick = () => navigate(`/questions/ask`);
@@ -18,6 +19,7 @@ function Questions() {
       .then((data) => {
         setPostsData(data.data.data);
         setTotal(data.data.pageInfo.totalPages);
+        setTotalEl(data.data.pageInfo.totalElements);
       })
       .catch((er) => {
         console.log(er);
@@ -36,20 +38,18 @@ function Questions() {
           </button>
         </div>
         <div className={styles.subber}>
-          <span>{postsData.length} questions</span>
+          <span>{totalEl} questions</span>
           <button type="button">Filter</button>
         </div>
       </div>
       <div className={styles.questions}>
-        {postsData.map((item, i) => {
-          return <Question key={i} userData={item}></Question>;
-        })}
+        {postsData
+          .sort((a, b) => b.id - a.id)
+          .map((item, i) => {
+            return <Question key={i} userData={item}></Question>;
+          })}
       </div>
-      <Pagination
-        total={total} //게시물 갯수
-        page={page}
-        setPage={setPage}
-      />
+      <Pagination total={total} page={page} setPage={setPage} />
     </section>
   );
 }

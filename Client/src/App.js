@@ -22,7 +22,7 @@ function App() {
           <Route path="/singup" element={<SignUp />} />
           <Route path="/posts/:id" element={<Posts />} />
           <Route path="/questions/ask" element={<AskQuestion />} />
-          <Route path="/questions/update" element={<UpdateQuestion />} />
+          <Route path="/questions/update/:id" element={<UpdateQuestion />} />
         </Routes>
       </React.Fragment>
     </div>

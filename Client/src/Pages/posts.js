@@ -26,10 +26,10 @@ function Posts() {
   useEffect(() => {
     axios.get(`/posts/${id}`).then((res) => {
       setuserData(res.data.data);
-      console.log(userdata);
     });
   }, []);
 
+  console.log(userdata);
   return (
     <div>
       <Header />

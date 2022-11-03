@@ -1,5 +1,8 @@
 import VoteBtn from '../VoteBtn/VoteBtn';
 import styled from 'styled-components';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const Postmain = styled.div`
   display: flex;
@@ -56,6 +59,8 @@ const SF = styled.div`
   display: flex;
   margin-top: 100px;
   margin-left: -70px;
+  text-align: center;
+  align-items: center;
   a {
     font-size: 15px;
     text-decoration: none;
@@ -63,13 +68,39 @@ const SF = styled.div`
     margin-right: 15px;
   }
 `;
+const DeleteBtn = styled.button`
+  color: black;
+  background-color: white;
+  font-size: 15px;
+
+  color: inherit;
+  margin-right: 15px;
+`;
 
 function Post(props) {
+  const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const handleOnClick = () => navigate(`/questions/ask`);
+  const { id } = useParams();
+  const handleRemove = () => {
+    axios.delete(`/posts/${id}`).then(() => navigate(`/`));
+  };
+  const handleEdit = () => {
+    navigate(`/questions/update/${id}`);
+  };
+  useEffect(() => {
+    axios
+      .get(`/answers/${id}?page=1&size=20`)
+      .then((res) => setData(res.data.data));
+  }, []);
+  console.log(data);
   return (
     <Postmain>
       <Mainheader>
         <h1>{props.userdata.postTitle}</h1>
-        <button>Ask Question</button>
+        <button type="button" onClick={handleOnClick}>
+          Ask Question
+        </button>
       </Mainheader>
       <Subheader>
         <span>View {props.userdata.postView}</span>
@@ -82,8 +113,15 @@ function Post(props) {
         <SF>
           <a href="/">Share</a>
           <span>Following</span>
+          <button onClick={handleEdit}>Edit</button>
+          <DeleteBtn type="button" onClick={handleRemove}>
+            Delete
+          </DeleteBtn>
         </SF>
       </Postm>
+      {data.map((el, i) => {
+        return <div key={i}>{el.postContent}</div>;
+      })}
     </Postmain>
   );
 }
