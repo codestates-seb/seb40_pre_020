@@ -1,7 +1,6 @@
 .container {
   display: flex;
   gap: 0 16px;
-  /* border-bottom: 1px solid hsl(210, 8%, 90%); */
   padding: 16px;
 }
 .container1 {
@@ -60,9 +59,8 @@
 }
 
 .content div {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  /* justify-content: flex-end; */
+  /* align-items: center; */
   gap: 0 4px;
 }
 .userId {
