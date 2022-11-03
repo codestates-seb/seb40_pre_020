@@ -1,15 +1,11 @@
 package com.SEB_Pre_020.demo.member.entity;
 
 import com.SEB_Pre_020.demo.audit.Auditable;
-import com.SEB_Pre_020.demo.member.repository.MemberRepository;
-import com.SEB_Pre_020.demo.member.service.MemberService;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity(name="member")
-//@Table(name="member")
+@Table(name="member")
 public class Member extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본키 설정을 위한 애너테이션.
