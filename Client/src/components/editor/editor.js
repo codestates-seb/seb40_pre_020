@@ -3,12 +3,12 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './Editor.css';
 import React from 'react';
 
-const Editor = ({ setContent, postContent }) => {
+const Editor = ({ setContent }) => {
   return (
     <div className="App">
       <CKEditor
         editor={ClassicEditor}
-        data={postContent}
+        data=""
         onChange={(event, editor) => {
           const data = editor.getData();
           setContent(data.replace(/<[^>]*>?/g, ''));

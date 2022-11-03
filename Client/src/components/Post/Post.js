@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import Editor from '../Editor/editor';
 
 const Postmain = styled.div`
   display: flex;
@@ -22,6 +23,9 @@ const Mainheader = styled.div`
   h1 {
     font-size: 30px;
     font-weight: 600;
+  }
+  button {
+    padding: 10px;
   }
   @media screen and (max-width: 900px) {
     flex-direction: column-reverse;
@@ -46,21 +50,20 @@ const Subheader = styled.div`
 `;
 
 const Postm = styled.div`
-  display: flex;
+  display: block;
   padding: 15px;
   margin-top: 30px;
   p {
     color: #777;
     padding: 15px;
+    margin-top: 30px;
   }
 `;
 
 const SF = styled.div`
   display: flex;
-  margin-top: 100px;
-  margin-left: -70px;
-  text-align: center;
-  align-items: center;
+  margin-top: 30px;
+  margin-right: auto;
   a {
     font-size: 15px;
     text-decoration: none;
@@ -77,10 +80,45 @@ const DeleteBtn = styled.button`
   margin-right: 15px;
 `;
 
+const PostA = styled.div`
+  margin-top: 70px;
+  padding: 15px;
+  button {
+    margin-top: 30px;
+    padding: 10px;
+  }
+`;
+
+const PostAs = styled.div`
+  padding: 15px;
+  margin-top: 30px;
+  h1 {
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+`;
+
+const PostAss = styled.div`
+  display: flex;
+  padding: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  span {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+  }
+`;
+
+const ED = styled.div`
+  margin-left: auto;
+`;
+
 function Post(props) {
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
-  const handleOnClick = () => navigate(`/questions/ask`);
+  const [answers, setAnswers] = useState([]);
+  const [conutent, setContent] = useState();
+  const handleOnClickask = () => navigate(`/questions/ask`);
   const { id } = useParams();
   const handleRemove = () => {
     axios.delete(`/posts/${id}`).then(() => navigate(`/`));
@@ -91,14 +129,27 @@ function Post(props) {
   useEffect(() => {
     axios
       .get(`/answers/${id}?page=1&size=20`)
-      .then((res) => setData(res.data.data));
+      .then((res) => setAnswers(res.data.data));
   }, []);
-  console.log(data);
+  const handleOnClick = () => {
+    const data = {
+      parentId: id,
+      postTitle: 'Answer1',
+      postContent: conutent,
+      memberId: 2,
+      postView: 0,
+      postVoteCount: 0,
+      postAnswerCount: 0,
+      postCommentCount: 0,
+    };
+    axios.post('/answers', data).then(() => window.location.reload());
+  };
+
   return (
     <Postmain>
       <Mainheader>
         <h1>{props.userdata.postTitle}</h1>
-        <button type="button" onClick={handleOnClick}>
+        <button type="button" onClick={handleOnClickask}>
           Ask Question
         </button>
       </Mainheader>
@@ -113,15 +164,35 @@ function Post(props) {
         <SF>
           <a href="/">Share</a>
           <span>Following</span>
-          <button onClick={handleEdit}>Edit</button>
-          <DeleteBtn type="button" onClick={handleRemove}>
-            Delete
-          </DeleteBtn>
+          <ED>
+            <button onClick={handleEdit}>Edit</button>
+            <DeleteBtn type="button" onClick={handleRemove}>
+              Delete
+            </DeleteBtn>
+          </ED>
         </SF>
       </Postm>
-      {data.map((el, i) => {
+      {/* {answers.map((el, i) => {
         return <div key={i}>{el.postContent}</div>;
-      })}
+      })} */}
+      <PostAs>
+        <div>
+          <h1>{answers.length} Answers</h1>
+          {answers.map((item, i) => {
+            return (
+              <PostAss key={i}>
+                <VoteBtn />
+                <span key={i}>{item.postContent}</span>
+              </PostAss>
+            );
+          })}
+        </div>
+      </PostAs>
+      <PostA>
+        <h1>Your Answer</h1>
+        <Editor setContent={setContent} />
+        <button onClick={handleOnClick}>Post Your Answer</button>
+      </PostA>
     </Postmain>
   );
 }

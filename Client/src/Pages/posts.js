@@ -29,7 +29,6 @@ function Posts() {
     });
   }, []);
 
-  console.log(userdata);
   return (
     <div>
       <Header />
