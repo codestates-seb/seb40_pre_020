@@ -1,5 +1,5 @@
 import Tag from '../Addtag/Addtag';
-import Editor from '../Editor/editor';
+import Editor from '../editor/editor';
 import styles from './UpdateQuestion.module.css';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
