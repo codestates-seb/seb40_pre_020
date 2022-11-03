@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import styles from './Reply.module.css';
 import Icon from '../Icons/SpriteIcon/SpriteIcon';
-import Editor from '../editor/Editor';
+import Editor from '../Editor/editor';
 import { PATCH_ANSWER, DELETE_ANSWER } from '../../utils/api';
 
 function Reply({

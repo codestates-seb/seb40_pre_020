@@ -1,8 +1,5 @@
-// import styles from './Addtag.module.css';
 import { useState } from 'react';
 import styled from 'styled-components';
-
-// import Title from '../components/Title';
 
 const Tag = () => {
   const [tagItem, setTagItem] = useState('');
@@ -75,7 +72,7 @@ const TagBox = styled.div`
   border: 1px solid rgba(118, 118, 118);
   border-radius: 3px;
   &:focus-within {
-    border-color: blue;
+    border-color: #0982f0;
   }
 `;
 
