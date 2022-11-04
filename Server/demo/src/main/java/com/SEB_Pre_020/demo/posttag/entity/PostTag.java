@@ -17,7 +17,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity(name="postTag")
-public class PostTag extends Auditable {
+public class PostTag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="postTagId")
