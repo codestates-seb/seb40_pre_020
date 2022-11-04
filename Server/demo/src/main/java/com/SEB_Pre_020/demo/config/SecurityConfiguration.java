@@ -2,6 +2,10 @@ package com.SEB_Pre_020.demo.config;
 
 import com.SEB_Pre_020.demo.config.auth.filter.JwtAuthenticationFilter;
 import com.SEB_Pre_020.demo.config.auth.filter.JwtVerificationFilter;
+import com.SEB_Pre_020.demo.config.auth.handler.MemberAccessDeniedHandler;
+import com.SEB_Pre_020.demo.config.auth.handler.MemberAuthenticationEntryPoint;
+import com.SEB_Pre_020.demo.config.auth.handler.MemberAuthenticationFailureHandler;
+import com.SEB_Pre_020.demo.config.auth.handler.MemberAuthenticationSuccessHandler;
 import com.SEB_Pre_020.demo.config.auth.jwt.JwtTokenizer;
 import com.SEB_Pre_020.demo.config.auth.utils.CustomAuthorityUtils;
 import org.springframework.context.annotation.Bean;
