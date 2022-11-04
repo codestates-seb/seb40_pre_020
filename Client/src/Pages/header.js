@@ -102,18 +102,17 @@ function Header() {
 
   const valueChange = (e) => {
     Setkeyword(e.target.value);
-    console.log(keyword);
   };
   const Submit = async (e) => {
     e.preventDefault();
 
+    // eslint-disable-next-line no-unused-vars
     const res = await axios.get(
       process.env.REACT_APP_DB_HOST + '/profiles/1/posts?page=1&size=20',
       {
         params: keyword,
       }
     );
-    console.log(res);
     Setkeyword('');
   };
 

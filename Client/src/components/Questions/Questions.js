@@ -21,9 +21,7 @@ function Questions() {
         setTotal(data.data.pageInfo.totalPages);
         setTotalEl(data.data.pageInfo.totalElements);
       })
-      .catch((er) => {
-        console.log(er);
-      });
+      .catch((Error) => alert(Error));
   };
   useEffect(() => {
     getPosts();

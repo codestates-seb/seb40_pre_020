@@ -18,7 +18,6 @@ function UpdateQuestion() {
   useEffect(() => {
     axios.get(process.env.REACT_APP_DB_HOST + `/posts/${id}`).then((res) => {
       setuserData(res.data.data);
-      console.log(userdata);
     });
   }, []);
   return (

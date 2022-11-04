@@ -21,7 +21,6 @@ const Postscomment = (item) => {
         window.location.reload();
       });
   };
-  console.log(item);
   return (
     <Postscommentmain>
       <span>{item.item.commentContent}</span>

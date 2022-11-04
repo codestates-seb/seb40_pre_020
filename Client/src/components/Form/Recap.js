@@ -2,9 +2,8 @@
 import ReCAPTCHA from 'react-google-recaptcha';
 
 function Recap() {
-  const onChange = (value) => {
-    console.log('Captcha value:', value);
-  };
+  // eslint-disable-next-line no-unused-vars
+  const onChange = (value) => {};
 
   return (
     <div className="Recap">

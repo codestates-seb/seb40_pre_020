@@ -52,7 +52,6 @@ function Users() {
       )
     ).json();
     setUsers(json.items);
-    console.log(json);
     setLoading(false);
   };
 

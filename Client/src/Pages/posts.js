@@ -26,7 +26,7 @@ function Posts() {
   // const APIURL = `${URL_TEST}/posts/${id}`;
 
   useEffect(() => {
-    axios.get(`/posts/${id}`).then((res) => {
+    axios.get(process.env.REACT_APP_DB_HOST + `/posts/${id}`).then((res) => {
       setuserData(res.data.data);
     });
   }, []);

@@ -204,7 +204,6 @@ function Post(props) {
     axios
       .get(process.env.REACT_APP_DB_HOST + `/comments/${id}?page=1&size=20`)
       .then((res) => setComment(res.data.data));
-    console.log(comment);
   }, [count]);
 
   return (
