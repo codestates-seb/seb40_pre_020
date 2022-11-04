@@ -71,7 +71,7 @@ const SF = styled.div`
     margin-right: 15px;
   }
 `;
-const DeleteBtn = styled.button`
+const Btn = styled.button`
   color: black;
   background-color: white;
   font-size: 15px;
@@ -117,34 +117,37 @@ const ED = styled.div`
 function Post(props) {
   const navigate = useNavigate();
   const [answers, setAnswers] = useState([]);
-  const [conutent, setContent] = useState();
+  const [content, setContent] = useState();
+  const [count, setCount] = useState(0);
   const handleOnClickask = () => navigate(`/questions/ask`);
   const { id } = useParams();
   const handleRemove = () => {
     axios.delete(`/posts/${id}`).then(() => navigate(`/`));
   };
+
   const handleEdit = () => {
     navigate(`/questions/update/${id}`);
   };
   useEffect(() => {
     axios
       .get(`/answers/${id}?page=1&size=20`)
-      .then((res) => setAnswers(res.data.data));
-  }, []);
+      .then((res) => setAnswers(res.data.data))
+      .then(() => console.log(answers));
+  }, [count]);
+
   const handleOnClick = () => {
     const data = {
       parentId: id,
       postTitle: 'Answer1',
-      postContent: conutent,
+      postContent: content,
       memberId: 2,
       postView: 0,
       postVoteCount: 0,
       postAnswerCount: 0,
       postCommentCount: 0,
     };
-    axios.post('/answers', data).then(() => window.location.reload());
+    axios.post('/answers', data).then(() => setCount((el) => el + 1));
   };
-
   return (
     <Postmain>
       <Mainheader>
@@ -155,7 +158,7 @@ function Post(props) {
       </Mainheader>
       <Subheader>
         <span>View {props.userdata.postView}</span>
-        <span>Answer {props.userdata.postAnswerCount}</span>
+        <span>Answer {answers.length}</span>
         <span>Comment {props.userdata.postCommentCount}</span>
       </Subheader>
       <Postm>
@@ -165,16 +168,13 @@ function Post(props) {
           <a href="/">Share</a>
           <span>Following</span>
           <ED>
-            <button onClick={handleEdit}>Edit</button>
-            <DeleteBtn type="button" onClick={handleRemove}>
+            <Btn onClick={handleEdit}>Edit</Btn>
+            <Btn type="button" onClick={handleRemove}>
               Delete
-            </DeleteBtn>
+            </Btn>
           </ED>
         </SF>
       </Postm>
-      {/* {answers.map((el, i) => {
-        return <div key={i}>{el.postContent}</div>;
-      })} */}
       <PostAs>
         <div>
           <h1>{answers.length} Answers</h1>

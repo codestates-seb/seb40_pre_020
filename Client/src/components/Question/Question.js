@@ -5,13 +5,14 @@ import { useNavigate } from 'react-router-dom';
 function Question({ userData }) {
   const navigate = useNavigate();
   const handleOnClick = () => navigate(`/posts/${userData.id}`);
+  console.log(userData);
   return (
     <div className={styles.container1}>
       <div className={styles.container} aria-hidden="true">
         <div className={styles.stats}>
-          <div id={styles.votes}>{userData.votes} votes</div>
-          <div id={styles.answer}>{userData.replies} answer</div>
-          <div id={styles.views}>{userData.views} views</div>
+          <div id={styles.votes}>{userData.postVoteCount} votes</div>
+          <div id={styles.answer}>{userData.postAnswerCount} answer</div>
+          <div id={styles.views}>{userData.postView} views</div>
         </div>
         <div className={styles.content}>
           <div
