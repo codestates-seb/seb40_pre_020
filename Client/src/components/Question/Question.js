@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 function Question({ userData }) {
   const navigate = useNavigate();
   const handleOnClick = () => navigate(`/posts/${userData.id}`);
-  console.log(userData);
   return (
     <div className={styles.container1}>
       <div className={styles.container} aria-hidden="true">

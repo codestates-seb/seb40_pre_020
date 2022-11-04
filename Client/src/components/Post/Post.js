@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Editor from '../Editor/editor';
-
+import Post1 from './Post1';
 const Postmain = styled.div`
   display: flex;
   flex-direction: column;
@@ -88,27 +88,6 @@ const PostA = styled.div`
   }
 `;
 
-const PostAs = styled.div`
-  padding: 15px;
-  margin-top: 30px;
-  h1 {
-    margin-bottom: 30px;
-    font-size: 20px;
-    font-weight: 700;
-  }
-`;
-
-const PostAss = styled.div`
-  display: flex;
-  padding: 15px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  span {
-    display: flex;
-    align-items: center;
-    margin-left: 30px;
-  }
-`;
-
 const ED = styled.div`
   margin-left: auto;
 `;
@@ -130,8 +109,7 @@ function Post(props) {
   useEffect(() => {
     axios
       .get(`/answers/${id}?page=1&size=20`)
-      .then((res) => setAnswers(res.data.data))
-      .then(() => console.log(answers));
+      .then((res) => setAnswers(res.data.data));
   }, [count]);
 
   const handleOnClick = () => {
@@ -139,7 +117,7 @@ function Post(props) {
       parentId: id,
       postTitle: 'Answer1',
       postContent: content,
-      memberId: 2,
+      memberId: 1,
       postView: 0,
       postVoteCount: 0,
       postAnswerCount: 0,
@@ -174,19 +152,11 @@ function Post(props) {
           </ED>
         </SF>
       </Postm>
-      <PostAs>
-        <div>
-          <h1>{answers.length} Answers</h1>
-          {answers.map((item, i) => {
-            return (
-              <PostAss key={i}>
-                <VoteBtn />
-                <span key={i}>{item.postContent}</span>
-              </PostAss>
-            );
-          })}
-        </div>
-      </PostAs>
+      <h1>{answers.length} Answers</h1>
+      {answers.map((item, i) => {
+        return <Post1 item={item} key={i}></Post1>;
+      })}
+
       <PostA>
         <h1>Your Answer</h1>
         <Editor setContent={setContent} />
