@@ -1,16 +1,24 @@
 import Tag from '../Addtag/Addtag';
-import Editor from '../editor/editor';
+// import Editor from '../editor/editor';
 import styles from './UpdateQuestion.module.css';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const Input = styled.input`
+  height: 200px;
+`;
 
 function UpdateQuestion() {
   const [userdata, setuserData] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const [bodytext, setBodytext] = useState();
   const { id } = useParams();
   useEffect(() => {
     axios.get(`/posts/${id}`).then((res) => {
       setuserData(res.data.data);
+      console.log(userdata);
     });
   }, []);
   return (
@@ -31,14 +39,13 @@ function UpdateQuestion() {
               placeholder="e.g is there an R function someone would need to answer your question"
             />
           </div>
-
           <div className={styles.editorBody}>
             <h3>Body</h3>
             <p>
               Include all the information someone would need to answer you
               question
             </p>
-            <Editor postContent={userdata.postContent} />
+            <Input value={userdata.postContent} />
           </div>
         </div>
         <Tag></Tag>

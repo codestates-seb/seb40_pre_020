@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Editor from '../editor/editor';
+import PostAnswers from './PostAnswers';
+import Postscomment from './Postcomments';
 
 const Postmain = styled.div`
   display: flex;
@@ -71,7 +73,7 @@ const SF = styled.div`
     margin-right: 15px;
   }
 `;
-const DeleteBtn = styled.button`
+const Btn = styled.button`
   color: black;
   background-color: white;
   font-size: 15px;
@@ -81,69 +83,124 @@ const DeleteBtn = styled.button`
 `;
 
 const PostA = styled.div`
-  margin-top: 70px;
-  padding: 15px;
+  padding: 10px;
+  h1 {
+    padding: 10px;
+  }
   button {
     margin-top: 30px;
     padding: 10px;
   }
 `;
 
-const PostAs = styled.div`
-  padding: 15px;
-  margin-top: 30px;
+const PostC = styled.div`
+  padding: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   h1 {
-    margin-bottom: 30px;
-    font-size: 20px;
-    font-weight: 700;
+    margin-bottom: 15px;
   }
 `;
 
-const PostAss = styled.div`
+const Postcomment = styled.div`
   display: flex;
-  padding: 15px;
+  margin-top: 15px;
+  padding: 10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  span {
-    display: flex;
-    align-items: center;
-    margin-left: 30px;
-  }
 `;
+
+const H1 = styled.div`
+  padding: 10px;
+`;
+
+// const PostAs = styled.div`
+//   padding: 15px;
+//   margin-top: 30px;
+//   h1 {
+//     margin-bottom: 30px;
+//     font-size: 20px;
+//     font-weight: 700;
+//   }
+// `;
+
+// const PostAss = styled.div`
+//   display: flex;
+//   padding: 15px;
+//   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+//   span {
+//     display: flex;
+//     align-items: center;
+//     margin-left: 30px;
+//   }
+// `;
+
+// const Adelete = styled.div`
+//   margin-left: auto;
+//   display: flex;
+//   align-items: center;
+// `;
 
 const ED = styled.div`
   margin-left: auto;
 `;
 
 function Post(props) {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [answers, setAnswers] = useState([]);
-  const [conutent, setContent] = useState();
+  const [content, setContent] = useState();
+  const [count, setCount] = useState(0);
+  const [comment, setComment] = useState([]);
+  const [commentvalue, setCommentValue] = useState('');
   const handleOnClickask = () => navigate(`/questions/ask`);
-  const { id } = useParams();
   const handleRemove = () => {
     axios.delete(`/posts/${id}`).then(() => navigate(`/`));
   };
+
   const handleEdit = () => {
     navigate(`/questions/update/${id}`);
   };
-  useEffect(() => {
-    axios
-      .get(`/answers/${id}?page=1&size=20`)
-      .then((res) => setAnswers(res.data.data));
-  }, []);
   const handleOnClick = () => {
     const data = {
       parentId: id,
       postTitle: 'Answer1',
-      postContent: conutent,
-      memberId: 2,
+      postContent: content,
+      memberId: 1,
       postView: 0,
       postVoteCount: 0,
       postAnswerCount: 0,
       postCommentCount: 0,
     };
-    axios.post('/answers', data).then(() => window.location.reload());
+    axios.post('/answers', data).then(() => setCount((el) => el + 1));
   };
+
+  useEffect(() => {
+    axios
+      .get(`/answers/${id}?page=1&size=20`)
+      .then((res) => setAnswers(res.data.data));
+  }, [count]);
+
+  const onCommentChange = (e) => {
+    setCommentValue(e.target.value);
+  };
+
+  const handlecomment = () => {
+    const data = {
+      memberId: 1,
+      postId: id,
+      commentContent: commentvalue,
+    };
+    axios
+      .post('/comments', data)
+      .then(() => setCount((el) => el + 1))
+      .then(() => setCommentValue(''));
+  };
+
+  useEffect(() => {
+    axios
+      .get(`/comments/${id}?page=1&size=20`)
+      .then((res) => setComment(res.data.data));
+    console.log(comment);
+  }, [count]);
 
   return (
     <Postmain>
@@ -155,7 +212,7 @@ function Post(props) {
       </Mainheader>
       <Subheader>
         <span>View {props.userdata.postView}</span>
-        <span>Answer {props.userdata.postAnswerCount}</span>
+        <span>Answer {answers.length}</span>
         <span>Comment {props.userdata.postCommentCount}</span>
       </Subheader>
       <Postm>
@@ -165,33 +222,39 @@ function Post(props) {
           <a href="/">Share</a>
           <span>Following</span>
           <ED>
-            <button onClick={handleEdit}>Edit</button>
-            <DeleteBtn type="button" onClick={handleRemove}>
+            <Btn onClick={handleEdit}>Edit</Btn>
+            <Btn type="button" onClick={handleRemove}>
               Delete
-            </DeleteBtn>
+            </Btn>
           </ED>
         </SF>
       </Postm>
-      {/* {answers.map((el, i) => {
-        return <div key={i}>{el.postContent}</div>;
-      })} */}
-      <PostAs>
-        <div>
-          <h1>{answers.length} Answers</h1>
-          {answers.map((item, i) => {
-            return (
-              <PostAss key={i}>
-                <VoteBtn />
-                <span key={i}>{item.postContent}</span>
-              </PostAss>
-            );
-          })}
-        </div>
-      </PostAs>
+      <PostC>
+        <h1>{comment.length} Comments</h1>
+        {comment.map((item, i) => {
+          return <Postscomment item={item} key={i}></Postscomment>;
+        })}
+        <Postcomment>
+          <form>
+            <input
+              type="text"
+              placeholder="Add a comment"
+              onChange={onCommentChange}
+            />
+            <button onClick={handlecomment}>Answer Your Comment</button>
+          </form>
+        </Postcomment>
+      </PostC>
+      <H1>{answers.length} Answers</H1>
+      {answers.map((item, i) => {
+        return <PostAnswers item={item} key={i}></PostAnswers>;
+      })}
       <PostA>
         <h1>Your Answer</h1>
-        <Editor setContent={setContent} />
-        <button onClick={handleOnClick}>Post Your Answer</button>
+        <form>
+          <Editor setContent={setContent} />
+          <button onClick={handleOnClick}>Post Your Answer</button>
+        </form>
       </PostA>
     </Postmain>
   );
