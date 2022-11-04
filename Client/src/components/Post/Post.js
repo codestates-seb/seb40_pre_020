@@ -75,7 +75,6 @@ const Btn = styled.button`
   color: black;
   background-color: white;
   font-size: 15px;
-
   color: inherit;
   margin-right: 15px;
 `;
