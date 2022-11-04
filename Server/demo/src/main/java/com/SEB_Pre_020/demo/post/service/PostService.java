@@ -61,7 +61,7 @@ public class PostService {
     public Page<Post> findPostPosts(int postId, int page, int size) {
         List<Post> postList = postRepository.findByParentId(postId);
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("postVoteCount").descending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
         PagedListHolder pagedListHolder = new PagedListHolder(postList);
         pagedListHolder.setPageSize(size);
         pagedListHolder.setPage(page);
