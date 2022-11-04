@@ -4,14 +4,15 @@ import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line react/prop-types
 function Question({ userData }) {
   const navigate = useNavigate();
-  const handleOnClick = () => navigate(`/question/${userData.userId}`);
+  const handleOnClick = () => navigate(`/posts/${userData.id}`);
+  console.log(userData);
   return (
     <div className={styles.container1}>
       <div className={styles.container} aria-hidden="true">
         <div className={styles.stats}>
-          <div id={styles.votes}>{userData.votes} votes</div>
-          <div id={styles.answer}>{userData.replies} answer</div>
-          <div id={styles.views}>{userData.views} views</div>
+          <div id={styles.votes}>{userData.postVoteCount} votes</div>
+          <div id={styles.answer}>{userData.postAnswerCount} answer</div>
+          <div id={styles.views}>{userData.postView} views</div>
         </div>
         <div className={styles.content}>
           <div
@@ -20,9 +21,9 @@ function Question({ userData }) {
             role="button"
             aria-hidden="true"
           >
-            {userData.title}
+            {userData.postTitle}
           </div>
-          <p>{userData.content}</p>
+          <p>{userData.postContent}</p>
         </div>
       </div>
       {userData.tags && (

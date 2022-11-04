@@ -73,9 +73,3 @@ button {
 .subber button:hover {
   background-color: hsl(205, 76%, 84%);
 }
-
-/* @media (max-width:980px) {
-  .small-tomato {
-    background-color: tomato;
-  }
-} */

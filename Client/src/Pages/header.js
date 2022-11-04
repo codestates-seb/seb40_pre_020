@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/default
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { faStackOverflow } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,6 +13,7 @@ const Navmain = styled.div`
   width: 100%;
   margin: 0 auto;
   background-color: #f8f9f9;
+  border-top: 3px solid #f48225;
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.5);
   position: fixed;
   z-index: 999;
@@ -61,10 +62,10 @@ const Input = styled.input`
   border-radius: 5px;
   display: block;
   width: 100%;
-  max-width: 500px;
+  min-width: 450px;
   box-sizing: border-box;
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 25px;
   margin-bottom: 20px;
   outline-style: none;
 `;
@@ -96,6 +97,7 @@ const Singupbutton = styled.button`
 `;
 
 function Header() {
+  const navigate = useNavigate();
   const [keyword, Setkeyword] = useState('');
 
   const valueChange = (e) => {
@@ -105,7 +107,9 @@ function Header() {
   const Submit = async (e) => {
     e.preventDefault();
 
-    const res = await axios.get('/questions', { params: keyword });
+    const res = await axios.get('/profiles/1/posts?page=1&size=20', {
+      params: keyword,
+    });
     console.log(res);
     Setkeyword('');
   };
@@ -138,8 +142,10 @@ function Header() {
           </label>
         </form>
         <Button>
-          <Loginbutton>Log in</Loginbutton>
-          <Singupbutton>Sign up</Singupbutton>
+          <Loginbutton onClick={() => navigate('/login')}>Log in</Loginbutton>
+          <Singupbutton onClick={() => navigate('/singup')}>
+            Sign up
+          </Singupbutton>
         </Button>
       </Navmain>
     </div>

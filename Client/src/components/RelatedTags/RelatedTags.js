@@ -14,12 +14,12 @@ function RelatedTags() {
   ];
   return (
     <div className={styles.container}>
-      <h2 className={styles.qwe}>Related Tags</h2>
+      <h2 className={styles.title}>Related Tags</h2>
       {tags.map((el, i) => {
         return (
-          <div className={styles.d11} key={i}>
+          <div className={styles.tagBox} key={i}>
             <span className={styles.tag}>{el}</span>
-            <span className={styles.x}>×</span>
+            <span className={styles.deleteBtn}>×</span>
           </div>
         );
       })}

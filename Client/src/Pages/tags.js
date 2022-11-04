@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Tag from '../Tags/tag.js';
+import Tag from '../components/Tags/tag';
 import { useState, useEffect } from 'react';
-import Leftmenu from '../Leftside/Leftside.js';
+import Leftmenu from '../components/Leftside/Leftside';
 import Header from './header.js';
 import Footer from './footer.js';
 

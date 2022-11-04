@@ -38,7 +38,7 @@ function Leftmenu() {
           <Leftlink to="/users">Users</Leftlink>
         </Li>
         <Li>
-          <Leftlink to="/companies">Companies</Leftlink>
+          <Leftlink to="/">Companies</Leftlink>
         </Li>
       </Ul>
     </Leftside>

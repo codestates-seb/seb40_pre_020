@@ -1,0 +1,5 @@
+.displayContainer {
+  background-color: azure;
+  background-size: auto;
+}
+/* // form 모듈 완성. 소셜버튼 모듈을 보면서 만들어볼것. opt-in에 플렉스적용하고, 3개를 가로배열. form 전체를 묶는 흰색 박스 필요. */
