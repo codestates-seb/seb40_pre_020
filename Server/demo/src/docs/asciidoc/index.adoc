@@ -8,7 +8,7 @@
 // 다른 분들도 문서화 하시면 수정해주세요
 Kim Ji Hwan <kjh42447@gmail.com>
 
-v1.0.6, 2022.11.04
+v1.0.7, 2022.11.04
 
 ***
 == PostController
@@ -300,3 +300,22 @@ include::{snippets}/postTag-post/http-response.adoc[]
 
 .response-fields
 include::{snippets}/postTag-post/response-fields.adoc[]
+
+=== 태그로 게시글 조회
+.curl-request
+include::{snippets}/postTag-get/curl-request.adoc[]
+
+.http-request
+include::{snippets}/postTag-get/http-request.adoc[]
+
+path-parameters
+include::{snippets}/postTag-get/path-parameters.adoc[]
+
+request-parameters
+include::{snippets}/postTag-get/request-parameters.adoc[]
+
+.http-response
+include::{snippets}/postTag-get/http-response.adoc[]
+
+.response-fields
+include::{snippets}/postTag-get/response-fields.adoc[]
