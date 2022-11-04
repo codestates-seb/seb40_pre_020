@@ -16,7 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
+@Entity(name="postTag")
 public class PostTag extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
