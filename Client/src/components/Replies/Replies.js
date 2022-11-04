@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import axios from 'axios';
-import Editor from '../editor/Editor';
+import Editor from '../editor/editor';
 import styles from './Replies.module.css';
 import Reply from '../Reply/Reply';
 import { DETAIL_GET_QUESTION, POST_ANSWER } from '../../utils/api';

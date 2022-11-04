@@ -54,7 +54,11 @@ function VoteBtn(props) {
     const directionName = direction === 1 ? 'up' : 'down';
     axios
       .post(
-        'http://localhost:3030/vote/' + directionName + '/' + props.postId,
+        process.env.REACT_APP_DB_HOST +
+          '/vote/' +
+          directionName +
+          '/' +
+          props.postId,
         {},
         { withCredentials: true }
       )

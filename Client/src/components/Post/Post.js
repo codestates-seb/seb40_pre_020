@@ -152,12 +152,15 @@ function Post(props) {
   const [comment, setComment] = useState([]);
   const [commentvalue, setCommentValue] = useState('');
   const handleOnClickask = () => navigate(`/questions/ask`);
+
   const handleRemove = () => {
-    axios.delete(`/posts/${id}`).then(() => navigate(`/`));
+    axios
+      .delete(process.env.REACT_APP_DB_HOST + `/posts/${id}`)
+      .then(() => navigate(`/`));
   };
 
   const handleEdit = () => {
-    navigate(`/questions/update/${id}`);
+    navigate(process.env.REACT_APP_DB_HOST + `/questions/update/${id}`);
   };
   const handleOnClick = () => {
     const data = {
@@ -170,12 +173,14 @@ function Post(props) {
       postAnswerCount: 0,
       postCommentCount: 0,
     };
-    axios.post('/answers', data).then(() => setCount((el) => el + 1));
+    axios
+      .post(process.env.REACT_APP_DB_HOST + '/answers', data)
+      .then(() => setCount((el) => el + 1));
   };
 
   useEffect(() => {
     axios
-      .get(`/answers/${id}?page=1&size=20`)
+      .get(process.env.REACT_APP_DB_HOST + `/answers/${id}?page=1&size=20`)
       .then((res) => setAnswers(res.data.data));
   }, [count]);
 
@@ -190,14 +195,14 @@ function Post(props) {
       commentContent: commentvalue,
     };
     axios
-      .post('/comments', data)
+      .post(process.env.REACT_APP_DB_HOST + '/comments', data)
       .then(() => setCount((el) => el + 1))
       .then(() => setCommentValue(''));
   };
 
   useEffect(() => {
     axios
-      .get(`/comments/${id}?page=1&size=20`)
+      .get(process.env.REACT_APP_DB_HOST + `/comments/${id}?page=1&size=20`)
       .then((res) => setComment(res.data.data));
     console.log(comment);
   }, [count]);

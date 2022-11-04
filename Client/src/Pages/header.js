@@ -107,9 +107,12 @@ function Header() {
   const Submit = async (e) => {
     e.preventDefault();
 
-    const res = await axios.get('/profiles/1/posts?page=1&size=20', {
-      params: keyword,
-    });
+    const res = await axios.get(
+      process.env.REACT_APP_DB_HOST + '/profiles/1/posts?page=1&size=20',
+      {
+        params: keyword,
+      }
+    );
     console.log(res);
     Setkeyword('');
   };

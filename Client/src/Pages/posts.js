@@ -22,6 +22,8 @@ function Posts() {
   const { id } = useParams();
   // eslint-disable-next-line no-unused-vars
   const [userdata, setuserData] = useState([]);
+  // eslint-disable-next-line no-undef
+  // const APIURL = `${URL_TEST}/posts/${id}`;
 
   useEffect(() => {
     axios.get(`/posts/${id}`).then((res) => {

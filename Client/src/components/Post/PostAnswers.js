@@ -1,19 +1,17 @@
 import VoteBtn from '../VoteBtn/VoteBtn';
 import styled from 'styled-components';
 import axios from 'axios';
-import { useState } from 'react';
 // import { useParams } from 'react-router-dom';
 
 function PostAnswers({ item }) {
-  const [count, setCount] = useState(0);
-
   // const { id } = useParams();
   const handleRe = () => {
-    axios.delete(`/answers/${item.id}`).then(() => {
-      setCount((el) => el + 1);
-    });
+    axios
+      .delete(process.env.REACT_APP_DB_HOST + `/answers/${item.id}`)
+      .then(() => {
+        window.location.reload();
+      });
   };
-  console.log(count);
 
   return (
     <PostAs>

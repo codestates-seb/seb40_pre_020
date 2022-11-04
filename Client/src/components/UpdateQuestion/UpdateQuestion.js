@@ -16,7 +16,7 @@ function UpdateQuestion() {
   const [bodytext, setBodytext] = useState();
   const { id } = useParams();
   useEffect(() => {
-    axios.get(`/posts/${id}`).then((res) => {
+    axios.get(process.env.REACT_APP_DB_HOST + `/posts/${id}`).then((res) => {
       setuserData(res.data.data);
       console.log(userdata);
     });
