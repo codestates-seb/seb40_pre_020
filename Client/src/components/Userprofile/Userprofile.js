@@ -31,6 +31,7 @@ function Userprofile() {
         })
       );
   }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.Userprofile}>
@@ -39,7 +40,7 @@ function Userprofile() {
           alt="avatar"
         />
         <div className={styles.userdata}>
-          <div className={styles.username}>유저이름</div>
+          <div className={styles.username}>{userdata[0].memberId}</div>
           <div className={styles.userinfo}>
             <FontAwesomeIcon
               icon={faChessKing}
