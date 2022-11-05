@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Editor from '../editor/editor';
+import Editor from '../Editor/editor';
 import PostAnswers from './PostAnswers';
 import Postscomment from './Postcomments';
 
@@ -144,22 +144,26 @@ const ED = styled.div`
 `;
 
 function Post(props) {
-  const { id } = useParams();
   const navigate = useNavigate();
   const [answers, setAnswers] = useState([]);
   const [content, setContent] = useState();
+  // eslint-disable-next-line no-unused-vars
+  const [tags, setTags] = useState([]);
   const [count, setCount] = useState(0);
+  const handleOnClickask = () => navigate(`/questions/ask`);
+  const { id } = useParams();
   const [comment, setComment] = useState([]);
   const [commentvalue, setCommentValue] = useState('');
-  const handleOnClickask = () => navigate(`/questions/ask`);
 
   const handleRemove = () => {
     axios
+      // eslint-disable-next-line no-undef
       .delete(process.env.REACT_APP_DB_HOST + `/posts/${id}`)
       .then(() => navigate(`/`));
   };
 
   const handleEdit = () => {
+    // eslint-disable-next-line no-undef
     navigate(process.env.REACT_APP_DB_HOST + `/questions/update/${id}`);
   };
   const handleOnClick = () => {
@@ -174,16 +178,32 @@ function Post(props) {
       postCommentCount: 0,
     };
     axios
+      // eslint-disable-next-line no-undef
       .post(process.env.REACT_APP_DB_HOST + '/answers', data)
       .then(() => setCount((el) => el + 1));
   };
-
+  useEffect(() => {
+    const data = {
+      postEntities: [
+        {
+          postId: id,
+          tagName: tags[0],
+        },
+      ],
+    };
+    axios.post(`/tags`, data);
+  }, [tags]);
   useEffect(() => {
     axios
+      // eslint-disable-next-line no-undef
       .get(process.env.REACT_APP_DB_HOST + `/answers/${id}?page=1&size=20`)
       .then((res) => setAnswers(res.data.data));
   }, [count]);
-
+  useEffect(() => {
+    axios
+      .get(`/answers/${id}?page=1&size=20`)
+      .then((res) => setAnswers(res.data.data));
+  }, [count]);
   const onCommentChange = (e) => {
     setCommentValue(e.target.value);
   };
@@ -195,6 +215,7 @@ function Post(props) {
       commentContent: commentvalue,
     };
     axios
+      // eslint-disable-next-line no-undef
       .post(process.env.REACT_APP_DB_HOST + '/comments', data)
       .then(() => setCount((el) => el + 1))
       .then(() => setCommentValue(''));
@@ -202,6 +223,7 @@ function Post(props) {
 
   useEffect(() => {
     axios
+      // eslint-disable-next-line no-undef
       .get(process.env.REACT_APP_DB_HOST + `/comments/${id}?page=1&size=20`)
       .then((res) => setComment(res.data.data));
   }, [count]);

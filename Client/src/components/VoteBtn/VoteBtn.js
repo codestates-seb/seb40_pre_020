@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 const ArrowUp = styled.div`
   width: 0;
@@ -41,42 +42,34 @@ const Total = styled.div`
   color: #888;
 `;
 function VoteBtn(props) {
-  const [currentTotal, setCurrentTotal] = useState(0);
-  const [currentUserVote, setCurrentUserVote] = useState(null);
-  function handleVoteClick(direction) {
-    if (direction === currentUserVote) {
-      setCurrentUserVote(null);
-      setCurrentTotal(direction === 1 ? total - 1 : total + 1);
-    } else {
-      setCurrentUserVote(direction);
-      setCurrentTotal(total + direction - currentUserVote);
-    }
-    const directionName = direction === 1 ? 'up' : 'down';
-    axios
-      .post(
-        process.env.REACT_APP_DB_HOST +
-          '/vote/' +
-          directionName +
-          '/' +
-          props.postId,
-        {},
-        { withCredentials: true }
-      )
-      .then((response) => {
-        setCurrentTotal(response.data);
-      });
-  }
-  const total = currentTotal || props.initialTotal || 0;
-  const userVote =
-    currentUserVote === null ? props.initialUserVote : currentUserVote;
+  const [count, setCount] = useState(0);
+  const [userdata, setuserData] = useState([]);
+  const { id } = useParams();
+  // eslint-disable-next-line no-unused-vars
+  useEffect(() => {
+    axios.get(`/posts/${id}`).then((res) => {
+      setuserData(res.data.data);
+    });
+  }, [count]);
+
+  const handleVoteClick = (as) => {
+    const data = {
+      postId: props.postId1 || userdata.id,
+      memberId: props.memberId1 || userdata.memberId,
+      voteType: as,
+    };
+    axios.post('/votes', data).then(() => setCount((el) => el + 1));
+  };
   return (
     <div {...props}>
       <ArrowButton onClick={() => handleVoteClick(1)}>
-        <ArrowUp size={props.size} uservote={userVote} />
+        <ArrowUp size={props.size} />
       </ArrowButton>
-      <Total size={props.size}>{total}</Total>
+      <Total size={props.size}>
+        {props.postVoteCount1 ? props.postVoteCount1 : userdata.postVoteCount}
+      </Total>
       <ArrowButton onClick={() => handleVoteClick(-1)}>
-        <ArrowBottom size={props.size} uservote={userVote} />
+        <ArrowBottom size={props.size} />
       </ArrowButton>
     </div>
   );

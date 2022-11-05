@@ -1,10 +1,10 @@
 // eslint-disable-next-line import/default
 import styled from 'styled-components';
-import axios from 'axios';
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { faStackOverflow } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 
 const Navmain = styled.div`
   display: flex;
@@ -96,28 +96,31 @@ const Singupbutton = styled.button`
   }
 `;
 
-function Header() {
+function Header({ setTag }) {
   const navigate = useNavigate();
   const [keyword, Setkeyword] = useState('');
+  const [a, seta] = useState('');
 
-  // eslint-disable-next-line no-unused-vars
   const valueChange = (e) => {
     Setkeyword(e.target.value);
+    console.log(keyword);
   };
-  // eslint-disable-next-line no-unused-vars
   const Submit = async (e) => {
     e.preventDefault();
 
-    // eslint-disable-next-line no-unused-vars
-    const res = await axios.get(
-      process.env.REACT_APP_DB_HOST + '/profiles/1/posts?page=1&size=20',
-      {
-        params: keyword,
-      }
-    );
+    const res = await axios.get('/profiles/1/posts?page=1&size=20', {
+      params: keyword,
+    });
+    console.log(res);
     Setkeyword('');
   };
-
+  const handleOnKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      setTag(a);
+      seta('');
+      navigate('/');
+    }
+  };
   return (
     <div>
       <Navmain>
@@ -140,9 +143,17 @@ function Header() {
             <Logo to={'/'}>For Teams</Logo>
           </Li>
         </Ul>
-        <form>
+        <form onChange={valueChange} onSubmit={Submit}>
           <label htmlFor="search">
-            <Input type="text" placeholder="Search" />
+            <Input
+              type="text"
+              placeholder="Search"
+              value={a}
+              onKeyPress={handleOnKeyPress}
+              onChange={(e) => {
+                seta(e.target.value);
+              }}
+            />
           </label>
         </form>
         <Button>

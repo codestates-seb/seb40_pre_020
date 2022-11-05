@@ -16,6 +16,7 @@ const Postscommentmain = styled.div`
 const Postscomment = (item) => {
   const handleDeleteComment = () => {
     axios
+      // eslint-disable-next-line no-undef
       .delete(process.env.REACT_APP_DB_HOST + `/comments/${item.item.id}`)
       .then(() => {
         window.location.reload();

@@ -1,18 +1,16 @@
 import VoteBtn from '../VoteBtn/VoteBtn';
 import styled from 'styled-components';
 import axios from 'axios';
-// import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-function PostAnswers({ item }) {
-  // const { id } = useParams();
+function Post1({ item }) {
+  const [count, setCount] = useState(0);
   const handleRe = () => {
-    axios
-      .delete(process.env.REACT_APP_DB_HOST + `/answers/${item.id}`)
-      .then(() => {
-        window.location.reload();
-      });
+    axios.delete(`/answers/${item.id}`).then(() => {
+      setCount(count + 1);
+    });
   };
-
+  useEffect(() => {}, [count]);
   return (
     <PostAs>
       <PostAss>
@@ -21,8 +19,11 @@ function PostAnswers({ item }) {
           memberId1={item.memberId}
           postVoteCount1={item.postVoteCount}
         />
-        <span>{item.postContent}</span>
-        <button onClick={handleRe}>Delete</button>
+        <span>
+          {item.postContent}
+          {count}
+        </span>
+        <button onClick={handleRe}>삭제</button>
       </PostAss>
     </PostAs>
   );
@@ -30,18 +31,16 @@ function PostAnswers({ item }) {
 const PostAss = styled.div`
   display: flex;
   padding: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   span {
     display: flex;
     align-items: center;
     margin-left: 30px;
   }
-  button {
-    margin-left: auto;
-  }
 `;
 const PostAs = styled.div`
   padding: 15px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
   h1 {
     margin-bottom: 30px;
     font-size: 20px;
@@ -49,4 +48,4 @@ const PostAs = styled.div`
   }
 `;
 
-export default PostAnswers;
+export default Post1;

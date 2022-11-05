@@ -22,18 +22,16 @@ function Posts() {
   const { id } = useParams();
   // eslint-disable-next-line no-unused-vars
   const [userdata, setuserData] = useState([]);
-  // eslint-disable-next-line no-undef
-  // const APIURL = `${URL_TEST}/posts/${id}`;
-
+  let [tag, setTag] = useState();
   useEffect(() => {
-    axios.get(process.env.REACT_APP_DB_HOST + `/posts/${id}`).then((res) => {
+    axios.get(`/posts/${id}`).then((res) => {
       setuserData(res.data.data);
     });
   }, []);
 
   return (
     <div>
-      <Header />
+      <Header tag={tag} setTag={setTag} />
       <Postsmain>
         <Leftmenu />
         <Posts2>
