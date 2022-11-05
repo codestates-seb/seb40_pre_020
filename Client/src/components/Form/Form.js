@@ -26,9 +26,9 @@ function Form() {
       .then((response) => {
         //handleSuccess
         alert('Well done!');
-        alert(response.data);
-        console.log('User token', response.data.jwt);
-        localStorage.setItem('token', response.data.jwt);
+        alert(response.headers);
+        console.log('User token', response.headers.data.jwt);
+        localStorage.setItem('token', response.headers.data.jwt);
         navigate('/');
       })
       .catch((error) => {
