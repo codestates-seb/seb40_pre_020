@@ -34,7 +34,7 @@ public class MemberController {
     public ResponseEntity postMember(@Valid @RequestBody MemberPostDto memberPostDto){
        Member member = memberMapper.memberPostDtoToMember(memberPostDto);
        Member joinedMember = memberService.createMember(member);
-        System.out.println(memberService.findVerifiedMember(joinedMember.getEmail()).getName());
+//        System.out.println(memberService.findVerifiedMember(joinedMember.getEmail()).getName());
        return new ResponseEntity<>(
                new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(joinedMember)),
                HttpStatus.CREATED);

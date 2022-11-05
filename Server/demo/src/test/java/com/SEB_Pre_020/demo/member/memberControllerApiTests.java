@@ -17,6 +17,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -27,10 +29,11 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(MemberController.class)
+@WebMvcTest(value = MemberController.class)
 @MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs
 public class memberControllerApiTests {
@@ -47,6 +50,7 @@ public class memberControllerApiTests {
     private MemberMapper memberMapper;
 
     @Test
+    @WithMockUser // 테스트 401 에러 해결
     public void memberPostTest() throws Exception {
         // given
         MemberPostDto memberPostDto = new MemberPostDto("test1234@gmail.com", "MemberPosttest1", "121720310");
@@ -60,6 +64,7 @@ public class memberControllerApiTests {
         //when
         ResultActions actions = mockMvc.perform(
                 post("/v1/signup")
+                        .with(SecurityMockMvcRequestPostProcessors.csrf()) // 테스트 403 에러 해결
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content)
