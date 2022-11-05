@@ -50,11 +50,12 @@ public class memberControllerApiTests {
     public void memberPostTest() throws Exception {
         // given
         MemberPostDto memberPostDto = new MemberPostDto("test1234@gmail.com", "MemberPosttest1", "121720310");
+        MemberResponseDto memberResponseDto = new MemberResponseDto("MemberPosttest1", "test1234@gmail.com", "121720310");
         String content = gson.toJson(memberPostDto);
 
         given(memberMapper.memberPostDtoToMember(Mockito.any(MemberPostDto.class))).willReturn(new Member());
         given(memberService.createMember(Mockito.any(Member.class))).willReturn(new Member());
-        given(memberMapper.memberToMemberResponseDto(Mockito.any(Member.class))).willReturn(new MemberResponseDto());
+        given(memberMapper.memberToMemberResponseDto(Mockito.any(Member.class))).willReturn(memberResponseDto);
 
         //when
         ResultActions actions = mockMvc.perform(
@@ -66,10 +67,10 @@ public class memberControllerApiTests {
 
         //then
         actions
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.data.name").value(memberPostDto.getName()))
                 .andExpect(jsonPath("$.data.email").value(memberPostDto.getEmail()))
-                .andExpect(jsonPath("$.data.postContent").value(memberPostDto.getPassword()))
+                .andExpect(jsonPath("$.data.password").value(memberPostDto.getPassword()))
                 .andDo(document(
                         "signup",
                         ApiDocumentUtils.getRequestPreProcessor(),
@@ -85,8 +86,8 @@ public class memberControllerApiTests {
                         responseFields(
                                 List.of(
                                         fieldWithPath("data").type(JsonFieldType.OBJECT).description("결과 데이터"),
-                                        fieldWithPath("data.name").type(JsonFieldType.NUMBER).description("닉네임"),
-                                        fieldWithPath("data.email").type(JsonFieldType.NUMBER).description("이메일"),
+                                        fieldWithPath("data.name").type(JsonFieldType.STRING).description("닉네임"),
+                                        fieldWithPath("data.email").type(JsonFieldType.STRING).description("이메일"),
                                         fieldWithPath("data.password").type(JsonFieldType.STRING).description("비밀번호")
                                 )
                         )
