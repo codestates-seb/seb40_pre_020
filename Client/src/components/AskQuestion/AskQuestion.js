@@ -1,7 +1,30 @@
-import Tag from '../Addtag/Addtag';
-import Editor from '../Editor/Editor.js';
+import Editor from '../Editor/editor';
 import styles from './AskQuestion.module.css';
+import { useRef, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 function AskQuestion() {
+  // eslint-disable-next-line no-unused-vars
+  let [content, setContent] = useState('');
+  const titleRef = useRef(null);
+  const navigate = useNavigate();
+
+  const handleOnClick = () => {
+    const data = {
+      parentId: 0,
+      postTitle: titleRef.current.value,
+      postContent: content,
+      memberId: 1,
+      postView: 0,
+      postVoteCount: 0,
+      postAnswerCount: 0,
+      postCommentCount: 0,
+    };
+    console.log(data);
+    axios.post('/posts', data).then(() => navigate('/'));
+  };
+
   return (
     <section className={styles.container}>
       <div className={styles.content}>
@@ -15,6 +38,7 @@ function AskQuestion() {
               Be specific and imagine you`re asking a question to another person
             </p>
             <input
+              ref={titleRef}
               type="text"
               placeholder="e.g is there an R function someone would need to answer your question"
             />
@@ -26,11 +50,15 @@ function AskQuestion() {
               Include all the information someone would need to answer you
               question
             </p>
-            <Editor />
+            <Editor setContent={setContent} />
           </div>
         </div>
-        <Tag></Tag>
-        <button className={styles.postBtn} type="button">
+
+        <button
+          className={styles.postBtn}
+          type="button"
+          onClick={handleOnClick}
+        >
           Review your question
         </button>
       </div>

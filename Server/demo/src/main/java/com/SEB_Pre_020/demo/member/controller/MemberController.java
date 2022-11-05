@@ -1,6 +1,7 @@
 package com.SEB_Pre_020.demo.member.controller;
 
 import com.SEB_Pre_020.demo.dto.SingleResponseDto;
+import com.SEB_Pre_020.demo.member.dto.MemberLoginDto;
 import com.SEB_Pre_020.demo.member.dto.MemberPostDto;
 import com.SEB_Pre_020.demo.member.entity.Member;
 import com.SEB_Pre_020.demo.member.mapstruct.mapper.MemberMapper;
@@ -32,9 +33,20 @@ public class MemberController {
     @PostMapping("/signup") // 회원가입
     public ResponseEntity postMember(@Valid @RequestBody MemberPostDto memberPostDto){
        Member member = memberMapper.memberPostDtoToMember(memberPostDto);
-       Member joinedMember = memberService.joinMember(member);
+       Member joinedMember = memberService.createMember(member);
+        System.out.println(memberService.findVerifiedMember(joinedMember.getEmail()).getName());
        return new ResponseEntity<>(
                new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(joinedMember)),
                HttpStatus.CREATED);
     }
+
+//    @GetMapping("/member") // 해당 토큰을 받은 유저 정보를 클라이언트에게 전달
+//    public ResponseEntity getMember(){
+//        Member member =  memberService.getLoginMember();
+//
+//        return new ResponseEntity<>(
+//                new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(member)),
+//                HttpStatus.OK);
+//    }
+
 }

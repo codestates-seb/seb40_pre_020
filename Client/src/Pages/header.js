@@ -96,9 +96,10 @@ const Singupbutton = styled.button`
   }
 `;
 
-function Header() {
+function Header({ setTag }) {
   const navigate = useNavigate();
   const [keyword, Setkeyword] = useState('');
+  const [a, seta] = useState('');
 
   const valueChange = (e) => {
     Setkeyword(e.target.value);
@@ -107,11 +108,19 @@ function Header() {
   const Submit = async (e) => {
     e.preventDefault();
 
-    const res = await axios.get('/questions', { params: keyword });
+    const res = await axios.get('/profiles/1/posts?page=1&size=20', {
+      params: keyword,
+    });
     console.log(res);
     Setkeyword('');
   };
-
+  const handleOnKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      setTag(a);
+      seta('');
+      navigate('/');
+    }
+  };
   return (
     <div>
       <Navmain>
@@ -136,7 +145,15 @@ function Header() {
         </Ul>
         <form onChange={valueChange} onSubmit={Submit}>
           <label htmlFor="search">
-            <Input type="text" placeholder="Search" />
+            <Input
+              type="text"
+              placeholder="Search"
+              value={a}
+              onKeyPress={handleOnKeyPress}
+              onChange={(e) => {
+                seta(e.target.value);
+              }}
+            />
           </label>
         </form>
         <Button>

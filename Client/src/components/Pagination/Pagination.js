@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-function Pagination({ total, limit, page, setPage }) {
-  const numPages = Math.ceil(total / limit);
+function Pagination({ total, page, setPage }) {
+  const numPages = Math.ceil(total);
 
   return (
     <>
@@ -44,19 +44,16 @@ const Button = styled.button`
   border: 1px solid hsl(210, 8%, 85%);
   background-color: transparent;
   border-radius: 3px;
-
   &:hover {
     background-color: hsl(210, 8%, 85%);
     cursor: pointer;
     /* transform: translateY(-2px); */
   }
-
   /* &[disabled] {
     background: grey;
     cursor: revert;
     transform: revert;
   } */
-
   &[aria-current] {
     border-color: transparent !important;
     background-color: hsl(27, 90%, 55%) !important;

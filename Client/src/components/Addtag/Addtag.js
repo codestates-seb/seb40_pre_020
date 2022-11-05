@@ -1,10 +1,7 @@
-// import styles from './Addtag.module.css';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-// import Title from '../components/Title';
-
-const Tag = () => {
+const Tag = ({ setTags }) => {
   const [tagItem, setTagItem] = useState('');
   const [tagList, setTagList] = useState([]);
 
@@ -18,6 +15,7 @@ const Tag = () => {
     let updatedTagList = [...tagList];
     updatedTagList.push(tagItem);
     setTagList(updatedTagList);
+    setTags(updatedTagList);
     setTagItem('');
   };
 
@@ -27,8 +25,8 @@ const Tag = () => {
       (tagItem) => tagItem !== deleteTagItem
     );
     setTagList(filteredTagList);
+    setTags(filteredTagList);
   };
-
   return (
     <WholeBox>
       {/* <Title text="Tag" /> */}
@@ -43,11 +41,16 @@ const Tag = () => {
         })}
         <TagInput
           type="text"
-          placeholder="Press enter to add tags"
+          placeholder={
+            tagList.length === 1
+              ? "You've already added a tag"
+              : 'Press enter to add tags'
+          }
           // tabIndex={2}
           onChange={(e) => setTagItem(e.target.value)}
           value={tagItem}
           onKeyPress={onKeyPress}
+          disabled={tagList.length === 1 ? true : false}
         />
       </TagBox>
     </WholeBox>
@@ -75,7 +78,7 @@ const TagBox = styled.div`
   border: 1px solid rgba(118, 118, 118);
   border-radius: 3px;
   &:focus-within {
-    border-color: blue;
+    border-color: #0982f0;
   }
 `;
 
