@@ -2,6 +2,7 @@ package com.SEB_Pre_020.demo.post.entity;
 
 import com.SEB_Pre_020.demo.audit.Auditable;
 import com.SEB_Pre_020.demo.member.entity.Member;
+import com.SEB_Pre_020.demo.posttag.entity.PostTag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,12 +11,13 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
+@Entity(name="post")
 public class Post extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +34,7 @@ public class Post extends Auditable {
     private String postContent;
 
     @ManyToOne
-    @JoinColumn(name = "memberId")
+    @JoinColumn(name = "postMemberId")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 
@@ -47,4 +49,7 @@ public class Post extends Auditable {
 
     @Column(name = "postCommentCount", nullable = false, updatable = true, unique = false)
     private int postCommentCount;
+
+//    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+//    private List<PostTag> postTags;
 }

@@ -4,13 +4,16 @@ import com.SEB_Pre_020.demo.audit.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity(name="member")
-//@Table(name="member")
+@Table(name="member")
 public class Member extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본키 설정을 위한 애너테이션.
@@ -27,8 +30,8 @@ public class Member extends Auditable {
     @Column(name="memberPassword", nullable = false)
     private String password;
 
-    //방문수(VisitCount) 추가해야 함
-
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
 
     public Member(String name, String email, String password) {
         this.name = name;

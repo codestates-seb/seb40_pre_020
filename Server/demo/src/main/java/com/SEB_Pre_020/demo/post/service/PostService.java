@@ -1,5 +1,6 @@
 package com.SEB_Pre_020.demo.post.service;
 
+import com.SEB_Pre_020.demo.member.repository.MemberRepository;
 import com.SEB_Pre_020.demo.post.entity.Post;
 import com.SEB_Pre_020.demo.post.repository.PostRepository;
 import org.springframework.beans.support.PagedListHolder;
@@ -14,9 +15,11 @@ import java.util.Optional;
 @Service
 public class PostService {
     private final PostRepository postRepository;
+    private final MemberRepository memberRepository;
 
-    public PostService(PostRepository postRepository) {
+    public PostService(PostRepository postRepository, MemberRepository memberRepository) {
         this.postRepository = postRepository;
+        this.memberRepository = memberRepository;
     }
 
     /** 게시글(답글) 생성 */
@@ -25,6 +28,7 @@ public class PostService {
         int memberId = post.getMember().getId();
 
         if (!postRepository.existsById(post.getId())) {
+            post.setMember(memberRepository.findById(memberId).get());
             Post savePost = postRepository.save(post);
             return savePost;
         }
@@ -57,7 +61,7 @@ public class PostService {
     public Page<Post> findPostPosts(int postId, int page, int size) {
         List<Post> postList = postRepository.findByParentId(postId);
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("postVoteCount").descending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
         PagedListHolder pagedListHolder = new PagedListHolder(postList);
         pagedListHolder.setPageSize(size);
         pagedListHolder.setPage(page);

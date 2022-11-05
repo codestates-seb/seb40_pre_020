@@ -12,6 +12,7 @@ const Editor = ({ setContent }) => {
         onChange={(event, editor) => {
           const data = editor.getData();
           setContent(data.replace(/<[^>]*>?/g, ''));
+          setContent(data.replace(/<[^>]*>?/g, ''));
         }}
         // eslint-disable-next-line no-unused-vars
         onBlur={(event, editor) => {}}

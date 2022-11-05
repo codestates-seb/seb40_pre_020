@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
+@Entity(name="vote")
 public class Vote extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
