@@ -7,12 +7,10 @@ function Recap() {
   };
 
   return (
-    <div className="Recap">
-      <ReCAPTCHA
-        sitekey="6LeAKskiAAAAAEakbkKCcu_A-Lm5p0okXMuBBvPJ"
-        onChange={onChange}
-      />
-    </div>
+    <ReCAPTCHA
+      sitekey="6LeAKskiAAAAAEakbkKCcu_A-Lm5p0okXMuBBvPJ"
+      onChange={onChange}
+    />
   );
 }
 export default Recap;

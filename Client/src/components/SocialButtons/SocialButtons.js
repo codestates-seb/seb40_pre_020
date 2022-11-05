@@ -35,28 +35,17 @@ function SocialButtons() {
       >
         <button value="google" type="button">
           <SvgIcon name="google" />
-          Log in with Google
+          Sign up with Google
         </button>
         <button value="github" type="submit">
           <SvgIcon name="gitHub" />
-          Log in with Google
+          Sign up with GitHub
         </button>
         <button type="submit">
           <SvgIcon name="faceBook" />
-          Log in with Google
+          Sign up with Facebook
         </button>
       </div>
-
-      <footer className={styles.textWrap}>
-        <div>
-          Don’t have an account? <em>Sign up</em>
-        </div>
-        <div>
-          Are you an employer?
-          <em>Sign up on Talent</em>
-          <SvgIcon name="share" className={styles.test} />
-        </div>
-      </footer>
     </React.Fragment>
   );
 }
