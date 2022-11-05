@@ -11,7 +11,6 @@ function Post1({ item }) {
     });
   };
   useEffect(() => {}, [count]);
-  console.log(item);
   return (
     <PostAs>
       <PostAss>

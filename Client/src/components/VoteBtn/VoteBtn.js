@@ -66,7 +66,7 @@ function VoteBtn(props) {
         <ArrowUp size={props.size} />
       </ArrowButton>
       <Total size={props.size}>
-        {props.postVoteCount1 || userdata.postVoteCount}
+        {props.postVoteCount1 ? props.postVoteCount1 : userdata.postVoteCount}
       </Total>
       <ArrowButton onClick={() => handleVoteClick(-1)}>
         <ArrowBottom size={props.size} />

@@ -63,27 +63,63 @@ margin-top: 16px;}
 .Userdata h2{
   font-size: 21px;
 }
-.post{
-  width: 684px;
-  height: 300px;/*포스트창 임의크기*/
-  background-color: rgb(226, 226, 226);
-  border-radius: 5px;
-}
 .about{
   width: 684px;
   height: 100px;
   background-color: rgb(226, 226, 226);
   border-radius: 5px;
+  overflow: scroll;
 }
-
-
+.posts{
+  width: 684px;
+  height: 300px;
+  background-color: rgb(226, 226, 226);
+  border-radius: 5px;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+}
+.container33{
+  display: flex;
+}
+.stats33{
+margin: 10px;
+}
+.container22{
+  background-color:  rgb(226, 226, 226);
+  border-bottom: 1px solid white;
+}
+.content{
+margin: 10px 0px 0px 10px;
+}
+#answer {
+  color: hsl(140deg 41% 31%);
+  border: 1px solid hsl(140deg 41% 31%);
+  border-radius: 3px;
+  padding: 2px 4px;
+  font-weight: 400;
+  font-size: 13px;
+}
+#votes {
+  color: black;
+  font-weight: 500;
+  font-size: 13px;
+}
+#views {
+  color: #6a737c;
+  font-size: 13px;
+  font-weight: 500;
+}
+.title{
+  color: #0074cc;
+  cursor: pointer;
+}
 
 @media (min-width: 980px) {
   .statsinfo{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     width: 211px;
-    /* height: 120px; */
   }
   .sss{
     display: flex;

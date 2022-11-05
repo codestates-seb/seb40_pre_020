@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Editor from '../Editor/editor';
 import Post1 from './Post1';
+import Tag from '../Addtag/Addtag';
 const Postmain = styled.div`
   display: flex;
   flex-direction: column;
@@ -96,13 +97,14 @@ function Post(props) {
   const navigate = useNavigate();
   const [answers, setAnswers] = useState([]);
   const [content, setContent] = useState();
+  const [tags, setTags] = useState([]);
   const [count, setCount] = useState(0);
   const handleOnClickask = () => navigate(`/questions/ask`);
   const { id } = useParams();
   const handleRemove = () => {
     axios.delete(`/posts/${id}`).then(() => navigate(`/`));
   };
-
+  console.log(tags[0]);
   const handleEdit = () => {
     navigate(`/questions/update/${id}`);
   };
@@ -111,7 +113,17 @@ function Post(props) {
       .get(`/answers/${id}?page=1&size=20`)
       .then((res) => setAnswers(res.data.data));
   }, [count]);
-
+  useEffect(() => {
+    const data = {
+      postEntities: [
+        {
+          postId: id,
+          tagName: tags[0],
+        },
+      ],
+    };
+    axios.post(`/tags`, data);
+  }, [tags]);
   const handleOnClick = () => {
     const data = {
       parentId: id,
@@ -141,6 +153,7 @@ function Post(props) {
       <Postm>
         <VoteBtn />
         <p>{props.userdata.postContent}</p>
+        <Tag setTags={setTags} />
         <SF>
           <a href="/">Share</a>
           <span>Following</span>

@@ -1,4 +1,3 @@
-import Tag from '../Addtag/Addtag';
 import Editor from '../Editor/editor';
 import styles from './AskQuestion.module.css';
 import { useRef, useState } from 'react';
@@ -54,7 +53,7 @@ function AskQuestion() {
             <Editor setContent={setContent} />
           </div>
         </div>
-        <Tag />
+
         <button
           className={styles.postBtn}
           type="button"

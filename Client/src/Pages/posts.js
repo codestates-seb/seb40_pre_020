@@ -22,7 +22,7 @@ function Posts() {
   const { id } = useParams();
   // eslint-disable-next-line no-unused-vars
   const [userdata, setuserData] = useState([]);
-
+  let [tag, setTag] = useState();
   useEffect(() => {
     axios.get(`/posts/${id}`).then((res) => {
       setuserData(res.data.data);
@@ -31,7 +31,7 @@ function Posts() {
 
   return (
     <div>
-      <Header />
+      <Header tag={tag} setTag={setTag} />
       <Postsmain>
         <Leftmenu />
         <Posts2>
