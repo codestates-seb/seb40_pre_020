@@ -9,7 +9,7 @@ function AskQuestion() {
   let [content, setContent] = useState('');
   const titleRef = useRef(null);
   const navigate = useNavigate();
-
+  // eslint-disable-next-line no-unused-vars
   const handleOnClick = () => {
     const data = {
       parentId: 0,
