@@ -15,7 +15,6 @@ function Userprofile() {
   let { id } = useParams();
   let [userdata, setUserData] = useState([]);
   let [comment, setComment] = useState([]);
-
   useEffect(() => {
     // eslint-disable-next-line import/no-named-as-default-member
     axios
