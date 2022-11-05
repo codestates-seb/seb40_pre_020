@@ -5,6 +5,8 @@ import axios from 'axios';
 import { faStackOverflow } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import Logout from './Logout';
+import { storge } from '../utils/store';
 
 const Navmain = styled.div`
   display: flex;
@@ -85,7 +87,7 @@ const Loginbutton = styled.button`
   }
 `;
 
-const Singupbutton = styled.button`
+const Signupbutton = styled.button`
   margin-left: 7px;
   background-color: #0a95ff;
   color: #39739d;
@@ -157,10 +159,18 @@ function Header({ setTag }) {
           </label>
         </form>
         <Button>
-          <Loginbutton onClick={() => navigate('/login')}>Log in</Loginbutton>
-          <Singupbutton onClick={() => navigate('/singup')}>
-            Sign up
-          </Singupbutton>
+          {storge.getData() ? (
+            <Logout />
+          ) : (
+            <>
+              <Loginbutton onClick={() => navigate('/login')}>
+                Log in
+              </Loginbutton>
+              <Signupbutton onClick={() => navigate('/signup')}>
+                Sign up
+              </Signupbutton>
+            </>
+          )}
         </Button>
       </Navmain>
     </div>

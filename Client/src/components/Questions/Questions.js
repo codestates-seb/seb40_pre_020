@@ -4,6 +4,8 @@ import Question from '../Question/Question';
 import Pagination from '../Pagination/Pagination';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+// import getItem from '../../utils/store';
+import { storge } from '../../utils/store';
 
 function Questions({ tag }) {
   const [limit] = useState(3); //한 페이지 최대 개시물 수
@@ -47,9 +49,15 @@ function Questions({ tag }) {
       <div className={styles.titleWrap}>
         <div className={styles.mainber}>
           <h1>All Questions</h1>
-          <button type="button" onClick={handleOnClick}>
-            Ask Question
-          </button>
+          {storge.getData() ? (
+            <button type="button" onClick={handleOnClick}>
+              Ask Question
+            </button>
+          ) : (
+            <button onClick={() => navigate('/login')}>
+              로그인이 필요합니다!
+            </button>
+          )}
         </div>
         <div className={styles.subber}>
           <span>{totalEl} questions</span>

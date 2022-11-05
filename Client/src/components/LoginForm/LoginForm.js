@@ -23,13 +23,13 @@ function LoginForm() {
         //return res.json();
         navigate('/');
       })
-      //   .then((res))=>{
-      // if(res.code ===1){
-      //dispathcher(memberLogin(res.data))
-      //setMember(res.data);
-      //alert(res.data.name + "님 로그인 성공");
-      // }
+      // .then((res) => {
+      //   if (res.code === 1) {
+      //     dispathcher(memberLogin(res.data));
+      //     setMember(res.data);
+      //     alert(res.data.name + '님 로그인 성공');
       //   }
+      // })
       .catch((error) => {
         alert('an error', error.response);
       });
