@@ -1,9 +1,9 @@
 import VoteBtn from '../VoteBtn/VoteBtn';
 import styled from 'styled-components';
-import Editor from '../Editor/Editor';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Editor from '../Editor/editor';
 
 const Postmain = styled.div`
   display: flex;
@@ -71,6 +71,13 @@ const SF = styled.div`
     margin-right: 15px;
   }
 `;
+const Btn = styled.button`
+  color: black;
+  background-color: white;
+  font-size: 15px;
+  color: inherit;
+  margin-right: 15px;
+`;
 
 const PostA = styled.div`
   margin-top: 70px;
@@ -102,40 +109,55 @@ const PostAss = styled.div`
   }
 `;
 
+const ED = styled.div`
+  margin-left: auto;
+`;
+
 function Post(props) {
-  const [conutent, setContent] = useState();
-  // const [limit] = useState(20); //한 페이지 최대 개시물 수
+  const navigate = useNavigate();
   const [answers, setAnswers] = useState([]);
+  const [content, setContent] = useState();
+  const [count, setCount] = useState(0);
+  const handleOnClickask = () => navigate(`/questions/ask`);
   const { id } = useParams();
+  const handleRemove = () => {
+    axios.delete(`/posts/${id}`).then(() => navigate(`/`));
+  };
+
+  const handleEdit = () => {
+    navigate(`/questions/update/${id}`);
+  };
+  useEffect(() => {
+    axios
+      .get(`/answers/${id}?page=1&size=20`)
+      .then((res) => setAnswers(res.data.data))
+      .then(() => console.log(answers));
+  }, [count]);
+
   const handleOnClick = () => {
     const data = {
       parentId: id,
       postTitle: 'Answer1',
-      postContent: conutent,
+      postContent: content,
       memberId: 2,
       postView: 0,
       postVoteCount: 0,
       postAnswerCount: 0,
       postCommentCount: 0,
     };
-    axios.post('/answers', data).then(() => window.location.reload());
+    axios.post('/answers', data).then(() => setCount((el) => el + 1));
   };
-
-  useEffect(() => {
-    axios
-      .get(`/answers/${id}?page=1&size=20`)
-      .then((res) => setAnswers(res.data.data));
-  }, []);
-
   return (
     <Postmain>
       <Mainheader>
         <h1>{props.userdata.postTitle}</h1>
-        <button>Ask Question</button>
+        <button type="button" onClick={handleOnClickask}>
+          Ask Question
+        </button>
       </Mainheader>
       <Subheader>
         <span>View {props.userdata.postView}</span>
-        <span>Answer {props.userdata.postAnswerCount}</span>
+        <span>Answer {answers.length}</span>
         <span>Comment {props.userdata.postCommentCount}</span>
       </Subheader>
       <Postm>
@@ -144,6 +166,12 @@ function Post(props) {
         <SF>
           <a href="/">Share</a>
           <span>Following</span>
+          <ED>
+            <Btn onClick={handleEdit}>Edit</Btn>
+            <Btn type="button" onClick={handleRemove}>
+              Delete
+            </Btn>
+          </ED>
         </SF>
       </Postm>
       <PostAs>
@@ -161,7 +189,7 @@ function Post(props) {
       </PostAs>
       <PostA>
         <h1>Your Answer</h1>
-        <Editor setContent={setContent} style={{ display: 'flex' }} />
+        <Editor setContent={setContent} />
         <button onClick={handleOnClick}>Post Your Answer</button>
       </PostA>
     </Postmain>
