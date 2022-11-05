@@ -1,5 +1,7 @@
 // eslint-disable-next-line import/default
 import styled from 'styled-components';
+import axios from 'axios';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { faStackOverflow } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -96,6 +98,25 @@ const Singupbutton = styled.button`
 
 function Header() {
   const navigate = useNavigate();
+  const [keyword, Setkeyword] = useState('');
+
+  // eslint-disable-next-line no-unused-vars
+  const valueChange = (e) => {
+    Setkeyword(e.target.value);
+  };
+  // eslint-disable-next-line no-unused-vars
+  const Submit = async (e) => {
+    e.preventDefault();
+
+    // eslint-disable-next-line no-unused-vars
+    const res = await axios.get(
+      process.env.REACT_APP_DB_HOST + '/profiles/1/posts?page=1&size=20',
+      {
+        params: keyword,
+      }
+    );
+    Setkeyword('');
+  };
 
   return (
     <div>

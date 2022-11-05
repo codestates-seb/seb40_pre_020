@@ -40,7 +40,6 @@ const Total = styled.div`
   line-height: ${(props) => (props.size === 'sm' ? '.6rem' : '1.4rem')};
   color: #888;
 `;
-
 function VoteBtn(props) {
   const [currentTotal, setCurrentTotal] = useState(0);
   const [currentUserVote, setCurrentUserVote] = useState(null);
@@ -55,7 +54,11 @@ function VoteBtn(props) {
     const directionName = direction === 1 ? 'up' : 'down';
     axios
       .post(
-        'http://localhost:3030/vote/' + directionName + '/' + props.postId,
+        process.env.REACT_APP_DB_HOST +
+          '/vote/' +
+          directionName +
+          '/' +
+          props.postId,
         {},
         { withCredentials: true }
       )

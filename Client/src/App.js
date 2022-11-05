@@ -24,7 +24,7 @@ function App() {
           <Route path="/posts/:id" element={<Posts />} />
           <Route path="/answers/:id" element={<Post />} />
           <Route path="/questions/ask" element={<AskQuestion />} />
-          <Route path="/questions/update" element={<UpdateQuestion />} />
+          <Route path="/questions/update/:id" element={<UpdateQuestion />} />
         </Routes>
       </React.Fragment>
     </div>

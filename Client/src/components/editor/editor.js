@@ -12,13 +12,12 @@ const Editor = ({ setContent }) => {
         onChange={(event, editor) => {
           const data = editor.getData();
           setContent(data.replace(/<[^>]*>?/g, ''));
+          setContent(data.replace(/<[^>]*>?/g, ''));
         }}
-        onBlur={(event, editor) => {
-          console.log('Blur.', editor);
-        }}
-        onFocus={(event, editor) => {
-          console.log('Focus.', editor);
-        }}
+        // eslint-disable-next-line no-unused-vars
+        onBlur={(event, editor) => {}}
+        // eslint-disable-next-line no-unused-vars
+        onFocus={(event, editor) => {}}
       />
     </div>
   );

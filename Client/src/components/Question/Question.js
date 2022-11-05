@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
 function Question({ userData }) {
+  // const id = useParams();
   const navigate = useNavigate();
-  const handleOnClick = () => navigate(`/posts/${userData.id}`);
-  console.log(userData);
   return (
     <div className={styles.container1}>
       <div className={styles.container} aria-hidden="true">
@@ -17,7 +16,9 @@ function Question({ userData }) {
         <div className={styles.content}>
           <div
             className={styles.title}
-            onClick={handleOnClick}
+            onClick={() => {
+              navigate(`/posts/${userData.id}`);
+            }}
             role="button"
             aria-hidden="true"
           >

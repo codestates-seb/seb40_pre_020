@@ -1,12 +1,11 @@
 import Tag from '../Addtag/Addtag';
-import Editor from '../Editor/editor';
+import Editor from '../editor/editor';
 import styles from './AskQuestion.module.css';
 import { useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function AskQuestion() {
-  // eslint-disable-next-line no-unused-vars
   let [content, setContent] = useState('');
   const titleRef = useRef(null);
   const navigate = useNavigate();
@@ -22,8 +21,9 @@ function AskQuestion() {
       postAnswerCount: 0,
       postCommentCount: 0,
     };
-    console.log(data);
-    axios.post('/posts', data).then(() => navigate('/'));
+    axios
+      .post(process.env.REACT_APP_DB_HOST + '/posts', data)
+      .then(() => navigate('/'));
   };
 
   return (
