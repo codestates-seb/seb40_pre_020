@@ -1,8 +1,8 @@
 import Tag from '../Addtag/Addtag';
 // import Editor from '../editor/editor';
 import styles from './UpdateQuestion.module.css';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState, useRef } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -11,15 +11,36 @@ const Input = styled.input`
 `;
 
 function UpdateQuestion() {
-  const [userdata, setuserData] = useState([]);
-  // eslint-disable-next-line no-unused-vars
-  const [bodytext, setBodytext] = useState();
-  const { id } = useParams();
   useEffect(() => {
+    // eslint-disable-next-line no-undef
     axios.get(process.env.REACT_APP_DB_HOST + `/posts/${id}`).then((res) => {
-      setuserData(res.data.data);
+      setBodyText(res.data.data.postContent);
+      setTitleText(res.data.data.postTitle);
     });
   }, []);
+
+  // eslint-disable-next-line no-unused-vars
+  const [bodyText, setBodyText] = useState('');
+  const [titleText, setTitleText] = useState('');
+  const navigate = useNavigate();
+  const titleRef = useRef(null);
+  const contentRef = useRef(null);
+  const { id } = useParams();
+  const handleOnClick = () => {
+    const data = {
+      id: id,
+      parentId: 0,
+      postTitle: titleRef.current.value,
+      postContent: contentRef.current.value,
+      memberId: 1,
+      postView: 0,
+      postVoteCount: 0,
+      postAnswerCount: 0,
+      postCommentCount: 0,
+    };
+    console.log(data);
+    axios.patch(`/posts/${id}`, data).then(() => navigate('/'));
+  };
   return (
     <section className={styles.container}>
       <div className={styles.content}>
@@ -33,7 +54,11 @@ function UpdateQuestion() {
               Be specific and imagine you`re asking a question to another person
             </p>
             <input
-              value={userdata.postTitle}
+              ref={titleRef}
+              value={titleText}
+              onChange={(e) => {
+                setTitleText(e.target.value);
+              }}
               type="text"
               placeholder="e.g is there an R function someone would need to answer your question"
             />
@@ -44,11 +69,21 @@ function UpdateQuestion() {
               Include all the information someone would need to answer you
               question
             </p>
-            <Input value={userdata.postContent} />
+            <Input
+              value={bodyText}
+              ref={contentRef}
+              onChange={(e) => {
+                setBodyText(e.target.value);
+              }}
+            />
           </div>
         </div>
         <Tag></Tag>
-        <button className={styles.postBtn} type="button">
+        <button
+          className={styles.postBtn}
+          type="button"
+          onClick={handleOnClick}
+        >
           Update your question
         </button>
       </div>

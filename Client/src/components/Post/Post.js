@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import Editor from '../Editor/editor';
 import PostAnswers from './PostAnswers';
 import Postscomment from './Postcomments';
-
+import Tag from '../Addtag/Addtag';
 const Postmain = styled.div`
   display: flex;
   flex-direction: column;
@@ -111,33 +111,6 @@ const Postcomment = styled.div`
 const H1 = styled.div`
   padding: 10px;
 `;
-
-// const PostAs = styled.div`
-//   padding: 15px;
-//   margin-top: 30px;
-//   h1 {
-//     margin-bottom: 30px;
-//     font-size: 20px;
-//     font-weight: 700;
-//   }
-// `;
-
-// const PostAss = styled.div`
-//   display: flex;
-//   padding: 15px;
-//   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-//   span {
-//     display: flex;
-//     align-items: center;
-//     margin-left: 30px;
-//   }
-// `;
-
-// const Adelete = styled.div`
-//   margin-left: auto;
-//   display: flex;
-//   align-items: center;
-// `;
 
 const ED = styled.div`
   margin-left: auto;
@@ -244,6 +217,7 @@ function Post(props) {
       <Postm>
         <VoteBtn />
         <p>{props.userdata.postContent}</p>
+        <Tag setTags={setTags} />
         <SF>
           <a href="/">Share</a>
           <span>Following</span>

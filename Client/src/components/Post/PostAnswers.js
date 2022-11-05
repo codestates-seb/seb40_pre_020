@@ -1,16 +1,13 @@
 import VoteBtn from '../VoteBtn/VoteBtn';
 import styled from 'styled-components';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 
 function Post1({ item }) {
-  const [count, setCount] = useState(0);
   const handleRe = () => {
     axios.delete(`/answers/${item.id}`).then(() => {
-      setCount(count + 1);
+      window.location.reload();
     });
   };
-  useEffect(() => {}, [count]);
   return (
     <PostAs>
       <PostAss>
@@ -19,10 +16,7 @@ function Post1({ item }) {
           memberId1={item.memberId}
           postVoteCount1={item.postVoteCount}
         />
-        <span>
-          {item.postContent}
-          {count}
-        </span>
+        <span>{item.postContent}</span>
         <button onClick={handleRe}>삭제</button>
       </PostAss>
     </PostAs>
