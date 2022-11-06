@@ -175,9 +175,9 @@ function Header({ setTag }) {
               <Loginbutton onClick={() => navigate('/login')}>
                 Log in
               </Loginbutton>
-              <Singupbutton onClick={() => navigate('/singup')}>
+              <Signupbutton onClick={() => navigate('/signup')}>
                 Sign up
-              </Singupbutton>
+              </Signupbutton>
             </>
           )}
         </Button>

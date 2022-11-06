@@ -1,4 +1,4 @@
-import Editor from '../Editor/Editor';
+import Editor from '../editor/editor';
 import styles from './AskQuestion.module.css';
 import { useRef, useState } from 'react';
 import axios from 'axios';
