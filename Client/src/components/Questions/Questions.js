@@ -65,6 +65,10 @@ function Questions({ tag }) {
               로그인이 필요합니다!
             </button>
           )}
+          {/* 임시로 만들어둔 게시글 등록버튼 */}
+          <button type="button" onClick={handleOnClick}>
+            Ask Question
+          </button>
         </div>
         <div className={styles.subber}>
           <span>{totalEl} questions</span>
