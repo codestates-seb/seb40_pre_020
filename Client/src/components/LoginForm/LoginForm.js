@@ -2,12 +2,16 @@ import SvgIcon from '../SvgIcon/SvgIcon';
 import styles from './LoginForm.module.css';
 import axios from 'axios';
 import { useState } from 'react';
+import { saveToken } from '../../utils/token';
 import { useNavigate } from 'react-router-dom';
+//import { storge } from '../../utils/store';
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   //Login 요청
+  //! JWT 만료시간
+  //const JWT_EXPIRY_TIME = 24 * 3600 * 1000; // 만료 시간 (24시간 밀리 초로 표현)
   const loginReq = () => {
     const data = {
       email: email,
@@ -17,10 +21,17 @@ function LoginForm() {
       .post('v1/auth/login', data)
       .then((res) => {
         //handleSuccess
-        alert('Well done!');
-        let jwtToken = res.headers.get('Authorization');
-        localStorage.setItem('Authorization', jwtToken);
+        // const { accessToken } = response.data;
+        saveToken(res.headers.get('Authorization'));
+        //let jwtToken = res.headers.get('Authorization');
+        // alert(parsedJwt(jwtToken));
+        // axios.defaults.headers.common[
+        //   'Authorization'
+        // ] = `Bearer ${accessToken}`;
+        // console.log(parsedJwt(jwtToken));
+        // localStorage.setItem('Authorization', jwtToken);
         //return res.json();
+        //storge.setData();
         navigate('/');
       })
       //   .then((res))=>{
@@ -34,6 +45,19 @@ function LoginForm() {
         alert('an error', error.response);
       });
   };
+  //! parsed JWT 함수
+  // function parsedJwt(token) {
+  //   let base64Url = token.split('.')[1];
+  //   let base64 = decodeURIComponent(
+  //     atob(base64Url)
+  //       .split('')
+  //       .map((c) => {
+  //         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  //       })
+  //       .join('')
+  //   );
+  //   return JSON.parse(base64);
+  // }
   return (
     <div>
       <div className={styles.FormContainer}>
