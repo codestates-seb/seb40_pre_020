@@ -8,3 +8,8 @@ const storge = {
 };
 
 export { storge };
+
+function getItem(key) {
+  return localStorage.getItem(key);
+}
+export default getItem;

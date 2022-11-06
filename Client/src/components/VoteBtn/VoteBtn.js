@@ -47,7 +47,8 @@ function VoteBtn(props) {
   const { id } = useParams();
   // eslint-disable-next-line no-unused-vars
   useEffect(() => {
-    axios.get(`/posts/${id}`).then((res) => {
+    // eslint-disable-next-line no-undef
+    axios.get(process.env.REACT_APP_DB_HOST + `/posts/${id}`).then((res) => {
       setuserData(res.data.data);
     });
   }, [count]);
@@ -58,7 +59,12 @@ function VoteBtn(props) {
       memberId: props.memberId1 || userdata.memberId,
       voteType: as,
     };
-    axios.post('/votes', data).then(() => setCount((el) => el + 1));
+    axios
+      // eslint-disable-next-line no-undef
+      .post(process.env.REACT_APP_DB_HOST + '/votes', data)
+      .then(() => setCount((el) => el + 1))
+      // 임시 리로드
+      .then(() => window.location.reload());
   };
   return (
     <div {...props}>

@@ -22,7 +22,10 @@ function AskQuestion() {
       postCommentCount: 0,
     };
     console.log(data);
-    axios.post('/posts', data).then(() => navigate('/'));
+    axios
+      // eslint-disable-next-line no-undef
+      .post(process.env.REACT_APP_DB_HOST + '/posts', data)
+      .then(() => navigate('/'));
   };
 
   return (

@@ -4,7 +4,7 @@ import { useParams, useNavigate /*useLocation*/ } from 'react-router-dom';
 import styles from './Comment.module.css';
 //import { useFetch } from '../../hooks/index';
 //import { DETAIL_GET_QUESTION, DELETE_QUESTION } from '../../utils/api';
-import Editor from '../Editor/editor';
+import Editor from '../editor/editor';
 import Replies from '../Replies/Replies';
 import SpriteIcon from '../Icons/SpriteIcon/SpriteIcon';
 //import Spinner from '../Spinner/Spinner';

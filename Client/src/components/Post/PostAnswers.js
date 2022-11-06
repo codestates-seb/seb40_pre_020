@@ -4,9 +4,12 @@ import axios from 'axios';
 
 function Post1({ item }) {
   const handleRe = () => {
-    axios.delete(`/answers/${item.id}`).then(() => {
-      window.location.reload();
-    });
+    axios
+      // eslint-disable-next-line no-undef
+      .delete(process.env.REACT_APP_DB_HOST + `/answers/${item.id}`)
+      .then(() => {
+        window.location.reload();
+      });
   };
   return (
     <PostAs>
@@ -17,19 +20,23 @@ function Post1({ item }) {
           postVoteCount1={item.postVoteCount}
         />
         <span>{item.postContent}</span>
-        <button onClick={handleRe}>삭제</button>
+        <button onClick={handleRe}>Delete</button>
       </PostAss>
     </PostAs>
   );
 }
 const PostAss = styled.div`
   display: flex;
+  align-items: center;
   padding: 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   span {
     display: flex;
     align-items: center;
     margin-left: 30px;
+  }
+  button {
+    margin-left: auto;
   }
 `;
 const PostAs = styled.div`

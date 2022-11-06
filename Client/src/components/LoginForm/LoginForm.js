@@ -18,7 +18,8 @@ function LoginForm() {
       password: password,
     };
     axios
-      .post('v1/auth/login', data)
+      // eslint-disable-next-line no-undef
+      .post(process.env.REACT_APP_DB_HOST + 'v1/auth/login', data)
       .then((res) => {
         //handleSuccess
         // const { accessToken } = response.data;
@@ -34,13 +35,13 @@ function LoginForm() {
         //storge.setData();
         navigate('/');
       })
-      //   .then((res))=>{
-      // if(res.code ===1){
-      //dispathcher(memberLogin(res.data))
-      //setMember(res.data);
-      //alert(res.data.name + "님 로그인 성공");
-      // }
+      // .then((res) => {
+      //   if (res.code === 1) {
+      //     dispathcher(memberLogin(res.data));
+      //     setMember(res.data);
+      //     alert(res.data.name + '님 로그인 성공');
       //   }
+      // })
       .catch((error) => {
         alert('an error', error.response);
       });
