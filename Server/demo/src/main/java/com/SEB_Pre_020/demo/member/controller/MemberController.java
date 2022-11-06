@@ -32,14 +32,15 @@ public class MemberController {
     }
 
     @PostMapping("/signup") // 회원가입
-    public ResponseEntity postMember(@Valid @RequestBody MemberPostDto memberPostDto){
-       Member member = memberMapper.memberPostDtoToMember(memberPostDto);
-       Member joinedMember = memberService.createMember(member);
+    public ResponseEntity postMember(@Valid @RequestBody MemberPostDto memberPostDto) {
+        Member member = memberMapper.memberPostDtoToMember(memberPostDto);
+        Member joinedMember = memberService.createMember(member);
 //        System.out.println(memberService.findVerifiedMember(joinedMember.getEmail()).getName());
-       return new ResponseEntity<>(
-               new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(joinedMember)),
-               HttpStatus.CREATED);
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(joinedMember)),
+                HttpStatus.CREATED);
     }
+}
 
 //    @GetMapping("/member") // 회원 정보 불러오기
 //    public ResponseEntity getMember(@Email @RequestParam String email){
