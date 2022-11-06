@@ -1,5 +1,6 @@
 package com.SEB_Pre_020.demo.member.mapstruct.mapper;
 
+import com.SEB_Pre_020.demo.member.dto.MemberLoginDto;
 import com.SEB_Pre_020.demo.member.dto.MemberPostDto;
 import com.SEB_Pre_020.demo.member.dto.MemberResponseDto;
 import com.SEB_Pre_020.demo.member.entity.Member;
@@ -27,4 +28,10 @@ public interface MemberMapper {
 
       return memberResponseDto;
     }
+//    default Member memberLoginDtoToMember(MemberLoginDto memberLoginDto){
+//        Member member = new Member();
+//
+//        member.setEmail(memberLoginDto.getEmail());
+//        member.
+//    }
 }
