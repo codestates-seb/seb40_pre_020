@@ -39,7 +39,10 @@ function UpdateQuestion() {
       postCommentCount: 0,
     };
     console.log(data);
-    axios.patch(`/posts/${id}`, data).then(() => navigate('/'));
+    axios
+      // eslint-disable-next-line no-undef
+      .patch(process.env.REACT_APP_DB_HOST + `/posts/${id}`, data)
+      .then(() => navigate('/'));
   };
   return (
     <section className={styles.container}>
