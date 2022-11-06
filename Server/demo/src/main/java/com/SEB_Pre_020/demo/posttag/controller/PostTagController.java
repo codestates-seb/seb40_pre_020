@@ -22,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tags")
+@CrossOrigin(origins = "*", allowedHeaders = "*") // cors 설정
 @Validated
 @Slf4j
 public class PostTagController {

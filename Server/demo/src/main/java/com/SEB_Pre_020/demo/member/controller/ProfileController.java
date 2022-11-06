@@ -18,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/profiles")
+@CrossOrigin(origins = "*", allowedHeaders = "*") // cors 설정
 @Validated
 @Slf4j
 public class ProfileController {

@@ -19,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
+@CrossOrigin(origins = "*", allowedHeaders = "*") // cors 설정
 @Validated
 @Slf4j
 public class PostController {
