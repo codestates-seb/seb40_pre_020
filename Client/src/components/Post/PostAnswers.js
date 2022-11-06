@@ -4,9 +4,12 @@ import axios from 'axios';
 
 function Post1({ item }) {
   const handleRe = () => {
-    axios.delete(`/answers/${item.id}`).then(() => {
-      window.location.reload();
-    });
+    axios
+      // eslint-disable-next-line no-undef
+      .delete(process.env.REACT_APP_DB_HOST + `/answers/${item.id}`)
+      .then(() => {
+        window.location.reload();
+      });
   };
   return (
     <PostAs>

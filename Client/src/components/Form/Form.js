@@ -22,7 +22,8 @@ function Form() {
       password: password,
     };
     axios
-      .post('v1/signup', data)
+      // eslint-disable-next-line no-undef
+      .post(process.env.REACT_APP_DB_HOST + 'v1/signup', data)
       .then((response) => {
         //handleSuccess
         alert('Well done!');

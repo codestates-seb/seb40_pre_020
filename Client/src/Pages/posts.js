@@ -24,7 +24,8 @@ function Posts() {
   const [userdata, setuserData] = useState([]);
   let [tag, setTag] = useState();
   useEffect(() => {
-    axios.get(`/posts/${id}`).then((res) => {
+    // eslint-disable-next-line no-undef
+    axios.get(process.env.REACT_APP_DB_HOST + `/posts/${id}`).then((res) => {
       setuserData(res.data.data);
     });
   }, []);

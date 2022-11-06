@@ -58,7 +58,10 @@ function VoteBtn(props) {
       memberId: props.memberId1 || userdata.memberId,
       voteType: as,
     };
-    axios.post('/votes', data).then(() => setCount((el) => el + 1));
+    axios
+      // eslint-disable-next-line no-undef
+      .post(process.env.REACT_APP_DB_HOST + '/votes', data)
+      .then(() => setCount((el) => el + 1));
   };
   return (
     <div {...props}>

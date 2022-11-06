@@ -19,8 +19,15 @@ function Userprofile() {
     // eslint-disable-next-line import/no-named-as-default-member
     axios
       .all([
-        axios.get(`/profiles/${id}/posts?page=1&size=20`),
-        axios.get(`/profiles/${id}/answers?page=1&size=20`),
+        axios.get(
+          // eslint-disable-next-line no-undef
+          process.env.REACT_APP_DB_HOST + `/profiles/${id}/posts?page=1&size=20`
+        ),
+        axios.get(
+          // eslint-disable-next-line no-undef
+          process.env.REACT_APP_DB_HOST +
+            `/profiles/${id}/answers?page=1&size=20`
+        ),
       ])
       .then(
         // eslint-disable-next-line import/no-named-as-default-member

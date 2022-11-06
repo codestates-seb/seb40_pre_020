@@ -14,7 +14,8 @@ function LoginForm() {
       password: password,
     };
     axios
-      .post('v1/auth/login', data)
+      // eslint-disable-next-line no-undef
+      .post(process.env.REACT_APP_DB_HOST + 'v1/auth/login', data)
       .then((res) => {
         //handleSuccess
         alert('Well done!');

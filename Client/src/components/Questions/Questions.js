@@ -8,7 +8,7 @@ import axios from 'axios';
 import { storge } from '../../utils/store';
 
 function Questions({ tag }) {
-  const [limit] = useState(3); //한 페이지 최대 개시물 수
+  const [limit] = useState(10); //한 페이지 최대 개시물 수
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState([]);
   const [totalEl, setTotalEl] = useState([]);
@@ -19,7 +19,10 @@ function Questions({ tag }) {
   const getPosts = () => {
     if (!tag) {
       axios
-        .get(`/posts?page=${page}&size=${limit}`)
+        .get(
+          // eslint-disable-next-line no-undef
+          process.env.REACT_APP_DB_HOST + `/posts?page=${page}&size=${limit}`
+        )
         .then((data) => {
           setPostsData(data.data.data);
           setTotal(data.data.pageInfo.totalPages);
@@ -30,7 +33,11 @@ function Questions({ tag }) {
         });
     } else {
       axios
-        .get(`/tags/${tag}?page=${page}&size=${limit}`)
+        .get(
+          // eslint-disable-next-line no-undef
+          process.env.REACT_APP_DB_HOST +
+            `/tags/${tag}?page=${page}&size=${limit}`
+        )
         .then((data) => {
           setPostsData(data.data.data);
           setTotal(data.data.pageInfo.totalPages);
