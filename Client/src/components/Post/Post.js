@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Editor from '../editor/editor';
+import Editor from '../editor/Editor';
 import PostAnswers from './PostAnswers';
 import Postscomment from './Postcomments';
 import Tag from '../Addtag/Addtag';

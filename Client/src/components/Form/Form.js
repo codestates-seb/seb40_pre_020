@@ -26,10 +26,10 @@ function Form() {
       .post(process.env.REACT_APP_DB_HOST + 'v1/signup', data)
       .then((response) => {
         //handleSuccess
-        alert('Well done!');
+        //alert('Well done!');
         alert(response.headers);
-        console.log('User token', response.headers.data.jwt);
-        localStorage.setItem('token', response.headers.data.jwt);
+        // console.log('User token', response.headers.data.jwt);
+        // localStorage.setItem('token', response.headers.data.jwt);
         navigate('/');
       })
       .catch((error) => {
@@ -84,6 +84,7 @@ function Form() {
   //   }}
   //   id="login-form"
   // method="POST"*/}
+
   return (
     <>
       <div className={styles.formContainer}>
