@@ -99,4 +99,8 @@ public class memberControllerApiTests {
                 )
         );
     }
+
+    @Test
+    @WithMockUser
+
 }

@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 
 @RestController
 @RequestMapping(value="/v1")
@@ -40,13 +41,12 @@ public class MemberController {
                HttpStatus.CREATED);
     }
 
-//    @GetMapping("/member") // 해당 토큰을 받은 유저 정보를 클라이언트에게 전달
-//    public ResponseEntity getMember(){
-//        Member member =  memberService.getLoginMember();
-//
+//    @GetMapping("/member") // 회원 정보 불러오기
+//    public ResponseEntity getMember(@Email @RequestParam String email){
+//        Member
 //        return new ResponseEntity<>(
 //                new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(member)),
 //                HttpStatus.OK);
 //    }
-
-}
+//
+//}
