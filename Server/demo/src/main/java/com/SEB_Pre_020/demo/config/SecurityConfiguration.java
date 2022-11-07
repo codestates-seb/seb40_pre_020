@@ -19,13 +19,6 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.header.writers.StaticHeadersWriter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfiguration {
@@ -43,8 +36,8 @@ public class SecurityConfiguration {
                 .headers().frameOptions().sameOrigin() //동일 출처로부터 들어오는 request만 페이지 렌더링을 허용
                 .and()
                 .csrf().disable()
-                .cors().configurationSource(corsConfigurationSource())
-                .and()
+//                .cors().configurationSource(corsConfigurationSource())
+//                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .headers().addHeaderWriter
@@ -60,7 +53,7 @@ public class SecurityConfiguration {
                 .apply(new CustomFilterConfigurer())
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
-                        .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll() // CORS 에러 발생 후 추가한 코드
+//                        .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll() // CORS 에러 발생 후 추가한 코드
                         // MEMBER 권한 가진 사용자만 이하 리소스 접근가능
                         .antMatchers(HttpMethod.GET,"*/profiles/**").hasRole("MEMBER")
                         .antMatchers(HttpMethod.POST,"*/posts/**").hasRole("MEMBER")
@@ -101,21 +94,21 @@ public class SecurityConfiguration {
         }
     } // JwtAuthenticationFilter를 등록하는 메서드
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedHeader("*");
-        configuration.addAllowedMethod("*");
-        configuration.addAllowedOrigin("http://localhost:3000");
-        configuration.addAllowedOrigin("http://localhost:8080");
-        configuration.addAllowedOrigin("http://3.39.219.172:8080");
-        configuration.addAllowedOrigin("http://seb40pre020.s3-website.ap-northeast-2.amazonaws.com");
-        configuration.addAllowedOrigin("http://seb40pre020.s3-website.ap-northeast-2.amazonaws.com:80");
-        configuration.setAllowCredentials(true);
-//        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
-        configuration.setAllowedMethods(Arrays.asList("*"));
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    } // 프론트 통신을 위한 CORS 설정
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.addAllowedHeader("*");
+//        configuration.addAllowedMethod("*");
+//        configuration.addAllowedOrigin("http://localhost:3000");
+//        configuration.addAllowedOrigin("http://localhost:8080");
+//        configuration.addAllowedOrigin("http://3.39.219.172:8080");
+//        configuration.addAllowedOrigin("http://seb40pre020.s3-website.ap-northeast-2.amazonaws.com");
+//        configuration.addAllowedOrigin("http://seb40pre020.s3-website.ap-northeast-2.amazonaws.com:80");
+//        configuration.setAllowCredentials(true);
+////        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
+//        configuration.setAllowedMethods(Arrays.asList("*"));
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    } // 프론트 통신을 위한 CORS 설정
 }

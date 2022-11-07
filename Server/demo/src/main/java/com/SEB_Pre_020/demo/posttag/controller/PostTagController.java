@@ -22,7 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tags")
-//@CrossOrigin(origins = "*", allowedHeaders = "*") // cors 설정
+@CrossOrigin(origins = {"http://localhost:3000","http://seb40pre020.s3-website.ap-northeast-2.amazonaws.com:80"}, allowedHeaders = "*") // cors 설정
 @Validated
 @Slf4j
 public class PostTagController {
