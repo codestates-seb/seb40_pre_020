@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Editor from '../Editor/editor';
+import Editor from '../editor/editor';
 import PostAnswers from './PostAnswers';
 import Postscomment from './Postcomments';
 import Tag from '../Addtag/Addtag';
@@ -131,7 +131,7 @@ function Post(props) {
   const handleRemove = () => {
     axios
       // eslint-disable-next-line no-undef
-      .delete(process.env.REACT_APP_DB_HOST + `/posts/${id}`)
+      .delete(`http://3.39.219.172:8080/posts/${id}`)
       .then(() => navigate(`/`));
   };
 
@@ -151,7 +151,7 @@ function Post(props) {
     };
     axios
       // eslint-disable-next-line no-undef
-      .post(process.env.REACT_APP_DB_HOST + '/answers', data)
+      .post('http://3.39.219.172:8080/answers', data)
       .then(() => setCount((el) => el + 1))
       .then((res) => console.log(res.data))
       .catch((Error) => console.log(Error));
@@ -160,7 +160,7 @@ function Post(props) {
   useEffect(() => {
     axios
       // eslint-disable-next-line no-undef
-      .get(process.env.REACT_APP_DB_HOST + `/answers/${id}?page=1&size=20`)
+      .get(`http://3.39.219.172:8080/answers/${id}?page=1&size=20`)
       .then((res) => setAnswers(res.data.data));
   }, [count]);
 
@@ -174,7 +174,7 @@ function Post(props) {
       ],
     };
     // eslint-disable-next-line no-undef
-    axios.post(process.env.REACT_APP_DB_HOST + `/tags`, data);
+    axios.post(`http://3.39.219.172:8080/tags`, data);
   }, [tags]);
 
   const handlecomment = () => {
@@ -185,7 +185,7 @@ function Post(props) {
     };
     axios
       // eslint-disable-next-line no-undef
-      .post(process.env.REACT_APP_DB_HOST + '/comments', data)
+      .post('http://3.39.219.172:8080/comments', data)
       .then(() => setCount((el) => el + 1))
       .then(() => setCommentValue(''));
   };
@@ -193,7 +193,7 @@ function Post(props) {
   useEffect(() => {
     axios
       // eslint-disable-next-line no-undef
-      .get(process.env.REACT_APP_DB_HOST + `/comments/${id}?page=1&size=20`)
+      .get(`http://3.39.219.172:8080/comments/${id}?page=1&size=20`)
       .then((res) => setComment(res.data.data));
   }, [count]);
 

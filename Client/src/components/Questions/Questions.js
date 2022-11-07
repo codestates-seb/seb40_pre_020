@@ -21,7 +21,7 @@ function Questions({ tag }) {
       axios
         .get(
           // eslint-disable-next-line no-undef
-          process.env.REACT_APP_DB_HOST + `/posts?page=${page}&size=${limit}`
+          `http://3.39.219.172:8080/posts?page=${page}&size=${limit}`
         )
         .then((data) => {
           setPostsData(data.data.data);
@@ -35,8 +35,7 @@ function Questions({ tag }) {
       axios
         .get(
           // eslint-disable-next-line no-undef
-          process.env.REACT_APP_DB_HOST +
-            `/tags/${tag}?page=${page}&size=${limit}`
+          `https://cors-anywhere.herokuapp.com/http://3.39.219.172:8080/tags/${tag}?page=${page}&size=${limit}`
         )
         .then((data) => {
           setPostsData(data.data.data);

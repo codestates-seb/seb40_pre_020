@@ -21,12 +21,11 @@ function Userprofile() {
       .all([
         axios.get(
           // eslint-disable-next-line no-undef
-          process.env.REACT_APP_DB_HOST + `/profiles/${id}/posts?page=1&size=20`
+          `http://3.39.219.172:8080/profiles/${id}/posts?page=1&size=20`
         ),
         axios.get(
           // eslint-disable-next-line no-undef
-          process.env.REACT_APP_DB_HOST +
-            `/profiles/${id}/answers?page=1&size=20`
+          `http://3.39.219.172:8080/profiles/${id}/answers?page=1&size=20`
         ),
       ])
       .then(

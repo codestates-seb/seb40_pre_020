@@ -48,9 +48,13 @@ function VoteBtn(props) {
   // eslint-disable-next-line no-unused-vars
   useEffect(() => {
     // eslint-disable-next-line no-undef
-    axios.get(process.env.REACT_APP_DB_HOST + `/posts/${id}`).then((res) => {
-      setuserData(res.data.data);
-    });
+    axios
+      .get(
+        `https://cors-anywhere.herokuapp.com/http://3.39.219.172:8080/posts/${id}`
+      )
+      .then((res) => {
+        setuserData(res.data.data);
+      });
   }, [count]);
 
   const handleVoteClick = (as) => {
@@ -61,7 +65,10 @@ function VoteBtn(props) {
     };
     axios
       // eslint-disable-next-line no-undef
-      .post(process.env.REACT_APP_DB_HOST + '/votes', data)
+      .post(
+        'https://cors-anywhere.herokuapp.com/http://3.39.219.172:8080/votes',
+        data
+      )
       .then(() => setCount((el) => el + 1))
       // 임시 리로드
       .then(() => window.location.reload());
