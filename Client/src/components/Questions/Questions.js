@@ -4,7 +4,6 @@ import Question from '../Question/Question';
 import Pagination from '../Pagination/Pagination';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import getItem from '../../utils/store';
 import { storge } from '../../utils/store';
 
 function Questions({ tag }) {
@@ -15,7 +14,6 @@ function Questions({ tag }) {
   const [postsData, setPostsData] = useState([]);
   const navigate = useNavigate();
   const handleOnClick = () => navigate(`/questions/ask`);
-
   const getPosts = () => {
     if (!tag) {
       axios
