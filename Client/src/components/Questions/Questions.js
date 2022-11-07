@@ -4,8 +4,7 @@ import Question from '../Question/Question';
 import Pagination from '../Pagination/Pagination';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import getItem from '../../utils/store';
-import { storge } from '../../utils/store';
+import { getToken } from '../../utils/token';
 
 function Questions({ tag }) {
   const [limit] = useState(10); //한 페이지 최대 개시물 수
@@ -15,6 +14,11 @@ function Questions({ tag }) {
   const [postsData, setPostsData] = useState([]);
   const navigate = useNavigate();
   const handleOnClick = () => navigate(`/questions/ask`);
+  // eslint-disable-next-line no-unused-vars
+  const [loginStatus, setLoginStatus] = useState(getToken());
+  // const changeLoginStatus = (value) => {
+  //   setLoginStatus(value);
+  // };
 
   const getPosts = () => {
     if (!tag) {
@@ -55,19 +59,19 @@ function Questions({ tag }) {
       <div className={styles.titleWrap}>
         <div className={styles.mainber}>
           <h1>All Questions</h1>
-          {storge.getData() ? (
+          {loginStatus ? (
             <button type="button" onClick={handleOnClick}>
               Ask Question
             </button>
           ) : (
-            <button onClick={() => navigate('/login')}>
-              로그인이 필요합니다!
-            </button>
+            <>
+              <button type="button" onClick={() => navigate('/login')}>
+                질문등록은
+                <br />
+                로그인해주세요
+              </button>
+            </>
           )}
-          {/* 임시로 만들어둔 게시글 등록버튼 */}
-          <button type="button" onClick={handleOnClick}>
-            Ask Question
-          </button>
         </div>
         <div className={styles.subber}>
           <span>{totalEl} questions</span>

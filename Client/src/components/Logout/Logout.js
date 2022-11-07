@@ -21,6 +21,7 @@ function Logout({ changeLoginStatus }) {
         onClick={() => {
           loggedOut();
           changeLoginStatus(false);
+          window.location.reload();
         }}
       >
         Log Out
