@@ -43,7 +43,8 @@ public class SecurityConfiguration {
                 .headers().frameOptions().sameOrigin() //동일 출처로부터 들어오는 request만 페이지 렌더링을 허용
                 .and()
                 .csrf().disable()
-                .cors(corsConfigurationSource())
+                .cors().configurationSource(corsConfigurationSource())
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .headers().addHeaderWriter
