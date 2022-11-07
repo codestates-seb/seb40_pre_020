@@ -73,4 +73,11 @@ public class MemberService {
                 new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
         return findMember;
     }
+
+//    public Member getUserByToken(){
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        PrincipalDetails principalDetails = (PrincipalDetails)principal;
+//
+//        return principalDetails.getMember();
+//    }
 }

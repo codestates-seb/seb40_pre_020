@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Editor from '../editor/editor';
+import Editor from '../Editor/editor';
 import PostAnswers from './PostAnswers';
 import Postscomment from './Postcomments';
 import Tag from '../Addtag/Addtag';
@@ -136,8 +136,7 @@ function Post(props) {
   };
 
   const handleEdit = () => {
-    // eslint-disable-next-line no-undef
-    navigate(process.env.REACT_APP_DB_HOST + `/questions/update/${id}`);
+    navigate(`/questions/update/${id}`);
   };
   const handleOnClick = () => {
     const data = {
@@ -153,8 +152,11 @@ function Post(props) {
     axios
       // eslint-disable-next-line no-undef
       .post(process.env.REACT_APP_DB_HOST + '/answers', data)
-      .then(() => setCount((el) => el + 1));
+      .then(() => setCount((el) => el + 1))
+      .then((res) => console.log(res.data))
+      .catch((Error) => console.log(Error));
   };
+
   useEffect(() => {
     axios
       // eslint-disable-next-line no-undef

@@ -18,7 +18,6 @@ import javax.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/votes")
-@CrossOrigin(origins = "*", allowedHeaders = "*") // cors 설정
 @Validated
 @Slf4j
 public class VoteController {

@@ -3,7 +3,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './Editor.css';
 import React from 'react';
 
-const Editor = ({ setContent }) => {
+const editor = ({ setContent }) => {
   return (
     <div className="App">
       <CKEditor
@@ -23,4 +23,4 @@ const Editor = ({ setContent }) => {
   );
 };
 
-export default React.memo(Editor);
+export default React.memo(editor);

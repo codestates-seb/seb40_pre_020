@@ -5,9 +5,8 @@ import axios from 'axios';
 import { faStackOverflow } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import Logout from './Logout';
-import { storge } from '../utils/store';
-
+import { getToken } from '../utils/token';
+import Logout from '../components/Logout/Logout';
 const Navmain = styled.div`
   display: flex;
   justify-content: center;
@@ -75,6 +74,7 @@ const Input = styled.input`
 const Button = styled.div`
   display: flex;
   padding: 20px;
+  width: 20%;
 `;
 
 const Loginbutton = styled.button`
@@ -99,6 +99,11 @@ const Signupbutton = styled.button`
 `;
 
 function Header({ setTag }) {
+  //! 로그아웃 상태 스테이트
+  const [loginStatus, setLoginStatus] = useState(getToken());
+  const changeLoginStatus = (value) => {
+    setLoginStatus(value);
+  };
   const navigate = useNavigate();
   const [keyword, Setkeyword] = useState('');
   const [a, seta] = useState('');
@@ -163,8 +168,8 @@ function Header({ setTag }) {
           </label>
         </form>
         <Button>
-          {storge.getData() ? (
-            <Logout />
+          {loginStatus ? (
+            <Logout changeLoginStatus={changeLoginStatus} />
           ) : (
             <>
               <Loginbutton onClick={() => navigate('/login')}>

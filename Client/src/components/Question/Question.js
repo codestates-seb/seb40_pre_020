@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
 function Question({ userData }) {
-  // const id = useParams();
+  let date = new Date().toLocaleString('ko-kr');
   const navigate = useNavigate();
   return (
     <div className={styles.container1}>
@@ -45,7 +45,7 @@ function Question({ userData }) {
           alt="avatar"
         />
         <span className={styles.userId}>유저이름</span>
-        <span className={styles.timeAgo}>{userData.createdAt}</span>
+        <span className={styles.timeAgo}>{date}</span>
       </div>
     </div>
   );
