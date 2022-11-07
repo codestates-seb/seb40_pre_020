@@ -117,7 +117,7 @@ function Header({ setTag }) {
 
     const res = await axios.get(
       // eslint-disable-next-line no-undef
-      'https://cors-anywhere.herokuapp.com/http://3.39.219.172:8080/profiles/1/posts?page=1&size=20',
+      'http://3.39.219.172:8080/profiles/1/posts?page=1&size=20',
       {
         params: keyword,
       }

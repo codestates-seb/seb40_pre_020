@@ -35,7 +35,7 @@ function Questions({ tag }) {
       axios
         .get(
           // eslint-disable-next-line no-undef
-          `https://cors-anywhere.herokuapp.com/http://3.39.219.172:8080/tags/${tag}?page=${page}&size=${limit}`
+          `http://3.39.219.172:8080/tags/${tag}?page=${page}&size=${limit}`
         )
         .then((data) => {
           setPostsData(data.data.data);
