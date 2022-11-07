@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/comments")
-@CrossOrigin(origins = "*", allowedHeaders = "*") // cors 설정
+//@CrossOrigin(origins = "*", allowedHeaders = "*") // cors 설정
 @Validated
 @Slf4j
 public class CommentController {

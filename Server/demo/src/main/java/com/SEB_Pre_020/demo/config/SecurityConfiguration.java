@@ -44,7 +44,7 @@ public class SecurityConfiguration {
                 .headers().frameOptions().sameOrigin() //동일 출처로부터 들어오는 request만 페이지 렌더링을 허용
                 .and()
                 .csrf().disable()
-                .cors(withDefaults())
+                .cors(corsConfigurationSource())
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .headers().addHeaderWriter
@@ -105,8 +105,8 @@ public class SecurityConfiguration {
     CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedHeader("");
-        configuration.addAllowedMethod("");
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
         configuration.addAllowedOrigin("http://localhost:3000");
         configuration.addAllowedOrigin("http://localhost:8080");
         configuration.addAllowedOrigin("http://3.39.219.172:8080");

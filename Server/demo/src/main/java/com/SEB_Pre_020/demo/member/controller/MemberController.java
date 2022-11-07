@@ -20,7 +20,7 @@ import javax.validation.constraints.Email;
 
 @RestController
 @RequestMapping(value="/v1")
-@CrossOrigin(origins = "*", allowedHeaders = "*") // cors 설정
+//@CrossOrigin(origins = "*", allowedHeaders = "*") // cors 설정
 public class MemberController {
 
     private MemberService memberService;
