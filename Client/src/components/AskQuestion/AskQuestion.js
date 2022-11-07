@@ -1,4 +1,4 @@
-import Editor from '../Editor/editor';
+import Editor from '../editor/editor';
 import styles from './AskQuestion.module.css';
 import { useRef, useState } from 'react';
 import axios from 'axios';
@@ -24,7 +24,7 @@ function AskQuestion() {
     console.log(data);
     axios
       // eslint-disable-next-line no-undef
-      .post(process.env.REACT_APP_DB_HOST + '/posts', data)
+      .post('http://3.39.219.172:8080/posts', data)
       .then(() => navigate('/'));
   };
 

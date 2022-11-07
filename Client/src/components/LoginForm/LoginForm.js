@@ -18,8 +18,7 @@ function LoginForm() {
       password: password,
     };
     axios
-      // eslint-disable-next-line no-undef
-      .post(process.env.REACT_APP_DB_HOST + 'v1/auth/login', data)
+      .post('http://3.39.219.172:8080/v1/auth/login', data)
       .then((res) => {
         //handleSuccess
         // const { accessToken } = response.data;

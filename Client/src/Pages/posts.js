@@ -25,7 +25,7 @@ function Posts() {
   let [tag, setTag] = useState();
   useEffect(() => {
     // eslint-disable-next-line no-undef
-    axios.get(process.env.REACT_APP_DB_HOST + `/posts/${id}`).then((res) => {
+    axios.get(`http://3.39.219.172:8080/posts/${id}`).then((res) => {
       setuserData(res.data.data);
     });
   }, []);

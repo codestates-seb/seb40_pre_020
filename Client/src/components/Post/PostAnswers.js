@@ -6,7 +6,7 @@ function Post1({ item }) {
   const handleRe = () => {
     axios
       // eslint-disable-next-line no-undef
-      .delete(process.env.REACT_APP_DB_HOST + `/answers/${item.id}`)
+      .delete(`http://3.39.219.172:8080/answers/${item.id}`)
       .then(() => {
         window.location.reload();
       });

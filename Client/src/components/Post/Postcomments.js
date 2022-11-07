@@ -17,7 +17,7 @@ const Postscomment = (item) => {
   const handleDeleteComment = () => {
     axios
       // eslint-disable-next-line no-undef
-      .delete(process.env.REACT_APP_DB_HOST + `/comments/${item.item.id}`)
+      .delete(`http://3.39.219.172:8080/comments/${item.item.id}`)
       .then(() => {
         window.location.reload();
       });

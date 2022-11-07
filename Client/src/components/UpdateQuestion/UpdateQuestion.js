@@ -13,7 +13,7 @@ const Input = styled.input`
 function UpdateQuestion() {
   useEffect(() => {
     // eslint-disable-next-line no-undef
-    axios.get(process.env.REACT_APP_DB_HOST + `/posts/${id}`).then((res) => {
+    axios.get(`http://3.39.219.172:8080/posts/${id}`).then((res) => {
       setBodyText(res.data.data.postContent);
       setTitleText(res.data.data.postTitle);
     });
@@ -41,7 +41,7 @@ function UpdateQuestion() {
     console.log(data);
     axios
       // eslint-disable-next-line no-undef
-      .patch(process.env.REACT_APP_DB_HOST + `/posts/${id}`, data)
+      .patch(`http://3.39.219.172:8080/posts/${id}`, data)
       .then(() => navigate('/'));
   };
   return (
