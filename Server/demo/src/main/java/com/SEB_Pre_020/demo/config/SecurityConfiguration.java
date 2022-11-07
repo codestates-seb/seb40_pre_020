@@ -53,8 +53,10 @@ public class SecurityConfiguration {
                 .apply(new CustomFilterConfigurer())
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
-//                        .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll() // CORS 에러 발생 후 추가한 코드
+                        .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll() // CORS 에러 발생 후 추가한 코드
                         // MEMBER 권한 가진 사용자만 이하 리소스 접근가능
+                        .antMatchers(HttpMethod.GET, "*/tags/**").permitAll()
+                        .antMatchers(HttpMethod.POST, "*/tags/**").hasRole("MEMBER")
                         .antMatchers(HttpMethod.GET,"*/profiles/**").hasRole("MEMBER")
                         .antMatchers(HttpMethod.POST,"*/posts/**").hasRole("MEMBER")
                         .antMatchers(HttpMethod.PATCH,"*/posts/**").hasRole("MEMBER")
