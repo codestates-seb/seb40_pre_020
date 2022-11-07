@@ -6,6 +6,9 @@ import com.SEB_Pre_020.demo.member.entity.Member;
 import com.SEB_Pre_020.demo.member.repository.MemberRepository;
 import com.SEB_Pre_020.demo.exception.BusinessLogicException;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -62,9 +65,6 @@ public class MemberService {
             throw new BusinessLogicException(ExceptionCode.USER_EXISTS);
     }
 
-    @Transactional(readOnly = true)
-    public Member findMember(String memberEmail) { return findVerifiedMember(memberEmail); }
-
     @Transactional
     public Member findVerifiedMember(String email){
         Optional<Member> optionalMember = memberRepository.findByEmail(email);
@@ -74,10 +74,17 @@ public class MemberService {
         return findMember;
     }
 
-//    public Member getUserByToken(){
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        PrincipalDetails principalDetails = (PrincipalDetails)principal;
-//
-//        return principalDetails.getMember();
-//    }
+    @Transactional(readOnly = true)
+    public Member findMember(int id) {
+        return findVerifiedMemberById(id);
+    }
+
+    @Transactional
+    public Member findVerifiedMemberById(int id){
+        Optional<Member> optionalMember = memberRepository.findById(id);
+
+        Member findMember=optionalMember.orElseThrow(()-> //만일 db에 저장된 유저 정보 없으면 예외발생
+                new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
+        return findMember;
+    }
 }

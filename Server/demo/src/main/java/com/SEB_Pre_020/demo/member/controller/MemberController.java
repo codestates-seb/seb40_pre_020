@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 
 @RestController
 @RequestMapping(value="/v1")
@@ -40,14 +41,14 @@ public class MemberController {
                 new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(joinedMember)),
                 HttpStatus.CREATED);
     }
-}
 
-//    @GetMapping("/member") // 회원 정보 불러오기
-//    public ResponseEntity getMember(@Email @RequestParam String email){
-//        Member
-//        return new ResponseEntity<>(
-//                new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(member)),
-//                HttpStatus.OK);
-//    }
-//
-//}
+
+    @GetMapping("/{member-id}") // 회원 정보 불러오기
+    public ResponseEntity getMember(@PathVariable("member-id") @Positive int id){
+        Member member = memberService.findVerifiedMemberById(id);
+        System.out.println("id로 회원정보를 불러왔습니다");
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(memberMapper.memberToMemberResponseDto(member)),
+                HttpStatus.OK);
+    }
+}
