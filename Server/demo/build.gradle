@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.SEB_Pre_020'
-version = '0.0.3-SNAPSHOT(221107_1)'
+version = '0.0.3-SNAPSHOT(221107_2)'
 sourceCompatibility = '11'
 
 configurations {
