@@ -1,9 +1,19 @@
 import styles from './Question.module.css';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 // eslint-disable-next-line react/prop-types
 function Question({ userData }) {
   // eslint-disable-next-line no-unused-vars
-
+  let [userId, setUserId] = useState('');
+  useEffect(() => {
+    axios
+      .get(`http://3.39.219.172:8080/v1/${userData.memberId}`)
+      .then((res) => {
+        setUserId(res.data.data);
+      });
+  }, []);
+  console.log(userData);
   let date = new Date().toLocaleString('ko-kr');
   const navigate = useNavigate();
   return (
@@ -54,7 +64,7 @@ function Question({ userData }) {
             navigate(`/mypage/${userData.memberId}`);
           }}
         >
-          {userData.memberId}
+          {userId.name}
         </span>
         <span className={styles.timeAgo}>{date}</span>
       </div>

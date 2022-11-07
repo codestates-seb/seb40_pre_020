@@ -8,16 +8,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-// import { parsedJwt, getToken } from '../../utils/token';
+
 function Userprofile() {
   const navigate = useNavigate();
   let [a, seta] = useState(1);
   let { id } = useParams();
   let [userdata, setUserData] = useState([]);
   let [comment, setComment] = useState([]);
+  let [userId, setUserId] = useState([]);
   // eslint-disable-next-line no-unused-vars
-  // let [userId, setUserId] = useState(parsedJwt(getToken()));
-  console.log(userdata);
+
   useEffect(() => {
     // eslint-disable-next-line import/no-named-as-default-member
     axios
@@ -30,12 +30,14 @@ function Userprofile() {
           // eslint-disable-next-line no-undef
           `http://3.39.219.172:8080/profiles/${id}/answers?page=1&size=20`
         ),
+        axios.get(`http://3.39.219.172:8080/v1/${id}`),
       ])
       .then(
         // eslint-disable-next-line import/no-named-as-default-member
-        axios.spread((res1, res2) => {
+        axios.spread((res1, res2, res3) => {
           setUserData(res1.data.data);
           setComment(res2.data.data);
+          setUserId(res3.data.data.name);
         })
       );
   }, []);
@@ -47,7 +49,7 @@ function Userprofile() {
           alt="avatar"
         />
         <div className={styles.userdata}>
-          <div className={styles.username}>{userdata[0].memberId}</div>
+          <div className={styles.username}>{userId}</div>
           <div className={styles.userinfo}>
             <FontAwesomeIcon
               icon={faChessKing}

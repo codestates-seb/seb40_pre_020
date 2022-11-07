@@ -11,6 +11,7 @@ export function getToken() {
 export function clearToken() {
   localStorage.clear();
 }
+
 export function parsedJwt(token) {
   let base64Url = token.split('.')[1];
   let base64 = decodeURIComponent(
