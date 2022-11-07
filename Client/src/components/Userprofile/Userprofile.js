@@ -17,7 +17,7 @@ function Userprofile() {
   let [comment, setComment] = useState([]);
   // eslint-disable-next-line no-unused-vars
   // let [userId, setUserId] = useState(parsedJwt(getToken()));
-
+  console.log(userdata);
   useEffect(() => {
     // eslint-disable-next-line import/no-named-as-default-member
     axios
@@ -47,7 +47,7 @@ function Userprofile() {
           alt="avatar"
         />
         <div className={styles.userdata}>
-          <div className={styles.username}>{userdata.memberId}</div>
+          <div className={styles.username}>{userdata[0].memberId}</div>
           <div className={styles.userinfo}>
             <FontAwesomeIcon
               icon={faChessKing}
