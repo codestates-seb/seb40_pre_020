@@ -9,25 +9,22 @@ function AskQuestion() {
   let [content, setContent] = useState('');
   const titleRef = useRef(null);
   const navigate = useNavigate();
-
   const handleOnClick = () => {
     const data = {
       parentId: 0,
       postTitle: titleRef.current.value,
       postContent: content,
-      memberId: 1,
+      memberId: 0,
       postView: 0,
       postVoteCount: 0,
       postAnswerCount: 0,
       postCommentCount: 0,
     };
-    console.log(data);
     axios
       // eslint-disable-next-line no-undef
       .post('http://3.39.219.172:8080/posts', data)
       .then(() => navigate('/'));
   };
-
   return (
     <section className={styles.container}>
       <div className={styles.content}>

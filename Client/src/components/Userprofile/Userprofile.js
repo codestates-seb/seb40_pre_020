@@ -8,13 +8,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { parsedJwt, getToken } from '../../utils/token';
 function Userprofile() {
   const navigate = useNavigate();
   let [a, seta] = useState(1);
   let { id } = useParams();
   let [userdata, setUserData] = useState([]);
   let [comment, setComment] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  let [userId, setUserId] = useState(parsedJwt(getToken()));
+
   useEffect(() => {
     // eslint-disable-next-line import/no-named-as-default-member
     axios
@@ -44,7 +47,7 @@ function Userprofile() {
           alt="avatar"
         />
         <div className={styles.userdata}>
-          <div className={styles.username}>유저이름</div>
+          <div className={styles.username}>{userId.memberEmail}</div>
           <div className={styles.userinfo}>
             <FontAwesomeIcon
               icon={faChessKing}
